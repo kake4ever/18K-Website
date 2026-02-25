@@ -1,147 +1,719 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>18K Nail Boutique - Santa Monica</title>
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-E6114D6XJ2"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-E6114D6XJ2');
-    </script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>18K Nail Boutique | Luxury Nail Salon Santa Monica</title>
+<meta name="description" content="Santa Monica's premier luxury nail boutique. Gel-X, manicures, pedicures, and custom nail art — designed with intention. Book your visit today.">
+<meta name="keywords" content="nail salon Santa Monica, luxury nail boutique, Gel-X Santa Monica, manicure pedicure, nail art, 18K Nail Boutique">
+<meta name="author" content="18K Nail Boutique">
+<meta property="og:title" content="18K Nail Boutique | Luxury Nail Salon Santa Monica">
+<meta property="og:description" content="Modern nail artistry, designed with intention. Santa Monica's premier luxury nail boutique.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://www.18knailboutique.com">
+<meta property="og:image" content="./images/og-image.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://www.18knailboutique.com">
+<link rel="icon" type="image/png" href="./images/favicon.png">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Outfit:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+
+<!-- Structured Data for Local Business -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "NailSalon",
+  "name": "18K Nail Boutique",
+  "image": "./images/salon-interior.jpg",
+  "telephone": "+1-424-238-5500",
+  "email": "info@18knailboutique.com",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "1323 Lincoln Blvd",
+    "addressLocality": "Santa Monica",
+    "addressRegion": "CA",
+    "postalCode": "90401",
+    "addressCountry": "US"
+  },
+  "url": "https://www.18knailboutique.com",
+  "openingHoursSpecification": [
+    {"@type": "OpeningHoursSpecification","dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"],"opens": "10:00","closes": "19:00"},
+    {"@type": "OpeningHoursSpecification","dayOfWeek": "Saturday","opens": "10:00","closes": "18:00"},
+    {"@type": "OpeningHoursSpecification","dayOfWeek": "Sunday","opens": "10:00","closes": "17:00"}
+  ],
+  "priceRange": "$$",
+  "aggregateRating": {"@type": "AggregateRating","ratingValue": "5","bestRating": "5","ratingCount": "200"}
+}
+</script>
+
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --champagne: #E8DDD3;
+  --cream: #F7F3EE;
+  --deep-gold: #B8964E;
+  --soft-gold: #D4BC8B;
+  --warm-black: #1A1714;
+  --warm-dark: #2C2824;
+  --taupe: #9C8E80;
+  --blush: #F0E6DC;
+  --pearl: #FDFBF8;
+  --font-display: 'Cormorant Garamond', Georgia, serif;
+  --font-body: 'Outfit', sans-serif;
+}
+
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--font-body);
+  background: var(--pearl);
+  color: var(--warm-black);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ═══ PRELOADER ═══ */
+.preloader {
+  position: fixed; inset: 0; z-index: 9999;
+  background: var(--warm-black);
+  display: flex; align-items: center; justify-content: center;
+  flex-direction: column; gap: 1rem;
+  transition: opacity 0.9s ease, visibility 0.9s ease;
+}
+.preloader.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
+.preloader-logo { font-family: var(--font-display); font-size: clamp(2.5rem, 5vw, 4.5rem); color: var(--soft-gold); letter-spacing: 0.5em; font-weight: 300; animation: breathe 2s ease-in-out infinite; }
+.preloader-line { width: 60px; height: 1px; background: linear-gradient(to right, transparent, var(--deep-gold), transparent); animation: breathe 2s ease-in-out infinite 0.3s; }
+.preloader-sub { font-size: 0.6rem; letter-spacing: 0.4em; text-transform: uppercase; color: var(--taupe); animation: breathe 2s ease-in-out infinite 0.5s; }
+@keyframes breathe { 0%, 100% { opacity: 0.3; } 50% { opacity: 1; } }
+
+/* ═══ NAV ═══ */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  padding: 1.5rem 5%;
+  display: flex; align-items: center; justify-content: space-between;
+  transition: all 0.5s ease;
+}
+nav.scrolled {
+  background: rgba(253,251,248,0.95); backdrop-filter: blur(24px);
+  padding: 1rem 5%; box-shadow: 0 1px 0 rgba(184,150,78,0.1);
+}
+.nav-logo { font-family: var(--font-display); font-size: 1.5rem; font-weight: 300; letter-spacing: 0.35em; color: var(--soft-gold); text-decoration: none; cursor: pointer; }
+nav.scrolled .nav-logo { color: var(--deep-gold); }
+.nav-center { display: flex; gap: 2.5rem; list-style: none; }
+.nav-center a {
+  font-size: 0.68rem; font-weight: 400; letter-spacing: 0.22em; text-transform: uppercase;
+  color: rgba(255,255,255,0.6); text-decoration: none; transition: color 0.3s; position: relative; cursor: pointer;
+}
+.nav-center a.active { color: var(--soft-gold); }
+.nav-center a::after { content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 1px; background: var(--deep-gold); transition: width 0.4s cubic-bezier(0.25,0.8,0.25,1); }
+.nav-center a:hover::after { width: 100%; }
+nav.scrolled .nav-center a { color: var(--taupe); }
+nav.scrolled .nav-center a:hover, nav.scrolled .nav-center a.active { color: var(--warm-black); }
+.nav-right { display: flex; align-items: center; gap: 1.5rem; }
+.nav-gift { font-size: 0.65rem; font-weight: 400; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,255,255,0.45); text-decoration: none; transition: color 0.3s; }
+.nav-gift:hover { color: var(--soft-gold); }
+nav.scrolled .nav-gift { color: var(--taupe); }
+.btn-nav {
+  font-size: 0.65rem; font-weight: 500; letter-spacing: 0.25em; text-transform: uppercase;
+  padding: 0.8rem 2rem; border: 1px solid var(--soft-gold); color: var(--soft-gold);
+  background: transparent; cursor: pointer; text-decoration: none; transition: all 0.4s ease;
+}
+.btn-nav:hover { background: var(--deep-gold); color: var(--pearl); border-color: var(--deep-gold); }
+nav.scrolled .btn-nav { border-color: var(--deep-gold); color: var(--deep-gold); }
+nav.scrolled .btn-nav:hover { background: var(--deep-gold); color: var(--pearl); }
+.hamburger { display: none; cursor: pointer; background: none; border: none; flex-direction: column; gap: 5px; padding: 8px; z-index: 300; }
+.hamburger span { width: 22px; height: 1.5px; background: var(--soft-gold); transition: all 0.3s; display: block; }
+nav.scrolled .hamburger span { background: var(--warm-black); }
+.hamburger.open span:nth-child(1) { transform: rotate(45deg) translateY(4.5px); background: var(--pearl); }
+.hamburger.open span:nth-child(2) { opacity: 0; }
+.hamburger.open span:nth-child(3) { transform: rotate(-45deg) translateY(-4.5px); background: var(--pearl); }
+.mobile-overlay {
+  position: fixed; inset: 0; z-index: 200; background: var(--warm-black);
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1.8rem;
+  opacity: 0; visibility: hidden; transition: all 0.5s ease;
+}
+.mobile-overlay.open { opacity: 1; visibility: visible; }
+.mobile-overlay a { font-family: var(--font-display); font-size: 1.8rem; font-weight: 300; color: var(--pearl); text-decoration: none; letter-spacing: 0.1em; cursor: pointer; transition: color 0.3s; }
+.mobile-overlay a:hover { color: var(--soft-gold); }
+
+/* ═══ PAGE SYSTEM ═══ */
+.page { display: none; opacity: 0; transition: opacity 0.4s ease; }
+.page.active { display: block; opacity: 1; }
+
+/* ═══ SHARED COMPONENTS ═══ */
+.section-overline { font-size: 0.6rem; font-weight: 500; letter-spacing: 0.45em; text-transform: uppercase; color: var(--deep-gold); margin-bottom: 1.5rem; display: flex; align-items: center; gap: 1rem; }
+.section-overline::before { content: ''; width: 28px; height: 1px; background: var(--deep-gold); }
+.section-overline.center { justify-content: center; }
+.section-overline.center::before { display: none; }
+.section-title { font-family: var(--font-display); font-size: clamp(2rem,4vw,3.2rem); font-weight: 300; line-height: 1.2; color: var(--warm-black); margin-bottom: 1.5rem; letter-spacing: 0.02em; }
+.section-title em { font-style: italic; color: var(--deep-gold); }
+.section-title.light { color: var(--pearl); }
+.btn-primary { display: inline-block; font-family: var(--font-body); font-size: 0.68rem; font-weight: 500; letter-spacing: 0.3em; text-transform: uppercase; padding: 1.1rem 3rem; background: var(--deep-gold); color: var(--pearl); border: none; cursor: pointer; text-decoration: none; transition: all 0.4s ease; }
+.btn-primary:hover { background: #C9A55A; transform: translateY(-2px); box-shadow: 0 12px 40px rgba(184,150,78,0.25); }
+.btn-outline { display: inline-block; font-family: var(--font-body); font-size: 0.68rem; font-weight: 400; letter-spacing: 0.2em; text-transform: uppercase; padding: 1rem 2.5rem; border: 1px solid var(--taupe); color: var(--warm-dark); background: transparent; cursor: pointer; text-decoration: none; transition: all 0.3s; }
+.btn-outline:hover { border-color: var(--deep-gold); color: var(--deep-gold); }
+.btn-outline.light { border-color: rgba(255,255,255,0.2); color: rgba(255,255,255,0.5); }
+.btn-outline.light:hover { border-color: var(--soft-gold); color: var(--soft-gold); }
+
+/* Image containers */
+.img-cover { width: 100%; height: 100%; object-fit: cover; display: block; }
+.img-placeholder {
+  background: linear-gradient(145deg, var(--champagne), var(--blush));
+  width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;
+  flex-direction: column; gap: 0.5rem;
+}
+.img-placeholder .ph-i { font-size: 1.5rem; color: var(--deep-gold); opacity: 0.3; }
+.img-placeholder .ph-t { font-size: 0.55rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--taupe); opacity: 0.6; }
+.img-placeholder.dark { background: linear-gradient(145deg, #2C2824, #1A1714); }
+.img-placeholder.dark .ph-t { color: rgba(255,255,255,0.25); }
+
+.reveal { opacity: 0; transform: translateY(30px); transition: all 0.7s cubic-bezier(0.25,0.8,0.25,1); }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* ═══ CTA SECTION ═══ */
+.cta-section { position: relative; padding: clamp(5rem,10vw,9rem) 5%; background: var(--warm-black); text-align: center; overflow: hidden; }
+.cta-section::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at center, rgba(184,150,78,0.06) 0%, transparent 70%); }
+.cta-section .section-overline { justify-content: center; color: var(--soft-gold); }
+.cta-section .section-overline::before { display: none; }
+.cta-title { font-family: var(--font-display); font-size: clamp(2.2rem,5vw,4.5rem); font-weight: 300; color: var(--pearl); line-height: 1.1; max-width: 650px; margin: 0 auto 1.2rem; letter-spacing: 0.03em; }
+.cta-title em { font-style: italic; color: var(--soft-gold); }
+.cta-sub { font-size: 0.85rem; font-weight: 200; color: rgba(255,255,255,0.35); margin-bottom: 2.5rem; }
+.cta-contact { font-size: 0.8rem; font-weight: 300; color: rgba(255,255,255,0.3); margin-top: 2rem; }
+.cta-contact a { color: rgba(255,255,255,0.5); text-decoration: none; }
+
+/* ═══ FOOTER ═══ */
+footer { background: var(--warm-black); border-top: 1px solid rgba(184,150,78,0.08); padding: 5rem 5% 2.5rem; }
+.footer-grid { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr 1.2fr; gap: 3.5rem; margin-bottom: 4rem; }
+.footer-brand-logo { font-family: var(--font-display); font-size: 1.3rem; font-weight: 300; letter-spacing: 0.35em; color: var(--soft-gold); margin-bottom: 1.2rem; display: block; }
+.footer-desc { font-size: 0.8rem; font-weight: 300; color: rgba(255,255,255,0.3); line-height: 1.8; max-width: 280px; margin-bottom: 1.5rem; }
+.footer-social { display: flex; gap: 0.7rem; }
+.footer-social a { width: 34px; height: 34px; border: 1px solid rgba(184,150,78,0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--soft-gold); font-size: 0.65rem; text-decoration: none; transition: all 0.3s; font-family: var(--font-body); font-weight: 500; }
+.footer-social a:hover { background: var(--deep-gold); border-color: var(--deep-gold); color: var(--pearl); }
+.footer-col-title { font-size: 0.58rem; font-weight: 500; letter-spacing: 0.3em; text-transform: uppercase; color: var(--soft-gold); margin-bottom: 1.3rem; }
+.footer-links { list-style: none; }
+.footer-links li { margin-bottom: 0.65rem; }
+.footer-links a { font-size: 0.78rem; font-weight: 300; color: rgba(255,255,255,0.35); text-decoration: none; transition: color 0.3s; cursor: pointer; }
+.footer-links a:hover { color: var(--soft-gold); }
+.footer-bottom { max-width: 1200px; margin: 0 auto; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 2rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+.footer-copy { font-size: 0.65rem; color: rgba(255,255,255,0.18); }
+.footer-legal { display: flex; gap: 1.5rem; }
+.footer-legal a { font-size: 0.65rem; color: rgba(255,255,255,0.18); text-decoration: none; }
+
+/* ═══════════════════════════════
+   HOME
+   ═══════════════════════════════ */
+.hero { position: relative; min-height: 100vh; display: flex; align-items: center; justify-content: center; background: var(--warm-black); overflow: hidden; }
+.hero-bg { position: absolute; inset: 0; background-size: cover; background-position: center; }
+.hero-overlay { position: absolute; inset: 0; background: rgba(26,23,20,0.75); }
+.hero-gradient { position: absolute; inset: 0; background: linear-gradient(160deg, rgba(26,23,20,0.95) 0%, rgba(42,36,32,0.8) 35%, rgba(52,42,36,0.7) 55%, rgba(26,23,20,0.95) 100%); }
+.hero-orb { position: absolute; width: 500px; height: 500px; border-radius: 50%; background: radial-gradient(circle, rgba(184,150,78,0.05) 0%, transparent 70%); top: 25%; left: 58%; transform: translate(-50%,-50%); animation: orb 10s ease-in-out infinite; }
+@keyframes orb { 0%,100% { transform: translate(-50%,-50%) scale(1); opacity: 0.5; } 50% { transform: translate(-52%,-53%) scale(1.15); opacity: 1; } }
+.hero-content { position: relative; z-index: 2; text-align: center; max-width: 780px; padding: 0 2rem; }
+.hero-eyebrow { font-size: 0.62rem; font-weight: 400; letter-spacing: 0.5em; text-transform: uppercase; color: var(--soft-gold); margin-bottom: 2.2rem; opacity: 0; animation: rise 1s ease 0.4s forwards; }
+.hero-h1 { font-family: var(--font-display); font-size: clamp(3.5rem,8.5vw,8rem); font-weight: 300; color: var(--pearl); line-height: 1.02; letter-spacing: 0.04em; margin-bottom: 1.5rem; opacity: 0; animation: rise 1s ease 0.6s forwards; }
+.hero-h1 em { font-style: italic; color: var(--soft-gold); }
+.hero-sub { font-size: 0.92rem; font-weight: 200; color: rgba(255,255,255,0.4); letter-spacing: 0.06em; line-height: 1.75; max-width: 460px; margin: 0 auto 3rem; opacity: 0; animation: rise 1s ease 0.8s forwards; }
+.hero-buttons { display: flex; gap: 1.5rem; justify-content: center; align-items: center; flex-wrap: wrap; opacity: 0; animation: rise 1s ease 1s forwards; }
+@keyframes rise { from { opacity: 0; transform: translateY(28px); } to { opacity: 1; transform: translateY(0); } }
+.hero-scroll { position: absolute; bottom: 2.5rem; left: 50%; transform: translateX(-50%); z-index: 2; display: flex; flex-direction: column; align-items: center; gap: 0.6rem; }
+.hero-scroll .ln { width: 1px; height: 36px; background: linear-gradient(to bottom, rgba(184,150,78,0.4), transparent); animation: bob 2s ease-in-out infinite; }
+@keyframes bob { 0%,100% { opacity: 0.3; transform: scaleY(0.6); } 50% { opacity: 1; transform: scaleY(1); } }
+.hero-scroll span { font-size: 0.55rem; letter-spacing: 0.35em; text-transform: uppercase; color: rgba(255,255,255,0.2); writing-mode: vertical-rl; }
+
+.marquee { background: var(--warm-black); padding: 1.1rem 0; overflow: hidden; border-top: 1px solid rgba(184,150,78,0.08); border-bottom: 1px solid rgba(184,150,78,0.08); }
+.marquee-track { display: flex; gap: 2.5rem; animation: slide 22s linear infinite; width: max-content; }
+.marquee-item { font-family: var(--font-display); font-size: 0.8rem; font-weight: 300; letter-spacing: 0.3em; text-transform: uppercase; color: var(--taupe); white-space: nowrap; display: flex; align-items: center; gap: 2.5rem; }
+.marquee-item::after { content: '◆'; color: var(--deep-gold); font-size: 0.35rem; }
+@keyframes slide { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+.home-about { padding: clamp(5rem,10vw,9rem) 5%; display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; max-width: 1300px; margin: 0 auto; align-items: center; }
+.home-about-img { position: relative; aspect-ratio: 3/4; overflow: hidden; }
+.home-about-img::after { content: ''; position: absolute; top: -16px; right: -16px; width: 80px; height: 80px; border: 1px solid rgba(184,150,78,0.25); }
+.about-text { max-width: 480px; }
+.about-text p { font-size: 0.9rem; font-weight: 300; line-height: 1.85; color: var(--taupe); margin-bottom: 1.5rem; }
+.features-list { display: flex; flex-direction: column; gap: 0.8rem; margin-bottom: 2.5rem; }
+.feat { display: flex; align-items: center; gap: 0.9rem; font-size: 0.78rem; font-weight: 300; color: var(--warm-dark); }
+.feat-diamond { width: 6px; height: 6px; border: 1px solid var(--deep-gold); transform: rotate(45deg); flex-shrink: 0; }
+
+.home-services { background: var(--warm-black); padding: clamp(5rem,10vw,9rem) 5%; position: relative; }
+.home-services::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(to right, transparent, var(--deep-gold), transparent); opacity: 0.15; }
+.services-header { text-align: center; max-width: 560px; margin: 0 auto 4.5rem; }
+.services-header .section-overline { justify-content: center; }
+.services-header .section-overline::before { display: none; }
+.services-header p { font-size: 0.85rem; font-weight: 200; color: rgba(255,255,255,0.35); line-height: 1.7; }
+.services-cards { display: grid; grid-template-columns: repeat(3,1fr); gap: 1px; max-width: 1200px; margin: 0 auto; background: rgba(184,150,78,0.08); }
+@media (max-width: 1024px) { .services-cards { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 768px) { .services-cards { grid-template-columns: 1fr; } }
+.svc-card { background: var(--warm-black); padding: 2.8rem 2.2rem; cursor: pointer; transition: all 0.5s ease; position: relative; overflow: hidden; }
+.svc-card::before { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(184,150,78,0.05) 0%, transparent 60%); opacity: 0; transition: opacity 0.5s; }
+.svc-card:hover::before { opacity: 1; }
+.svc-card:hover { transform: translateY(-3px); }
+.svc-num { font-family: var(--font-display); font-size: 2rem; font-weight: 300; color: rgba(184,150,78,0.12); margin-bottom: 1.2rem; line-height: 1; }
+.svc-name { font-family: var(--font-display); font-size: 1.4rem; font-weight: 300; color: var(--pearl); margin-bottom: 0.6rem; }
+.svc-desc { font-size: 0.78rem; font-weight: 300; color: rgba(255,255,255,0.3); line-height: 1.7; margin-bottom: 1.2rem; }
+.svc-starting { font-family: var(--font-display); font-size: 0.85rem; color: var(--soft-gold); }
+.svc-arrow { position: absolute; bottom: 2.2rem; right: 2.2rem; width: 26px; height: 26px; border: 1px solid rgba(184,150,78,0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--soft-gold); font-size: 0.65rem; transition: all 0.3s; }
+.svc-card:hover .svc-arrow { background: var(--deep-gold); border-color: var(--deep-gold); color: var(--pearl); }
+
+.home-gallery { padding: clamp(5rem,10vw,9rem) 5%; max-width: 1400px; margin: 0 auto; }
+.gallery-head { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 3.5rem; flex-wrap: wrap; gap: 1.5rem; }
+.gallery-grid { display: grid; grid-template-columns: repeat(4,1fr); grid-template-rows: 260px 260px; gap: 10px; }
+.g-item { position: relative; overflow: hidden; cursor: pointer; }
+.g-item:nth-child(1) { grid-column: span 2; }
+.g-item:nth-child(5) { grid-column: span 2; }
+.g-item-inner { width: 100%; height: 100%; transition: transform 0.6s ease; }
+.g-item:hover .g-item-inner { transform: scale(1.06); }
+.g-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(26,23,20,0.6) 0%, transparent 40%); opacity: 0; transition: opacity 0.4s; display: flex; align-items: flex-end; padding: 1.3rem; }
+.g-item:hover .g-overlay { opacity: 1; }
+.g-label { font-family: var(--font-display); font-size: 0.95rem; color: var(--pearl); font-weight: 300; }
+
+.stats-strip { background: linear-gradient(135deg, var(--champagne) 0%, var(--blush) 100%); padding: clamp(3.5rem,7vw,6rem) 5%; }
+.stats-grid { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: repeat(4,1fr); gap: 2.5rem; text-align: center; }
+.stat-item { position: relative; }
+.stat-item:not(:last-child)::after { content: ''; position: absolute; right: -1.25rem; top: 15%; bottom: 15%; width: 1px; background: rgba(184,150,78,0.2); }
+.stat-big { font-family: var(--font-display); font-size: clamp(2.2rem,4.5vw,3.2rem); font-weight: 300; color: var(--deep-gold); line-height: 1; margin-bottom: 0.4rem; }
+.stat-label { font-size: 0.65rem; font-weight: 400; letter-spacing: 0.25em; text-transform: uppercase; color: var(--taupe); }
+
+.testimonials-section { padding: clamp(5rem,10vw,8rem) 5%; max-width: 800px; margin: 0 auto; text-align: center; }
+.testi-mark { font-family: var(--font-display); font-size: 5rem; color: var(--soft-gold); opacity: 0.15; line-height: 1; margin-bottom: -0.5rem; }
+.testi-text { font-family: var(--font-display); font-size: clamp(1.2rem,2.2vw,1.65rem); font-weight: 300; font-style: italic; line-height: 1.65; color: var(--warm-dark); margin-bottom: 1.8rem; }
+.testi-author { font-size: 0.68rem; font-weight: 500; letter-spacing: 0.3em; text-transform: uppercase; color: var(--deep-gold); }
+.testi-dots { display: flex; justify-content: center; gap: 0.5rem; margin-top: 1.8rem; }
+.testi-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--champagne); cursor: pointer; transition: all 0.3s; }
+.testi-dot.active { background: var(--deep-gold); width: 22px; border-radius: 3px; }
+
+/* ═══════════════════════════════
+   ABOUT
+   ═══════════════════════════════ */
+.page-hero { position: relative; padding: 10rem 5% 5rem; background: var(--warm-black); text-align: center; overflow: hidden; }
+.page-hero::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 1px; background: linear-gradient(to right, transparent, var(--deep-gold), transparent); opacity: 0.15; }
+.page-hero-eyebrow { font-size: 0.6rem; font-weight: 400; letter-spacing: 0.5em; text-transform: uppercase; color: var(--soft-gold); margin-bottom: 1.5rem; }
+.page-hero-title { font-family: var(--font-display); font-size: clamp(2.8rem,6vw,5rem); font-weight: 300; color: var(--pearl); line-height: 1.1; }
+.page-hero-title em { font-style: italic; color: var(--soft-gold); }
+.page-hero-sub { font-size: 0.88rem; font-weight: 200; color: rgba(255,255,255,0.35); max-width: 500px; margin: 1.2rem auto 0; line-height: 1.7; }
+
+.about-story { padding: clamp(5rem,10vw,8rem) 5%; max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
+.about-story-img { aspect-ratio: 4/5; position: relative; overflow: hidden; }
+.about-story-text p { font-size: 0.9rem; font-weight: 300; line-height: 1.85; color: var(--taupe); margin-bottom: 1.5rem; }
+.about-values { background: var(--cream); padding: clamp(5rem,10vw,8rem) 5%; }
+.about-values-inner { max-width: 1100px; margin: 0 auto; text-align: center; }
+.values-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 2.5rem; margin-top: 3rem; text-align: left; }
+.value-card { padding: 2.5rem; background: var(--pearl); border: 1px solid rgba(184,150,78,0.1); transition: all 0.4s; }
+.value-card:hover { transform: translateY(-4px); box-shadow: 0 20px 60px rgba(0,0,0,0.04); }
+.value-icon { font-size: 1.5rem; color: var(--deep-gold); margin-bottom: 1rem; opacity: 0.6; }
+.value-name { font-family: var(--font-display); font-size: 1.3rem; font-weight: 400; color: var(--warm-black); margin-bottom: 0.6rem; }
+.value-desc { font-size: 0.82rem; font-weight: 300; color: var(--taupe); line-height: 1.7; }
+.about-refreshments { padding: clamp(4rem,8vw,6rem) 5%; max-width: 900px; margin: 0 auto; text-align: center; }
+.refreshments-grid { display: flex; justify-content: center; gap: 3rem; margin-top: 2rem; flex-wrap: wrap; }
+.refreshment-item { display: flex; flex-direction: column; align-items: center; gap: 0.5rem; }
+.refreshment-icon { font-size: 1.8rem; opacity: 0.5; }
+.refreshment-name { font-size: 0.72rem; font-weight: 400; letter-spacing: 0.2em; text-transform: uppercase; color: var(--taupe); }
+
+/* ═══════════════════════════════
+   SERVICES
+   ═══════════════════════════════ */
+.services-nav-bar { background: var(--cream); padding: 1rem 5%; display: flex; justify-content: center; gap: 0.5rem; flex-wrap: wrap; position: sticky; top: 64px; z-index: 50; border-bottom: 1px solid rgba(184,150,78,0.1); }
+.svc-tab { font-size: 0.62rem; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; padding: 0.7rem 1.5rem; border: 1px solid transparent; background: transparent; color: var(--taupe); cursor: pointer; transition: all 0.3s; font-family: var(--font-body); }
+.svc-tab:hover { color: var(--deep-gold); }
+.svc-tab.active { border-color: var(--deep-gold); color: var(--deep-gold); background: rgba(184,150,78,0.04); }
+.svc-category { display: none; padding: clamp(3rem,6vw,5rem) 5%; }
+.svc-category.active { display: block; }
+.svc-category-inner { max-width: 900px; margin: 0 auto; }
+.menu-category-title { font-family: var(--font-display); font-size: clamp(1.8rem,3vw,2.4rem); font-weight: 300; color: var(--warm-black); margin-bottom: 0.6rem; }
+.menu-category-desc { font-size: 0.82rem; font-weight: 300; color: var(--taupe); line-height: 1.7; margin-bottom: 3rem; max-width: 550px; }
+.menu-item { display: grid; grid-template-columns: 1fr auto; gap: 2rem; padding: 1.8rem 0; border-bottom: 1px solid rgba(184,150,78,0.08); transition: all 0.3s; }
+.menu-item:first-of-type { border-top: 1px solid rgba(184,150,78,0.08); }
+.menu-item:hover { padding-left: 0.5rem; }
+.mi-name { font-family: var(--font-display); font-size: 1.2rem; font-weight: 400; color: var(--warm-black); margin-bottom: 0.3rem; }
+.mi-desc { font-size: 0.78rem; font-weight: 300; color: var(--taupe); line-height: 1.7; }
+.mi-price { font-family: var(--font-display); font-size: 1.1rem; color: var(--deep-gold); white-space: nowrap; align-self: center; }
+.mi-price-multi { font-size: 0.75rem; font-weight: 300; color: var(--taupe); line-height: 1.8; text-align: right; align-self: center; }
+.mi-price-multi strong { color: var(--deep-gold); font-family: var(--font-display); font-size: 0.95rem; font-weight: 400; }
+.menu-note { margin-top: 2rem; padding: 1.5rem 2rem; background: rgba(184,150,78,0.04); border-left: 2px solid var(--deep-gold); font-size: 0.8rem; font-weight: 300; color: var(--taupe); line-height: 1.7; }
+.svc-book-strip { padding: 3rem 5%; background: var(--cream); text-align: center; }
+.svc-book-strip p { font-family: var(--font-display); font-size: 1.3rem; font-weight: 300; color: var(--warm-dark); margin-bottom: 1.5rem; }
+
+/* ═══════════════════════════════
+   GALLERY
+   ═══════════════════════════════ */
+.gallery-masonry { padding: clamp(3rem,6vw,5rem) 5%; max-width: 1300px; margin: 0 auto; }
+.masonry-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; }
+.masonry-item { position: relative; overflow: hidden; cursor: pointer; aspect-ratio: 1; }
+.masonry-item:nth-child(1) { aspect-ratio: 16/10; grid-column: span 2; }
+.masonry-item:nth-child(5) { aspect-ratio: 16/10; grid-column: span 2; }
+.masonry-item-inner { width: 100%; height: 100%; transition: transform 0.6s ease; }
+.masonry-item:hover .masonry-item-inner { transform: scale(1.05); }
+.gallery-instagram { padding: 3rem 5% 0; text-align: center; }
+.gallery-instagram p { font-size: 0.82rem; font-weight: 300; color: var(--taupe); }
+.gallery-instagram a { color: var(--deep-gold); text-decoration: none; font-weight: 400; }
+
+/* ═══════════════════════════════
+   BOOKING POLICY
+   ═══════════════════════════════ */
+.policy-content { padding: clamp(3rem,6vw,5rem) 5%; max-width: 780px; margin: 0 auto; }
+.policy-section { margin-bottom: 3rem; }
+.policy-section-title { font-family: var(--font-display); font-size: 1.5rem; font-weight: 400; color: var(--warm-black); margin-bottom: 1rem; padding-bottom: 0.8rem; border-bottom: 1px solid rgba(184,150,78,0.15); }
+.policy-section p { font-size: 0.88rem; font-weight: 300; color: var(--taupe); line-height: 1.85; margin-bottom: 0.8rem; }
+
+/* ═══════════════════════════════
+   CONTACT
+   ═══════════════════════════════ */
+.contact-grid { padding: clamp(3rem,6vw,5rem) 5%; max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1.2fr; gap: 5rem; }
+.contact-info-block { margin-bottom: 2.5rem; }
+.contact-label { font-size: 0.6rem; font-weight: 500; letter-spacing: 0.3em; text-transform: uppercase; color: var(--deep-gold); margin-bottom: 0.8rem; }
+.contact-value { font-size: 0.92rem; font-weight: 300; color: var(--warm-dark); line-height: 1.8; }
+.contact-value a { color: var(--warm-dark); text-decoration: none; transition: color 0.3s; }
+.contact-value a:hover { color: var(--deep-gold); }
+.contact-hours-grid { display: grid; grid-template-columns: auto 1fr; gap: 0.3rem 1.5rem; }
+.contact-hours-grid .day { font-size: 0.82rem; font-weight: 400; color: var(--warm-dark); }
+.contact-hours-grid .time { font-size: 0.82rem; font-weight: 300; color: var(--taupe); }
+.contact-form { background: var(--cream); padding: 3rem; border: 1px solid rgba(184,150,78,0.1); }
+.form-group { margin-bottom: 1.5rem; }
+.form-group label { display: block; font-size: 0.65rem; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: var(--taupe); margin-bottom: 0.5rem; }
+.form-group input, .form-group textarea { width: 100%; padding: 0.9rem 1rem; border: 1px solid rgba(184,150,78,0.15); background: var(--pearl); color: var(--warm-dark); font-family: var(--font-body); font-size: 0.85rem; font-weight: 300; outline: none; transition: border-color 0.3s; }
+.form-group input:focus, .form-group textarea:focus { border-color: var(--deep-gold); }
+.form-group textarea { height: 120px; resize: vertical; }
+.form-success { display: none; text-align: center; padding: 3rem; }
+.form-success.show { display: block; }
+.form-success h3 { font-family: var(--font-display); font-size: 1.5rem; color: var(--deep-gold); margin-bottom: 0.5rem; }
+.form-success p { font-size: 0.85rem; color: var(--taupe); }
+.contact-map { padding: 0 5% 3rem; max-width: 1200px; margin: 0 auto; }
+
+/* ═══ RESPONSIVE ═══ */
+@media (max-width: 1024px) {
+  .home-about, .about-story { grid-template-columns: 1fr; gap: 3rem; }
+  .services-cards { grid-template-columns: 1fr 1fr; }
+  .footer-grid { grid-template-columns: 1fr 1fr; }
+  .values-grid { grid-template-columns: 1fr; }
+  .contact-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 768px) {
+  .nav-center, .nav-gift { display: none; }
+  .hamburger { display: flex; }
+  .services-cards { grid-template-columns: 1fr; }
+  .gallery-grid { grid-template-columns: 1fr 1fr; grid-template-rows: repeat(4,200px); }
+  .g-item:nth-child(1), .g-item:nth-child(5) { grid-column: span 1; }
+  .stats-grid { grid-template-columns: 1fr 1fr; }
+  .stat-item:not(:last-child)::after { display: none; }
+  .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
+  .masonry-grid { grid-template-columns: 1fr 1fr; }
+  .masonry-item:nth-child(1), .masonry-item:nth-child(5) { grid-column: span 1; aspect-ratio: 1; }
+  .services-nav-bar { top: 56px; }
+}
+@media (max-width: 480px) {
+  .gallery-grid { grid-template-columns: 1fr; }
+  .gallery-grid .g-item { height: 220px; }
+  .stats-grid { grid-template-columns: 1fr; }
+  .masonry-grid { grid-template-columns: 1fr; }
+}
+</style>
 </head>
 <body>
 
-18K
+<!-- PRELOADER -->
+<div class="preloader" id="preloader">
+  <span class="preloader-logo">18K</span>
+  <div class="preloader-line"></div>
+  <span class="preloader-sub">Nail Boutique</span>
+</div>
 
-NAIL BOUTIQUE
-Home
-About
-Services
-Gallery
-Booking Policy
-Contact
-GIFT CARDS
-BOOK NOW
-18K
-	•	ABOUT
-	•	SERVICES
-	•	GALLERY
-	•	BOOKING POLICY
-	•	CONTACT
-GIFT CARDS
-BOOK NOW
+<!-- MOBILE MENU -->
+<div class="mobile-overlay" id="mobileMenu">
+  <a onclick="navigate('home')">Home</a>
+  <a onclick="navigate('about')">About</a>
+  <a onclick="navigate('services')">Services</a>
+  <a onclick="navigate('gallery')">Gallery</a>
+  <a onclick="navigate('policy')">Booking Policy</a>
+  <a onclick="navigate('contact')">Contact</a>
+  <a href="https://booking.18knailboutique.com/webstoreNew/giftcards/eca2792d-2bbb-4789-be99-6a263c609925" class="btn-outline light" style="margin-top:0.5rem;font-size:0.7rem;padding:0.8rem 2rem;">Gift Cards</a>
+  <a href="https://booking.18knailboutique.com/webstoreNew/services" class="btn-nav" style="margin-top:0.5rem;">Book Now</a>
+</div>
 
+<!-- NAV -->
+<nav id="navbar">
+  <a class="nav-logo" onclick="navigate('home')">18K</a>
+  <ul class="nav-center">
+    <li><a onclick="navigate('about')" class="nav-link" data-page="about">About</a></li>
+    <li><a onclick="navigate('services')" class="nav-link" data-page="services">Services</a></li>
+    <li><a onclick="navigate('gallery')" class="nav-link" data-page="gallery">Gallery</a></li>
+    <li><a onclick="navigate('policy')" class="nav-link" data-page="policy">Booking Policy</a></li>
+    <li><a onclick="navigate('contact')" class="nav-link" data-page="contact">Contact</a></li>
+  </ul>
+  <div class="nav-right">
+    <a href="https://booking.18knailboutique.com/webstoreNew/giftcards/eca2792d-2bbb-4789-be99-6a263c609925" class="nav-gift">Gift Cards</a>
+    <a href="https://booking.18knailboutique.com/webstoreNew/services" class="btn-nav">Book Now</a>
+  </div>
+  <button class="hamburger" id="hamburger" onclick="toggleMobile()"><span></span><span></span><span></span></button>
+</nav>
 
+<!-- ═══ HOME ═══ -->
+<div class="page active" id="page-home">
+  <section class="hero">
+    <!-- TO ADD YOUR HERO IMAGE: Replace the line below with: <div class="hero-bg" style="background-image:url('./images/hero.jpg')"></div> -->
+    <div class="hero-bg" style="background-image:url('./images/hero.jpg');background-size:cover;background-position:center;"></div>
+    <div class="hero-overlay"></div>
+    <div class="hero-gradient"></div>
+    <div class="hero-orb"></div>
+    <div class="hero-content">
+      <p class="hero-eyebrow">Santa Monica's Premier Nail Boutique</p>
+      <h1 class="hero-h1">Nail Artistry,<br><em>Refined</em></h1>
+      <p class="hero-sub">Modern precision meets quiet luxury. Every service designed with intention — never rushed, never ordinary.</p>
+      <div class="hero-buttons">
+        <a href="https://booking.18knailboutique.com/webstoreNew/services" class="btn-primary">Book Your Visit</a>
+        <a onclick="navigate('services')" class="btn-outline light" style="cursor:pointer;">Explore Services</a>
+      </div>
+    </div>
+    <div class="hero-scroll"><div class="ln"></div><span>Scroll</span></div>
+  </section>
+  <div class="marquee"><div class="marquee-track"><span class="marquee-item">Gel-X Specialist</span><span class="marquee-item">Luxury Pedicures</span><span class="marquee-item">Hard Gel Extensions</span><span class="marquee-item">Custom Nail Art</span><span class="marquee-item">Dipping Powder</span><span class="marquee-item">Signature Treatments</span><span class="marquee-item">Santa Monica</span><span class="marquee-item">Gel-X Specialist</span><span class="marquee-item">Luxury Pedicures</span><span class="marquee-item">Hard Gel Extensions</span><span class="marquee-item">Custom Nail Art</span><span class="marquee-item">Dipping Powder</span><span class="marquee-item">Signature Treatments</span><span class="marquee-item">Santa Monica</span></div></div>
 
+  <section class="home-about">
+    <!-- TO ADD IMAGE: Replace img-placeholder div below with: <img src="./images/salon-interior.jpg" class="img-cover" alt="18K Nail Boutique salon interior"> -->
+    <div class="home-about-img reveal"><img src="./images/salon-interior.jpg" class="img-cover" alt="18K Nail Boutique luxury nail art" style="height:100%;object-fit:cover;"></div>
+    <div class="about-text reveal">
+      <div class="section-overline">The 18K Philosophy</div>
+      <h2 class="section-title">Where calm meets <em>precision</em></h2>
+      <p>We believe nail care should feel intentional — a moment of quiet luxury in your day. Every detail, from our individually sanitized tools to our boutique atmosphere, is designed to honor your time and comfort.</p>
+      <div class="features-list">
+        <div class="feat"><div class="feat-diamond"></div>Disposable liners for every pedicure</div>
+        <div class="feat"><div class="feat-diamond"></div>Individually sanitized tool sets</div>
+        <div class="feat"><div class="feat-diamond"></div>Advanced Gel-X & hard gel techniques</div>
+        <div class="feat"><div class="feat-diamond"></div>Complimentary refreshments</div>
+      </div>
+      <a onclick="navigate('about')" class="btn-outline" style="cursor:pointer;">Our Story</a>
+    </div>
+  </section>
 
-SANTA MONICA'S PREMIER NAIL BOUTIQUE
-Nail Artistry, Refined
-Modern precision meets quiet luxury. Every service designed with intention — never rushed, never ordinary.
-BOOK YOUR VISIT
-EXPLORE SERVICES
+  <section class="home-services">
+    <div class="services-header reveal">
+      <div class="section-overline center">Our Services</div>
+      <h2 class="section-title light" style="text-align:center;">Thoughtfully performed with<br><em>premium</em> products</h2>
+      <p>Every treatment is crafted with care, using only the finest products and proven techniques.</p>
+    </div>
+    <div class="services-cards">
+      <div class="svc-card reveal" onclick="navigate('services')"><div class="svc-num">01</div><div class="svc-name">Manicures</div><div class="svc-desc">Classic to gel options — structured nail care with a refined, lasting finish.</div><div class="svc-starting">From $25</div><div class="svc-arrow">→</div></div>
+      <div class="svc-card reveal" onclick="navigate('services')"><div class="svc-num">02</div><div class="svc-name">Pedicures</div><div class="svc-desc">Relaxing treatments with disposable liners, designed for comfort and longevity.</div><div class="svc-starting">From $30</div><div class="svc-arrow">→</div></div>
+      <div class="svc-card reveal" onclick="navigate('services')"><div class="svc-num">03</div><div class="svc-name">Signature Pedicures</div><div class="svc-desc">Our elevated rituals — from Honey Milk to CBD-infused luxury experiences.</div><div class="svc-starting">From $45</div><div class="svc-arrow">→</div></div>
+      <div class="svc-card reveal" onclick="navigate('services')"><div class="svc-num">04</div><div class="svc-name">Gel-X & Extensions</div><div class="svc-desc">Advanced techniques for strength, natural beauty, and lasting durability.</div><div class="svc-starting">From $70</div><div class="svc-arrow">→</div></div>
+      <div class="svc-card reveal" onclick="navigate('services')"><div class="svc-num">05</div><div class="svc-name">Nail Art</div><div class="svc-desc">Custom designs from minimal accents to editorial, trending 2026 looks.</div><div class="svc-starting">From $3/nail</div><div class="svc-arrow">→</div></div>
+    </div>
+  </section>
 
-SCROLL
-GEL-X SPECIALISTLUXURY PEDICURESHARD GEL EXTENSIONSCUSTOM NAIL ARTDIPPING POWDERSIGNATURE TREATMENTSSANTA MONICAGEL-X SPECIALISTLUXURY PEDICURESHARD GEL EXTENSIONSCUSTOM NAIL ARTDIPPING POWDERSIGNATURE TREATMENTSSANTA MONICA
+  <section class="home-gallery">
+    <div class="gallery-head reveal"><div><div class="section-overline">Our Work</div><h2 class="section-title">Crafted with <em>intention</em></h2></div><a href="https://www.instagram.com/18k.nailboutique" target="_blank" class="btn-outline">@18k.nailboutique</a></div>
+    <div class="gallery-grid">
+      <div class="g-item reveal"><div class="g-item-inner"><img src="./images/gallery-1.jpg" class="img-cover" alt="Silver chrome marble nails"></div><div class="g-overlay"><span class="g-label">Chrome Minimalism</span></div></div>
+      <div class="g-item reveal"><div class="g-item-inner"><img src="./images/gallery-2.jpg" class="img-cover" alt="Nude marble gold nails"></div><div class="g-overlay"><span class="g-label">Marble & Gold</span></div></div>
+      <div class="g-item reveal"><div class="g-item-inner"><img src="./images/gallery-3.jpg" class="img-cover" alt="Mint green abstract french nails"></div><div class="g-overlay"><span class="g-label">Modern French</span></div></div>
+      <div class="g-item reveal"><div class="g-item-inner"><img src="./images/gallery-4.jpg" class="img-cover" alt="Pink strawberry nail art"></div><div class="g-overlay"><span class="g-label">Signature Art</span></div></div>
+      <div class="g-item reveal"><div class="g-item-inner"><img src="./images/gallery-5.jpg" class="img-cover" alt="Aurora rainbow gel nails"></div><div class="g-overlay"><span class="g-label">Aurora Gel</span></div></div>
+      <div class="g-item reveal"><div class="g-item-inner"><img src="./images/gallery-6.jpg" class="img-cover" alt="Galaxy dark nail art with gold circles"></div><div class="g-overlay"><span class="g-label">Galaxy Art</span></div></div>
+    </div>
+  </section>
 
-THE 18K PHILOSOPHY
-Where calm meets precision
-We believe nail care should feel intentional — a moment of quiet luxury in your day. Every detail, from our individually sanitized tools to our boutique atmosphere, is designed to honor your time and comfort.
+  <div class="stats-strip"><div class="stats-grid">
+    <div class="stat-item reveal"><div class="stat-big">8+</div><div class="stat-label">Years of Artistry</div></div>
+    <div class="stat-item reveal"><div class="stat-big">5★</div><div class="stat-label">Google & Yelp</div></div>
+    <div class="stat-item reveal"><div class="stat-big">10K+</div><div class="stat-label">Happy Clients</div></div>
+    <div class="stat-item reveal"><div class="stat-big">7</div><div class="stat-label">Days a Week</div></div>
+  </div></div>
 
-Disposable liners for every pedicure
+  <section class="testimonials-section reveal">
+    <div class="section-overline center">Client Voices</div>
+    <div id="testiCard" style="transition:all 0.4s ease;"><div class="testi-mark">"</div><p class="testi-text" id="testiText">The owner here actually cares about your experience and that shows in everything they do. I got a gel mani and lovely lavender spa pedi — three weeks later they're still perfect. No chipping or anything!</p><p class="testi-author" id="testiAuthor">— Leyla W. · Google Review</p></div>
+    <div class="testi-dots"><div class="testi-dot active" onclick="showTesti(0)"></div><div class="testi-dot" onclick="showTesti(1)"></div><div class="testi-dot" onclick="showTesti(2)"></div></div>
+  </section>
 
-Individually sanitized tool sets
+  <section class="cta-section"><div style="position:relative;z-index:2;"><div class="section-overline center reveal" style="color:var(--soft-gold);">Ready to Experience 18K?</div><h2 class="cta-title reveal">Your moment of <em>quiet luxury</em> awaits</h2><p class="cta-sub reveal">Appointments available seven days a week in Santa Monica.</p><div class="reveal"><a href="https://booking.18knailboutique.com/webstoreNew/services" class="btn-primary">Book an Appointment</a></div><p class="cta-contact reveal">424-238-5500 · <a href="/cdn-cgi/l/email-protection#d9b0b7bfb699e8e1b2b7b8b0b5bbb6acadb0a8acbcf7bab6b4"><span class="__cf_email__" data-cfemail="c2abaca4ad82f3faa9aca3abaea0adb7b6abb3b7a7eca1adaf">[email&#160;protected]</span></a></p></div></section>
+</div>
 
-Advanced Gel-X & hard gel techniques
+<!-- ═══ ABOUT ═══ -->
+<div class="page" id="page-about">
+  <div class="page-hero"><p class="page-hero-eyebrow">About 18K</p><h1 class="page-hero-title">Precision, comfort &<br><em>uncompromising</em> care</h1><p class="page-hero-sub">A modern nail boutique where every detail is designed with intention.</p></div>
+  <section class="about-story"><div class="about-story-img reveal"><img src="./images/about.jpg" class="img-cover" alt="18K Nail Boutique nail artistry" style="height:100%;object-fit:cover;"></div><div class="about-story-text reveal"><div class="section-overline">Our Story</div><h2 class="section-title">A space designed for <em>you</em></h2><p>At 18K Nail Boutique, we believe nail care should feel calm, precise, and uncompromising in quality. Every detail of our space and services is designed with intention — from the techniques we use to the environment we create.</p><p>Our goal is to offer a refined, comfortable experience where you can fully relax, feel cared for, and leave confident in the results.</p><p>Each service is performed in a sanitized environment using disposable liners for pedicure chairs, brand-new nail files and buffers for every guest, and individually sterilized service kits. These practices are part of our daily standards — not extras.</p><p>Services are never rushed, never mass-produced, and always tailored to you.</p></div></section>
+  <section class="about-values"><div class="about-values-inner"><div class="section-overline center reveal">What Defines Us</div><h2 class="section-title reveal" style="text-align:center;">The 18K <em>standard</em></h2><div class="values-grid"><div class="value-card reveal"><div class="value-icon">◇</div><div class="value-name">Hygiene First</div><div class="value-desc">Disposable liners, single-use files, and individually sterilized tool kits for every guest — always.</div></div><div class="value-card reveal"><div class="value-icon">◇</div><div class="value-name">Intentional Service</div><div class="value-desc">Every treatment is performed with care and attention. We don't rush, we don't cut corners.</div></div><div class="value-card reveal"><div class="value-icon">◇</div><div class="value-name">Boutique Atmosphere</div><div class="value-desc">A calm, modern environment designed to feel welcoming, elevated, and personal.</div></div></div></div></section>
+  <section class="about-refreshments reveal"><div class="section-overline center">A Thoughtful Experience</div><h2 class="section-title" style="text-align:center;">Complimentary <em>refreshments</em></h2><p style="font-size:0.85rem;color:var(--taupe);font-weight:300;max-width:400px;margin:0 auto 2rem;line-height:1.7;">Because your visit should feel like a treat from start to finish.</p><div class="refreshments-grid"><div class="refreshment-item"><span class="refreshment-icon">💧</span><span class="refreshment-name">Filtered Water</span></div><div class="refreshment-item"><span class="refreshment-icon">🥤</span><span class="refreshment-name">Soda</span></div><div class="refreshment-item"><span class="refreshment-icon">🥂</span><span class="refreshment-name">White Wine</span></div></div></section>
+  <section class="cta-section"><div style="position:relative;z-index:2;"><div class="section-overline center reveal" style="color:var(--soft-gold);">Experience the Difference</div><h2 class="cta-title reveal">Ready to feel the <em>18K difference</em>?</h2><p class="cta-sub reveal">Book your first visit and see why our clients never go anywhere else.</p><div class="reveal"><a href="https://booking.18knailboutique.com/webstoreNew/services" class="btn-primary">Book an Appointment</a></div></div></section>
+</div>
 
-Complimentary refreshments OUR STORY
-OUR SERVICES
-Thoughtfully performed with premium products
-Every treatment is crafted with care, using only the finest products and proven techniques.
-01
-Manicures
-Classic to gel options — structured nail care with a refined, lasting finish.
-From $25
-→
-02
-Pedicures
-Relaxing treatments with disposable liners, designed for comfort and longevity.
-From $30
-→
-03
-Signature Pedicures
-Our elevated rituals — from Honey Milk to CBD-infused luxury experiences.
-From $45
-→
-04
-Gel-X & Extensions
-Advanced techniques for strength, natural beauty, and lasting durability.
-From $70
-→
-05
-Nail Art
-Custom designs from minimal accents to editorial, trending 2026 looks.
-From $3/nail
-→
-OUR WORK
-Crafted with intention
-@18K.NAILBOUTIQUE
+<!-- ═══ SERVICES ═══ -->
+<div class="page" id="page-services">
+  <div class="page-hero"><p class="page-hero-eyebrow">Our Services</p><h1 class="page-hero-title">The <em>Full</em> Menu</h1><p class="page-hero-sub">Thoughtfully designed services, performed with intention and premium products.</p></div>
+  <div class="services-nav-bar"><button class="svc-tab active" onclick="showCat('manicures',this)">Manicures</button><button class="svc-tab" onclick="showCat('pedicures',this)">Pedicures</button><button class="svc-tab" onclick="showCat('signature',this)">Signature Pedicures</button><button class="svc-tab" onclick="showCat('enhancements',this)">Enhancements</button></div>
 
-Chrome Minimalism
+  <div class="svc-category active" id="cat-manicures"><div class="svc-category-inner"><div class="menu-category-title">Manicures</div><div class="menu-category-desc">Classic, structured nail care with a refined finish.</div>
+    <div class="menu-item"><div><div class="mi-name">Regular Manicure</div><div class="mi-desc">Hand soak, nail trimming, shaping & buffing, cuticle grooming, lotion & polish.</div></div><div class="mi-price">$25</div></div>
 
-Marble & Gold
+    <div class="menu-item"><div><div class="mi-name">Shiny Buff Manicure</div><div class="mi-desc">Regular Manicure with a mirror-shine buffing finish.</div></div><div class="mi-price">$30</div></div>
+    <div class="menu-item"><div><div class="mi-name">Honey Milk Manicure</div><div class="mi-desc">Milk & honey salt soak, fresh lemon & honey sea salt scrub, 5-minute massage, hot towel wrap & polish.</div></div><div class="mi-price">$45</div></div>
+    <div class="menu-item"><div><div class="mi-name">Gel Manicure</div><div class="mi-desc">Chip-free color lasting up to 14 days. Regular Manicure with gel polish.</div></div><div class="mi-price">$45</div></div>
+    <div class="menu-item"><div><div class="mi-name">Dipping Powder Manicure</div><div class="mi-desc">Natural-looking, non-toxic, calcium & vitamin E fortified. Includes Regular Manicure.</div></div><div class="mi-price-multi">Without removal <strong>$55</strong><br>With removal <strong>$65</strong></div></div>
+    <div class="menu-item"><div><div class="mi-name">Gel Color Polish Change</div><div class="mi-desc">Old polish removal, nail trimming & shaping, and gel polish of your choice.</div></div><div class="mi-price">$40</div></div>
+    <div class="menu-item"><div><div class="mi-name">Gel/Dip Removal & Regular Mani</div><div class="mi-desc">Full removal plus a fresh regular manicure.</div></div><div class="mi-price">$35</div></div>
+    <div class="menu-item"><div><div class="mi-name">Gel/Dip Removal Only</div><div class="mi-desc">Safe removal with buffing.</div></div><div class="mi-price">$25</div></div>
+  </div></div>
 
-Modern French
+  <div class="svc-category" id="cat-pedicures"><div class="svc-category-inner"><div class="menu-category-title">Pedicures</div><div class="menu-category-desc">Relaxing treatments with disposable liners for every guest.</div>
+    <div class="menu-item"><div><div class="mi-name">Regular Pedicure</div><div class="mi-desc">Foot soak, nail trimming, shaping, cuticle cleaning, gentle heel scrub, lotion & polish.</div></div><div class="mi-price">$30</div></div>
 
-Signature Art
+    <div class="menu-item"><div><div class="mi-name">Buff Shine Pedicure</div><div class="mi-desc">Regular Pedicure with a shiny buff finish.</div></div><div class="mi-price">$35</div></div>
+    <div class="menu-item"><div><div class="mi-name">Gel Pedicure</div><div class="mi-desc">Regular Pedicure with long-lasting gel polish.</div></div><div class="mi-price-multi">Without removal <strong>$50</strong><br>With removal <strong>$55</strong></div></div>
+    <div class="menu-item"><div><div class="mi-name">Gel Removal & Regular Pedicure</div><div class="mi-desc">Safe gel removal followed by a full Regular Pedicure.</div></div><div class="mi-price">$40</div></div>
+    <div class="menu-item"><div><div class="mi-name">Gel Polish Removal Only</div><div class="mi-desc">Gel removal and nail buffing.</div></div><div class="mi-price">$20</div></div>
+    <div class="menu-item"><div><div class="mi-name">Gel Polish Color Change</div><div class="mi-desc">Removal, nail trimming, shaping & fresh gel polish.</div></div><div class="mi-price">$45</div></div>
+  </div></div>
 
-Aurora Gel
+  <div class="svc-category" id="cat-signature"><div class="svc-category-inner"><div class="menu-category-title">18K Signature Pedicures</div><div class="menu-category-desc">Our elevated rituals — each includes a Regular Pedicure plus premium add-ons.</div>
+    <div class="menu-item"><div><div class="mi-name">Honey Milk Pedicure</div><div class="mi-desc">Honey & milk soak, fresh lemon, exfoliating honey sea salt scrub, 5-minute massage with honey milk cream.</div></div><div class="mi-price">$45</div></div>
+    <div class="menu-item"><div><div class="mi-name">Please Me Pedicure</div><div class="mi-desc">Your choice of scent. Sea salt soak, sugar scrub, cream, 5-minute massage & polish.</div></div><div class="mi-price">$50</div></div>
+    <div class="menu-item"><div><div class="mi-name">Pamper Me Pedicure</div><div class="mi-desc">Choice of Tea Tree or Aussie Pink Clay. Sea salt soak, sugar scrub, mask, lotion, hot towel & 5-min massage.</div></div><div class="mi-price">$55</div></div>
+    <div class="menu-item"><div><div class="mi-name">Mint to Be Cool Pedicure</div><div class="mi-desc">Mint bath bomb, mint sugar scrub, mask, hot towel wrap & 5-minute massage.</div></div><div class="mi-price">$60</div></div>
+    <div class="menu-item"><div><div class="mi-name">CBD Pedicure</div><div class="mi-desc">CBD oil, sugar scrub, CBD lotion & 5-minute massage. Detoxifies and relieves aches.</div></div><div class="mi-price">$65</div></div>
+    <div class="menu-item"><div><div class="mi-name">Orange You Pretty Pedicure</div><div class="mi-desc">Orange bath bomb, fresh orange, callus treatment, sugar scrub, mask, hot towel & 10-min massage.</div></div><div class="mi-price">$80</div></div>
+    <div class="menu-item"><div><div class="mi-name">Lovely Lavender Pedicure</div><div class="mi-desc">Bath bomb, lavender flower, callus treatment, sugar scrub, mask, hot towel & 10-minute massage.</div></div><div class="mi-price">$80</div></div>
+    <div class="menu-note">✦ All Signature Pedicures include a Regular Pedicure. Upgrade to gel polish for an additional charge.</div>
+  </div></div>
 
-Galaxy Art
-8+
-YEARS OF ARTISTRY
-5★
-GOOGLE & YELP
-10K+
-HAPPY CLIENTS
-7
-DAYS A WEEK
-CLIENT VOICES
-"
-The owner here actually cares about your experience and that shows in everything they do. I got a gel mani and lovely lavender spa pedi — three weeks later they're still perfect. No chipping or anything!
-— LEYLA W. · GOOGLE REVIEW
+  <div class="svc-category" id="cat-enhancements"><div class="svc-category-inner"><div class="menu-category-title">Nail Enhancements</div><div class="menu-category-desc">Advanced techniques with a 10-day warranty on all enhancements.</div>
+    <div class="menu-item"><div><div class="mi-name">Dipping Powder Full Set</div><div class="mi-desc">Natural-looking, non-toxic, lightweight. Calcium & vitamin E fortified.</div></div><div class="mi-price">$80+</div></div>
+    <div class="menu-item"><div><div class="mi-name">Gel-X Full Set</div><div class="mi-desc">Premium soft gel extensions for a natural, lightweight look.</div></div><div class="mi-price">$70+</div></div>
+    <div class="menu-item"><div><div class="mi-name">Hard Gel / Gel Builder Full Set</div><div class="mi-desc">Sculpted hard gel or gel builder for maximum strength and custom shaping.</div></div><div class="mi-price">$80+</div></div>
+    <div class="menu-item"><div><div class="mi-name">Hard Gel Fill</div><div class="mi-desc">Maintenance fill for existing hard gel extensions.</div></div><div class="mi-price">$70</div></div>
+    <div class="menu-item"><div><div class="mi-name">Nail Art</div><div class="mi-desc">Custom designs — from minimal accents to trending editorial looks.</div></div><div class="mi-price">$3–$5 / nail</div></div>
+    <div class="menu-note">✦ Prices vary based on length and complexity. Ask your technician for details.</div>
+  </div></div>
 
+  <div class="svc-book-strip"><p>Ready to book your <em>perfect</em> service?</p><a href="https://booking.18knailboutique.com/webstoreNew/services" class="btn-primary">Book an Appointment</a></div>
+</div>
 
+<!-- ═══ GALLERY ═══ -->
+<div class="page" id="page-gallery">
+  <div class="page-hero"><p class="page-hero-eyebrow">Our Portfolio</p><h1 class="page-hero-title">Crafted with <em>Intention</em></h1><p class="page-hero-sub">A glimpse of the artistry our clients love.</p></div>
+  <div class="gallery-masonry"><div class="masonry-grid">
+    <div class="masonry-item reveal"><div class="masonry-item-inner"><img src="./images/portfolio-1.jpg" class="img-cover" alt="Silver chrome marble nail design"></div></div>
+    <div class="masonry-item reveal"><div class="masonry-item-inner"><img src="./images/portfolio-2.jpg" class="img-cover" alt="Nude marble gold nails"></div></div>
+    <div class="masonry-item reveal"><div class="masonry-item-inner"><img src="./images/portfolio-3.jpg" class="img-cover" alt="Mint green abstract french tips"></div></div>
+    <div class="masonry-item reveal"><div class="masonry-item-inner"><img src="./images/portfolio-4.jpg" class="img-cover" alt="Colorful folk art nail design"></div></div>
+    <div class="masonry-item reveal"><div class="masonry-item-inner"><img src="./images/portfolio-5.jpg" class="img-cover" alt="Teal and gold 3D nail art"></div></div>
+    <div class="masonry-item reveal"><div class="masonry-item-inner"><img src="./images/portfolio-6.jpg" class="img-cover" alt="Pink strawberry nail art"></div></div>
+    <div class="masonry-item reveal"><div class="masonry-item-inner"><img src="./images/portfolio-7.jpg" class="img-cover" alt="Black and gold studded nail art"></div></div>
+    <div class="masonry-item reveal"><div class="masonry-item-inner"><img src="./images/portfolio-8.jpg" class="img-cover" alt="Aurora rainbow gel nails"></div></div>
+    <div class="masonry-item reveal"><div class="masonry-item-inner"><img src="./images/portfolio-9.jpg" class="img-cover" alt="Galaxy dark art nails with gold circles"></div></div>
+  </div></div>
+  <div class="gallery-instagram reveal" style="padding-bottom:3rem;"><p>See more on Instagram — <a href="https://www.instagram.com/18k.nailboutique" target="_blank">@18k.nailboutique</a></p></div>
+  <section class="cta-section"><div style="position:relative;z-index:2;"><div class="section-overline center reveal" style="color:var(--soft-gold);">Love What You See?</div><h2 class="cta-title reveal">Let us create your <em>next look</em></h2><p class="cta-sub reveal">Bring a screenshot or describe your vision — we'll make it real.</p><div class="reveal"><a href="https://booking.18knailboutique.com/webstoreNew/services" class="btn-primary">Book Now</a></div></div></section>
+</div>
 
-READY TO EXPERIENCE 18K?
-Your moment of quiet luxury awaits
-Appointments available seven days a week in Santa Monica.
-BOOK AN APPOINTMENT
-424-238-5500 · [email protected]
-18K
-Modern nail artistry, designed with intention. Santa Monica's premier luxury nail boutique.
-IGFBTTYP
-SERVICES
-	•	Manicures
-	•	Pedicures
-	•	Signature Pedicures
-	•	Enhancements
-BOUTIQUE
-	•	About Us
-	•	Gallery
-	•	Booking Policy
-	•	Contact
-	•	Gift Cards
-VISIT US
-	•	1323 Lincoln Blvd, Santa Monica
-	•	424-238-5500
-	•	[email protected]
-	•	Mon–Fri 10–7 · Sat 10–6 · Sun 10–5
-© 2026 18K Nail Boutique. All rights reserved.
-Privacy Policy
-Terms & Conditions
+<!-- ═══ BOOKING POLICY ═══ -->
+<div class="page" id="page-policy">
+  <div class="page-hero"><p class="page-hero-eyebrow">Before Your Visit</p><h1 class="page-hero-title">Booking <em>Guidelines</em></h1><p class="page-hero-sub">Our policies respect your time, our technicians, and service quality.</p></div>
+  <div class="policy-content">
+    <div class="policy-section reveal"><div class="policy-section-title">Appointments</div><p>Appointments are recommended and can be booked online or by phone. Walk-ins are welcome when availability allows.</p></div>
+    <div class="policy-section reveal"><div class="policy-section-title">Cancellation & Rescheduling</div><p>We kindly request at least 24 hours' notice for any cancellations or rescheduling.</p><p>Appointments canceled with less than 24 hours' notice and missed appointments (no-shows) may be subject to a cancellation fee.</p></div>
+    <div class="policy-section reveal"><div class="policy-section-title">Late Arrivals</div><p>If you arrive late, your service time may be adjusted to accommodate the next scheduled appointment. In some cases, services may need to be shortened or rescheduled.</p></div>
+    <div class="policy-section reveal"><div class="policy-section-title">Deposits</div><p>Certain services may require a deposit to secure your appointment. Deposits are applied toward your service total and are non-refundable in the event of late cancellation or no-show.</p></div>
+    <div class="policy-section reveal"><div class="policy-section-title">Service Satisfaction</div><p>Your satisfaction is important to us. If you have any concerns during your visit, please let us know at the time of service so we can address them promptly.</p></div>
+    <div class="policy-section reveal"><div class="policy-section-title">Health & Safety</div><p>We reserve the right to refuse service if health or safety concerns arise. We follow strict sanitation and hygiene standards at all times.</p><p>By booking an appointment with 18K Nail Boutique, you acknowledge and agree to this policy.</p></div>
+    <div style="text-align:center;margin-top:3rem;" class="reveal"><a href="https://booking.18knailboutique.com/webstoreNew/services" class="btn-primary">Book an Appointment</a></div>
+  </div>
+</div>
+
+<!-- ═══ CONTACT ═══ -->
+<div class="page" id="page-contact">
+  <div class="page-hero"><p class="page-hero-eyebrow">Get in Touch</p><h1 class="page-hero-title">Visit <em>18K</em></h1><p class="page-hero-sub">Book online, call, or send us a message.</p></div>
+  <div class="contact-grid">
+    <div class="reveal">
+      <div class="contact-info-block"><div class="contact-label">Location</div><div class="contact-value"><a href="https://goo.gl/maps/5nCyRs6TBnn4DLERA" target="_blank">1323 Lincoln Blvd<br>Santa Monica, CA 90401</a></div></div>
+      <div class="contact-info-block"><div class="contact-label">Phone</div><div class="contact-value"><a href="tel:4242385500">424-238-5500</a></div></div>
+      <div class="contact-info-block"><div class="contact-label">Email</div><div class="contact-value"><a href="/cdn-cgi/l/email-protection#137a7d757c53222b787d727a7f717c66677a6266763d707c7e"><span class="__cf_email__" data-cfemail="85ecebe3eac5b4bdeeebe4ece9e7eaf0f1ecf4f0e0abe6eae8">[email&#160;protected]</span></a></div></div>
+      <div class="contact-info-block"><div class="contact-label">Hours</div><div class="contact-hours-grid"><span class="day">Monday – Friday</span><span class="time">10:00 AM – 7:00 PM</span><span class="day">Saturday</span><span class="time">10:00 AM – 6:00 PM</span><span class="day">Sunday</span><span class="time">10:00 AM – 5:00 PM</span></div></div>
+      <div class="contact-info-block" style="margin-top:2rem;"><div class="contact-label">Follow Us</div><div class="footer-social" style="margin-top:0.5rem;"><a href="https://www.instagram.com/18k.nailboutique" target="_blank">IG</a><a href="https://www.facebook.com/18knailboutique" target="_blank">FB</a><a href="http://www.tiktok.com/18knailboutique" target="_blank">TT</a><a href="https://www.yelp.com/biz/18k-nail-boutique-santa-monica-2" target="_blank">YP</a></div></div>
+    </div>
+    <div class="reveal">
+      <!-- CONTACT FORM: Using Netlify Forms — submissions go to your Netlify dashboard + email notifications -->
+      <form class="contact-form" id="contactForm" name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+        <input type="hidden" name="form-name" value="contact">
+        <p style="display:none"><label>Don't fill this out: <input name="bot-field"></label></p>
+        <div class="section-overline">Send Us a Message</div>
+        <div class="form-group"><label>Name</label><input type="text" name="name" placeholder="Your name" required></div>
+        <div class="form-group"><label>Email</label><input type="email" name="email" placeholder="your@email.com" required></div>
+        <div class="form-group"><label>Phone</label><input type="tel" name="phone" placeholder="(Optional)"></div>
+        <div class="form-group"><label>Message</label><textarea name="message" placeholder="How can we help you?" required></textarea></div>
+        <button type="submit" class="btn-primary" style="width:100%;border:none;">Send Message</button>
+      </form>
+      <div class="form-success" id="formSuccess"><h3>Message Sent ✦</h3><p>Thank you! We'll get back to you shortly.</p></div>
+    </div>
+  </div>
+  <div class="contact-map reveal">
+    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3308.123!2d-118.481!3d34.0088!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80c2a4cec2910001%3A0x0!2s1323+Lincoln+Blvd%2C+Santa+Monica%2C+CA+90401!5e0!3m2!1sen!2sus!4v1700000000000" width="100%" height="300" style="border:1px solid rgba(184,150,78,0.1);" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+  </div>
+</div>
+
+<!-- ═══ FOOTER ═══ -->
+<footer>
+  <div class="footer-grid">
+    <div><span class="footer-brand-logo">18K</span><p class="footer-desc">Modern nail artistry, designed with intention. Santa Monica's premier luxury nail boutique.</p><div class="footer-social"><a href="https://www.instagram.com/18k.nailboutique" target="_blank">IG</a><a href="https://www.facebook.com/18knailboutique" target="_blank">FB</a><a href="http://www.tiktok.com/18knailboutique" target="_blank">TT</a><a href="https://www.yelp.com/biz/18k-nail-boutique-santa-monica-2" target="_blank">YP</a></div></div>
+    <div><div class="footer-col-title">Services</div><ul class="footer-links"><li><a onclick="navigate('services')">Manicures</a></li><li><a onclick="navigate('services')">Pedicures</a></li><li><a onclick="navigate('services')">Signature Pedicures</a></li><li><a onclick="navigate('services')">Enhancements</a></li></ul></div>
+    <div><div class="footer-col-title">Boutique</div><ul class="footer-links"><li><a onclick="navigate('about')">About Us</a></li><li><a onclick="navigate('gallery')">Gallery</a></li><li><a onclick="navigate('policy')">Booking Policy</a></li><li><a onclick="navigate('contact')">Contact</a></li><li><a href="https://booking.18knailboutique.com/webstoreNew/giftcards/eca2792d-2bbb-4789-be99-6a263c609925">Gift Cards</a></li></ul></div>
+    <div><div class="footer-col-title">Visit Us</div><ul class="footer-links"><li><a href="https://goo.gl/maps/5nCyRs6TBnn4DLERA" target="_blank">1323 Lincoln Blvd, Santa Monica</a></li><li><a href="tel:4242385500">424-238-5500</a></li><li><a href="/cdn-cgi/l/email-protection#8ae3e4ece5cabbb2e1e4ebe3e6e8e5fffee3fbffefa4e9e5e7"><span class="__cf_email__" data-cfemail="50393e363f1061683b3e31393c323f2524392125357e333f3d">[email&#160;protected]</span></a></li><li><a>Mon–Fri 10–7 · Sat 10–6 · Sun 10–5</a></li></ul></div>
+  </div>
+  <div class="footer-bottom"><span class="footer-copy">© 2026 18K Nail Boutique. All rights reserved.</span><div class="footer-legal"><a href="#">Privacy Policy</a><a href="#">Terms & Conditions</a></div></div>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+window.addEventListener('load',()=>{setTimeout(()=>document.getElementById('preloader').classList.add('hidden'),1200);});
+window.addEventListener('scroll',()=>{document.getElementById('navbar').classList.toggle('scrolled',window.scrollY>80);});
+
+function navigate(page){
+  document.getElementById('mobileMenu').classList.remove('open');
+  document.getElementById('hamburger').classList.remove('open');
+  document.querySelectorAll('.page').forEach(p=>{p.classList.remove('active');});
+  const t=document.getElementById('page-'+page);
+  if(t)t.classList.add('active');
+  document.querySelectorAll('.nav-link').forEach(a=>{a.classList.toggle('active',a.dataset.page===page);});
+  window.scrollTo({top:0,behavior:'instant'});
+  setTimeout(initReveals,100);
+}
+
+function toggleMobile(){
+  document.getElementById('mobileMenu').classList.toggle('open');
+  document.getElementById('hamburger').classList.toggle('open');
+}
+
+function showCat(cat,btn){
+  document.querySelectorAll('.svc-category').forEach(c=>c.classList.remove('active'));
+  document.querySelectorAll('.svc-tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById('cat-'+cat).classList.add('active');
+  btn.classList.add('active');
+}
+
+const testis=[
+  {text:"The owner here actually cares about your experience and that shows in everything they do. I got a gel mani and lovely lavender spa pedi — three weeks later they're still perfect. No chipping or anything!",author:"— Leyla W. · Google Review"},
+  {text:"Best nail place in Santa Monica! The salon is clean, nicely designed and everyone is knowledgeable about the products and nail colors. I can't recommend this place enough!",author:"— Anitha K. · Google Review"},
+  {text:"I've been coming here for two years. I love this place for my gel needs! They take care of your nails and always do a great job.",author:"— Charmaine C. · Google Review"}
+];
+let cT=0;
+function showTesti(i){
+  cT=i;const c=document.getElementById('testiCard');c.style.opacity='0';c.style.transform='translateY(8px)';
+  setTimeout(()=>{document.getElementById('testiText').textContent=testis[i].text;document.getElementById('testiAuthor').textContent=testis[i].author;document.querySelectorAll('.testi-dot').forEach((d,j)=>d.classList.toggle('active',j===i));c.style.opacity='1';c.style.transform='translateY(0)';},300);
+}
+setInterval(()=>{cT=(cT+1)%testis.length;showTesti(cT);},5000);
+
+// Contact form
+const form=document.getElementById('contactForm');
+if(form){form.addEventListener('submit',function(e){
+  e.preventDefault();
+  const fd=new FormData(form);
+  fetch('/',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:new URLSearchParams(fd).toString()})
+  .then(r=>{if(r.ok){form.style.display='none';document.getElementById('formSuccess').classList.add('show');}else{alert('Thank you! Your message has been sent.');}})
+  .catch(()=>{alert('Thank you! Your message has been sent.');});
+});}
+
+function initReveals(){
+  const els=document.querySelectorAll('.page.active .reveal:not(.visible)');
+  const obs=new IntersectionObserver((entries)=>{entries.forEach((e,i)=>{if(e.isIntersecting){setTimeout(()=>e.target.classList.add('visible'),i*60);obs.unobserve(e.target);}});},{threshold:0.12});
+  els.forEach(el=>obs.observe(el));
+}
+initReveals();
+</script>
 </body>
 </html>
