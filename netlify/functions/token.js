@@ -11,7 +11,7 @@ exports.handler = async (event) => {
   }
 
   try {
-    const tokenRes = await fetch(`${BASE_URL}/authorize/token`, {
+    const tokenRes = await fetch(`${BASE_URL}/tokens`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
       body: JSON.stringify({ app_id: APP_ID, app_secret: APP_SECRET }),
@@ -24,7 +24,7 @@ exports.handler = async (event) => {
         headers: { 'Authorization': `bearer ${tokenData.access_token}`, 'Accept': 'application/json' },
       });
       const testData = await testRes.json().catch(() => ({}));
-      return ok({ success: true, token_preview: tokenData.access_token.substring(0,20)+'...', services_test: { status: testRes.status, data: testData } });
+      return ok({ success: true, token_preview: tokenData.access_token.substring(0,30)+'...', services_test: { status: testRes.status, data: testData } });
     }
 
     return ok({ token_status: tokenRes.status, token_response: tokenData });
