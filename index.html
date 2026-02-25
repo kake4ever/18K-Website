@@ -143,38 +143,5 @@ VISIT US
 © 2026 18K Nail Boutique. All rights reserved.
 Privacy Policy
 Terms & Conditions
-<!-- Meta Pixel Conversion Events -->
-<script>
-  // Track all "Book Now" / "Book an Appointment" button clicks
-  document.querySelectorAll('a[href*="booking.18knailboutique.com"]').forEach(function(btn) {
-    btn.addEventListener('click', function() {
-      fbq('track', 'InitiateCheckout', {
-        content_name: 'Book Appointment',
-        content_category: 'Nail Services'
-      });
-    });
-  });
-
-  // Track contact form submission
-  var contactForm = document.querySelector('form');
-  if (contactForm) {
-    contactForm.addEventListener('submit', function() {
-      fbq('track', 'Lead', {
-        content_name: 'Contact Form',
-        content_category: 'Nail Services'
-      });
-    });
-  }
-
-  // Track phone number clicks
-  document.querySelectorAll('a[href="tel:4242385500"]').forEach(function(link) {
-    link.addEventListener('click', function() {
-      fbq('track', 'Contact', {
-        content_name: 'Phone Call',
-        content_category: 'Nail Services'
-      });
-    });
-  });
-</script>
 </body>
 </html>
