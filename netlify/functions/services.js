@@ -1,35 +1,31 @@
-// GET /api/services?center_id=xxx
-// Returns full service catalog grouped by category
-const { zenoti, ok, err, cors } = require('./_zenoti');
+const { zenoti, ok, cors } = require('./_zenoti');
 
 exports.handler = async (event) => {
   if (event.httpMethod === 'OPTIONS') return { statusCode: 204, headers: cors, body: '' };
 
-  const { center_id } = event.queryStringParameters || {};
-  if (!center_id) return err('center_id required', 400);
+  const CENTER_ID = 'eca2792d-2bbb-4789-be99-6a263c609925';
+  const results = {};
 
-  try {
-    const data = await zenoti(`/centers/${center_id}/services?size=200`);
-    const services = (data.services || []).map(s => ({
-      id: s.id,
-      name: s.name,
-      description: s.description,
-      duration: s.duration,
-      price: s.price?.sales_price || s.price?.actual_price || 0,
-      category_id: s.category?.id,
-      category_name: s.category?.name,
-    }));
+  const endpoints = [
+    `/centers/${CENTER_ID}/services`,
+    `/centers/${CENTER_ID}/services?size=10`,
+    `/centers/${CENTER_ID}/catalog/services`,
+    `/catalog/services?center_id=${CENTER_ID}`,
+    `/centers/${CENTER_ID}/services?catalog_enabled=true`,
+  ];
 
-    // Group by category
-    const grouped = {};
-    services.forEach(s => {
-      const cat = s.category_name || 'Other';
-      if (!grouped[cat]) grouped[cat] = [];
-      grouped[cat].push(s);
-    });
-
-    return ok({ services, grouped });
-  } catch (e) {
-    return err('Failed to fetch services', e.status || 500, e.body);
+  for (const ep of endpoints) {
+    try {
+      const data = await zenoti(ep);
+      results[ep] = { success: true, count: data.services?.length, sample: data.services?.[0]?.name };
+    } catch (e) {
+      results[ep] = { success: false, status: e.status, code: e.body?.ErrorCode || e.body?.code, msg: e.body?.Message || e.body?.message };
+    }
   }
+
+  return {
+    statusCode: 200,
+    headers: { ...cors, 'Content-Type': 'application/json' },
+    body: JSON.stringify({ results })
+  };
 };
