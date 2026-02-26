@@ -1,39 +1,58 @@
 const { ok, err, cors } = require('./_zenoti');
 
+const CENTER_ID = 'eca2792d-2bbb-4789-be99-6a263c609925';
 const BASE_URL = process.env.ZENOTI_API_URL || 'https://apiamrs12.zenoti.com/v1';
 const CATALOG_URL = BASE_URL.replace('/v1', '');
-const APP_ID = process.env.ZENOTI_APP_ID;
-const APP_SECRET = process.env.ZENOTI_APP_SECRET;
+const API_KEY = process.env.ZENOTI_API_KEY;
 
 exports.handler = async (event) => {
   if (event.httpMethod === 'OPTIONS') return { statusCode: 204, headers: cors, body: '' };
 
-  // Debug token generation
-  const attempts = {};
+  const { service_id, date } = event.queryStringParameters || {};
+  if (!service_id || !date) return err('service_id, date required', 400);
 
-  const payloads = [
-    { application_id: APP_ID, client_secret: APP_SECRET },
-    { app_id: APP_ID, app_secret: APP_SECRET },
-    { application_id: APP_ID, client_secret: APP_SECRET, grant_type: 'client_credentials' },
+  const centerDate = `${date} 00:00:00`;
+  const body = {
+    CenterId: CENTER_ID,
+    CenterDate: centerDate,
+    CheckFutureDayAvailability: false,
+    FromDeals: false,
+    FromServiceFrequnecyFlow: true,
+    SlotBookings: [{
+      GuestId: null,
+      AppointmentGroupId: null,
+      Services: [{
+        Service: { Id: service_id },
+        RequestedTherapist: { Id: null },
+        RequestedTherapistGender: 3,
+        Room: null,
+      }],
+    }],
+  };
+
+  const results = {};
+
+  // Try apikey auth on catalog endpoint
+  const authHeaders = [
+    { label: 'apikey_catalog', url: `${CATALOG_URL}/api/Catalog/Appointments/Availabletimes`, auth: `apikey ${API_KEY}` },
+    { label: 'apikey_v1', url: `${BASE_URL}/appointments/availabletimes`, auth: `apikey ${API_KEY}` },
+    { label: 'apikey_v1_catalog', url: `${BASE_URL}/Catalog/Appointments/Availabletimes`, auth: `apikey ${API_KEY}` },
   ];
 
-  for (const [i, body] of payloads.entries()) {
-    for (const url of [`${BASE_URL}/tokens`, `${CATALOG_URL}/api/tokens`, `${CATALOG_URL}/v1/tokens`]) {
-      const label = `p${i}::${url.split('/').pop()}::${Object.keys(body).join(',')}`;
-      try {
-        const res = await fetch(url, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(body),
-        });
-        const text = await res.text();
-        let data; try { data = JSON.parse(text); } catch { data = { raw: text.slice(0, 100) }; }
-        attempts[label] = { status: res.status, keys: Object.keys(data), token: data.access_token ? 'GOT_TOKEN' : null, data };
-      } catch (e) {
-        attempts[label] = { error: e.message };
-      }
+  for (const { label, url, auth } of authHeaders) {
+    try {
+      const res = await fetch(url, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Authorization': auth },
+        body: JSON.stringify(body),
+      });
+      const text = await res.text();
+      let data; try { data = JSON.parse(text); } catch { data = { raw: text.slice(0, 200) }; }
+      results[label] = { status: res.status, keys: Object.keys(data), sample: JSON.stringify(data).slice(0, 300) };
+    } catch (e) {
+      results[label] = { error: e.message };
     }
   }
 
-  return ok({ app_id_set: !!APP_ID, app_secret_set: !!APP_SECRET, attempts });
+  return ok({ results });
 };
