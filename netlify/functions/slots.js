@@ -10,12 +10,14 @@ exports.handler = async (event) => {
 
   const results = {};
 
+  // Build on the working format: date at top + date in service
   const attempts = {
-    'date_in_service':     { center_id: CENTER_ID, guests: [{ guest_id, services: [{ service_id, date }] }] },
-    'center_date_in_svc':  { center_id: CENTER_ID, guests: [{ guest_id, services: [{ service_id, center_date: date }] }] },
-    'requested_date_svc':  { center_id: CENTER_ID, guests: [{ guest_id, services: [{ service_id, requested_date: date }] }] },
-    'date_top_and_svc':    { center_id: CENTER_ID, date, guests: [{ guest_id, services: [{ service_id, date }] }] },
-    'date_in_guest':       { center_id: CENTER_ID, guests: [{ guest_id, date, services: [{ service_id }] }] },
+    'base':               { center_id: CENTER_ID, date, guests: [{ guest_id, services: [{ service_id, date }] }] },
+    'with_therapist_any': { center_id: CENTER_ID, date, guests: [{ guest_id, services: [{ service_id, date, therapist_id: '00000000-0000-0000-0000-000000000000' }] }] },
+    'with_quantity':      { center_id: CENTER_ID, date, guests: [{ guest_id, services: [{ service_id, date, quantity: 1 }] }] },
+    'with_slot_time':     { center_id: CENTER_ID, date, guests: [{ guest_id, services: [{ service_id, date, slot_time: `${date}T10:00:00` }] }] },
+    'with_duration':      { center_id: CENTER_ID, date, guests: [{ guest_id, services: [{ service_id, date, duration: 60 }] }] },
+    'no_guest_id':        { center_id: CENTER_ID, date, guests: [{ services: [{ service_id, date }] }] },
   };
 
   for (const [label, payload] of Object.entries(attempts)) {
