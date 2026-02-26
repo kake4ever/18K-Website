@@ -18,8 +18,9 @@ exports.handler = async (event) => {
           personal_info: {
             first_name: 'Guest',
             last_name: 'User',
-            country_id: 231,
+            country_fk: 231,
             mobile_phone: { country_code: 1, number: '310000001', country_fk: 231 },
+            email: `temp_${Date.now()}@18knailboutique.com`,
           },
         }),
       });
