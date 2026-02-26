@@ -10,32 +10,31 @@ exports.handler = async (event) => {
 
   const results = {};
 
-  // Try all known POST booking formats
-  const payloads = {
-    'format_a': {
-      center_id: CENTER_ID,
-      services: [{ service_id, guest_id }]
-    },
-    'format_b': {
-      center_id: CENTER_ID,
-      appointment_services: [{ service_id, guest_id }]
-    },
-    'format_c': {
-      CenterId: CENTER_ID,
-      Services: [{ ServiceId: service_id, GuestId: guest_id }]
-    },
-    'format_d': {
-      center_id: CENTER_ID,
-      items: [{ service_id, guest_id, quantity: 1 }]
-    },
-  };
+  // Try v2 and different endpoint paths
+  const attempts = [
+    ['/v2/bookings', { center_id: CENTER_ID, services: [{ service_id, guest_id }] }],
+    ['/bookings', { center_id: CENTER_ID, service_id, guest_id }],
+    ['/bookings', { center_id: CENTER_ID, guests: [{ guest_id, services: [{ service_id }] }] }],
+    ['/bookings', { center_id: CENTER_ID, booking_items: [{ service_id, guest_id }] }],
+  ];
 
-  for (const [label, payload] of Object.entries(payloads)) {
+  for (const [path, payload] of attempts) {
+    const label = `${path}::${Object.keys(payload).join(',')}`;
     try {
-      const data = await zenoti('/bookings', { method: 'POST', body: JSON.stringify(payload) });
-      results[label] = { success: true, booking_id: data.booking_id || data.id, keys: Object.keys(data) };
+      const BASE = process.env.ZENOTI_API_URL || 'https://apiamrs12.zenoti.com/v1';
+      const url = path.startsWith('/v2') 
+        ? BASE.replace('/v1', '') + path 
+        : BASE + path;
+      const res = await fetch(url, {
+        method: 'POST',
+        headers: { 'Authorization': `apikey ${process.env.ZENOTI_API_KEY}`, 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+      const text = await res.text();
+      let data; try { data = JSON.parse(text); } catch { data = { raw: text.slice(0, 100) }; }
+      results[label] = { success: res.ok, status: res.status, booking_id: data.booking_id || data.id, msg: data.message || data.Message, keys: Object.keys(data) };
     } catch (e) {
-      results[label] = { success: false, status: e.status, msg: e.body?.message || e.body?.Message };
+      results[label] = { error: e.message };
     }
   }
 
