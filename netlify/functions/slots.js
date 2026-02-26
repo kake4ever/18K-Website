@@ -8,25 +8,33 @@ exports.handler = async (event) => {
   const { service_id, date, guest_id } = event.queryStringParameters || {};
   if (!service_id || !date || !guest_id) return err('service_id, date, guest_id required', 400);
 
-  const results = {};
+  try {
+    // Create booking session with center_date
+    const booking = await zenoti('/bookings', {
+      method: 'POST',
+      body: JSON.stringify({
+        center_id: CENTER_ID,
+        center_date: date,
+        guests: [{ guest_id, services: [{ service_id }] }],
+      }),
+    });
 
-  // The guests format works - try variations to get a real booking_id
-  const payloads = {
-    'a': { center_id: CENTER_ID, guests: [{ guest_id, services: [{ service_id }] }] },
-    'b': { center_id: CENTER_ID, guests: [{ id: guest_id, services: [{ service_id }] }] },
-    'c': { center_id: CENTER_ID, guests: [{ guest_id, services: [{ id: service_id }] }] },
-    'd': { center_id: CENTER_ID, guests: [{ guest_id, services: [{ service_id, therapist_id: null }] }] },
-    'e': { center_id: CENTER_ID, guests: [{ guest_id, service_id }] },
-  };
-
-  for (const [label, payload] of Object.entries(payloads)) {
-    try {
-      const data = await zenoti('/bookings', { method: 'POST', body: JSON.stringify(payload) });
-      results[label] = { success: true, booking_id: data.booking_id || data.id, error: data.Error, keys: Object.keys(data), full: data };
-    } catch (e) {
-      results[label] = { success: false, status: e.status, msg: e.body?.message || e.body?.Message };
+    const booking_id = booking.booking_id || booking.id;
+    if (!booking_id || booking_id === '00000000-0000-0000-0000-000000000000') {
+      return err('Could not create booking session', 500, booking);
     }
-  }
 
-  return ok({ results });
+    // Get available slots
+    const slotsData = await zenoti(`/bookings/${booking_id}/slots?date=${date}`);
+    const slots = (slotsData.slots || []).map(s => ({
+      start_time: s.start_time,
+      end_time: s.end_time,
+      therapist_id: s.therapist?.id || null,
+      therapist_name: s.therapist ? `${s.therapist.first_name} ${s.therapist.last_name}`.trim() : 'Any',
+    }));
+
+    return ok({ booking_id, date, slots, count: slots.length });
+  } catch (e) {
+    return err('Failed to fetch slots', e.status || 500, e.body);
+  }
 };
