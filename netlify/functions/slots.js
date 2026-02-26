@@ -9,35 +9,30 @@ exports.handler = async (event) => {
   if (!service_id || !date) return err('service_id, date required', 400);
 
   try {
-    // Use provided guest_id or create a temp anonymous guest
+    // Use provided guest_id or create a temp guest
     let guestId = guest_id;
     if (!guestId) {
-      const tempGuest = await zenoti(`/centers/${CENTER_ID}/guests`, {
+      const tempGuest = await zenoti('/guests', {
         method: 'POST',
         body: JSON.stringify({
           center_id: CENTER_ID,
           personal_info: {
             first_name: 'Guest',
             last_name: 'User',
-            mobile_phone: { country_code: 1, number: '0000000000' },
+            mobile_phone: { country_code: 1, number: '3100000001' },
           },
         }),
       });
       guestId = tempGuest.guest?.id || tempGuest.id;
+      if (!guestId) return err('Could not create temp guest', 500, tempGuest);
     }
 
-    if (!guestId) return err('Could not get guest ID for booking', 500);
-
-    // Create booking session with guest
+    // Create booking session
     const booking = await zenoti('/bookings', {
       method: 'POST',
       body: JSON.stringify({
         center_id: CENTER_ID,
-        services: [{
-          service_id,
-          guest_id: guestId,
-          therapist_id: null,
-        }],
+        services: [{ service_id, guest_id: guestId, therapist_id: null }],
       }),
     });
 
@@ -46,14 +41,11 @@ exports.handler = async (event) => {
 
     // Get available slots
     const slotsData = await zenoti(`/bookings/${booking_id}/slots?date=${date}`);
-
     const slots = (slotsData.slots || []).map(s => ({
       start_time: s.start_time,
       end_time: s.end_time,
       therapist_id: s.therapist?.id || null,
-      therapist_name: s.therapist
-        ? `${s.therapist.first_name} ${s.therapist.last_name}`.trim()
-        : 'Any',
+      therapist_name: s.therapist ? `${s.therapist.first_name} ${s.therapist.last_name}`.trim() : 'Any',
     }));
 
     return ok({ booking_id, guest_id: guestId, date, slots });
