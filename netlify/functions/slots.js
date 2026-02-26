@@ -18,7 +18,8 @@ exports.handler = async (event) => {
           personal_info: {
             first_name: 'Guest',
             last_name: 'User',
-            mobile_phone: { country_code: 1, number: '310000001' },
+            country_id: 231,
+            mobile_phone: { country_code: 1, number: '310000001', country_fk: 231 },
           },
         }),
       });
@@ -26,7 +27,6 @@ exports.handler = async (event) => {
       if (!guestId) return err('Could not create temp guest', 500, tempGuest);
     }
 
-    // Create booking session
     const booking = await zenoti('/bookings', {
       method: 'POST',
       body: JSON.stringify({
@@ -38,7 +38,6 @@ exports.handler = async (event) => {
     const booking_id = booking.booking_id || booking.id;
     if (!booking_id) return err('Could not create booking session', 500, booking);
 
-    // Get available slots
     const slotsData = await zenoti(`/bookings/${booking_id}/slots?date=${date}`);
     const slots = (slotsData.slots || []).map(s => ({
       start_time: s.start_time,
