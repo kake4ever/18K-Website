@@ -9,7 +9,6 @@ exports.handler = async (event) => {
   if (!service_id || !date) return err('service_id, date required', 400);
 
   try {
-    // Use provided guest_id or create a temp guest
     let guestId = guest_id;
     if (!guestId) {
       const tempGuest = await zenoti('/guests', {
@@ -19,7 +18,7 @@ exports.handler = async (event) => {
           personal_info: {
             first_name: 'Guest',
             last_name: 'User',
-            mobile_phone: { country_code: 1, number: '3100000001' },
+            mobile_phone: { country_code: 1, number: '310000001' },
           },
         }),
       });
