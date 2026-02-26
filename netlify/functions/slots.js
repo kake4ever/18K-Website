@@ -10,21 +10,20 @@ exports.handler = async (event) => {
 
   const results = {};
 
-  // Try every possible slots/availability endpoint format
   const endpoints = [
-    `/centers/${CENTER_ID}/slots?service_id=${service_id}&date=${date}`,
-    `/centers/${CENTER_ID}/availability?service_id=${service_id}&date=${date}`,
-    `/centers/${CENTER_ID}/services/${service_id}/slots?date=${date}`,
-    `/centers/${CENTER_ID}/services/${service_id}/availability?date=${date}`,
-    `/appointments/slots?center_id=${CENTER_ID}&service_id=${service_id}&date=${date}`,
+    `/appointments/slots?center_id=${CENTER_ID}&service_id=${service_id}&date=${date}&size=50`,
+    `/appointments/slots?center_id=${CENTER_ID}&date=${date}`,
+    `/appointments/slots?center_id=${CENTER_ID}&service_id=${service_id}&start_date=${date}&end_date=${date}`,
+    `/centers/${CENTER_ID}/appointments/slots?service_id=${service_id}&date=${date}`,
+    `/appointments/availability?center_id=${CENTER_ID}&service_id=${service_id}&date=${date}`,
   ];
 
   for (const ep of endpoints) {
     try {
       const data = await zenoti(ep);
-      results[ep] = { success: true, keys: Object.keys(data), sample: JSON.stringify(data).slice(0, 200) };
+      results[ep] = { success: true, keys: Object.keys(data), sample: JSON.stringify(data).slice(0, 300) };
     } catch (e) {
-      results[ep] = { success: false, status: e.status, msg: e.body?.message || e.body?.Message };
+      results[ep] = { success: false, status: e.status, msg: e.body?.message || e.body?.Message, detail: e.body };
     }
   }
 
