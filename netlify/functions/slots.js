@@ -8,32 +8,25 @@ exports.handler = async (event) => {
   const { service_id, date, guest_id } = event.queryStringParameters || {};
   if (!service_id || !date || !guest_id) return err('service_id, date, guest_id required', 400);
 
-  const [y, m, d] = date.split('-');
+  const ts = new Date(date).getTime();
   const results = {};
 
-  const dateFormats = {
-    'iso':       date,                    // 2026-02-26
-    'slash':     `${y}/${m}/${d}`,        // 2026/02/26
-    'us_slash':  `${m}/${d}/${y}`,        // 02/26/2026
-    'us_dash':   `${m}-${d}-${y}`,        // 02-26-2026
-    'full_iso':  `${date}T00:00:00`,      // 2026-02-26T00:00:00
-    'full_iso_z':`${date}T00:00:00.000Z`, // 2026-02-26T00:00:00.000Z
+  const attempts = {
+    'no_date':        { center_id: CENTER_ID, guests: [{ guest_id, services: [{ service_id }] }] },
+    'unix_ms':        { center_id: CENTER_ID, center_date: ts, guests: [{ guest_id, services: [{ service_id }] }] },
+    'unix_s':         { center_id: CENTER_ID, center_date: Math.floor(ts/1000), guests: [{ guest_id, services: [{ service_id }] }] },
+    'date_key':       { center_id: CENTER_ID, date, guests: [{ guest_id, services: [{ service_id }] }] },
+    'start_date':     { center_id: CENTER_ID, start_date: date, guests: [{ guest_id, services: [{ service_id }] }] },
+    'requested_date': { center_id: CENTER_ID, requested_date: date, guests: [{ guest_id, services: [{ service_id }] }] },
   };
 
-  for (const [label, center_date] of Object.entries(dateFormats)) {
+  for (const [label, payload] of Object.entries(attempts)) {
     try {
-      const data = await zenoti('/bookings', {
-        method: 'POST',
-        body: JSON.stringify({
-          center_id: CENTER_ID,
-          center_date,
-          guests: [{ guest_id, services: [{ service_id }] }],
-        }),
-      });
+      const data = await zenoti('/bookings', { method: 'POST', body: JSON.stringify(payload) });
       const booking_id = data.booking_id || data.id;
-      results[label] = { center_date, booking_id, error: data.Error || null };
+      results[label] = { booking_id, error: data.Error || null };
     } catch (e) {
-      results[label] = { center_date, failed: true, msg: e.body?.message || e.body?.Message };
+      results[label] = { failed: true, msg: e.body?.message || e.body?.Message };
     }
   }
 
