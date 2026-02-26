@@ -8,16 +8,16 @@ exports.handler = async (event) => {
   const { service_id, date, guest_id } = event.queryStringParameters || {};
   if (!service_id || !date || !guest_id) return err('service_id, date, guest_id required', 400);
 
+  const [y, m, d] = date.split('-');
   const results = {};
 
-  // Try different date formats
   const dateFormats = {
-    'iso': date,                          // 2026-02-26
-    'slash': date.replace(/-/g, '/'),     // 2026/02/26
-    'us': date.split('-').reverse().join('/'), // 26/02/2026 -- wait that's wrong
-    'mdY': (() => { const [y,m,d] = date.split('-'); return `${m}/${d}/${y}`; })(), // 02/26/2026
-    'timestamp': new Date(date).toISOString(), // full ISO
-    'dateonly': new Date(date).toISOString().split('T')[0], // same as iso
+    'iso':       date,                    // 2026-02-26
+    'slash':     `${y}/${m}/${d}`,        // 2026/02/26
+    'us_slash':  `${m}/${d}/${y}`,        // 02/26/2026
+    'us_dash':   `${m}-${d}-${y}`,        // 02-26-2026
+    'full_iso':  `${date}T00:00:00`,      // 2026-02-26T00:00:00
+    'full_iso_z':`${date}T00:00:00.000Z`, // 2026-02-26T00:00:00.000Z
   };
 
   for (const [label, center_date] of Object.entries(dateFormats)) {
@@ -31,8 +31,7 @@ exports.handler = async (event) => {
         }),
       });
       const booking_id = data.booking_id || data.id;
-      const hasError = data.Error || data.error;
-      results[label] = { center_date, booking_id, error: hasError };
+      results[label] = { center_date, booking_id, error: data.Error || null };
     } catch (e) {
       results[label] = { center_date, failed: true, msg: e.body?.message || e.body?.Message };
     }
