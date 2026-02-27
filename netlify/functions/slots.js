@@ -5,10 +5,13 @@ const DEMO_GUEST = 'B83AE293-BD1E-4AC8-9714-74F5C3F5989C';
 exports.handler = async (event) => {
   if (event.httpMethod === 'OPTIONS') return { statusCode: 204, headers: cors, body: '' };
 
-  const { center_id, service_id, date, guest_id } = event.queryStringParameters || {};
+  const { center_id, service_id, date, guest_id, therapist_id } = event.queryStringParameters || {};
   if (!center_id || !service_id || !date) return err('center_id, service_id, date required', 400);
 
   try {
+    const guestItem = { item: { id: service_id } };
+    if (therapist_id) guestItem.therapist = { id: therapist_id };
+
     const booking = await zenoti('/bookings', {
       method: 'POST',
       body: JSON.stringify({
@@ -16,7 +19,7 @@ exports.handler = async (event) => {
         date,
         guests: [{
           id: guest_id || DEMO_GUEST,
-          items: [{ item: { id: service_id } }],
+          items: [guestItem],
         }],
       }),
     });
@@ -34,10 +37,7 @@ exports.handler = async (event) => {
         return {
           start_time,
           raw_time: slot.Time,
-          therapist: slot.Therapist ? {
-            id: slot.Therapist.id,
-            name: `${slot.Therapist.first_name || ''} ${slot.Therapist.last_name || ''}`.trim(),
-          } : null,
+          therapist: therapist_id ? { id: therapist_id, name: '' } : null,
         };
       });
 
