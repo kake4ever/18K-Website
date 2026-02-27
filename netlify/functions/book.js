@@ -1,6 +1,5 @@
 // POST /api/book
-// Body: { booking_id, slot_time, therapist_id, guest_id, service_id }
-// Reserves a slot and confirms the appointment
+// Body: { booking_id, slot_time, guest_id, service_id, therapist_id? }
 const { zenoti, ok, err, cors } = require('./_zenoti');
 
 exports.handler = async (event) => {
@@ -10,32 +9,30 @@ exports.handler = async (event) => {
   let body;
   try { body = JSON.parse(event.body); } catch { return err('Invalid JSON', 400); }
 
-  const { booking_id, slot_time, therapist_id, guest_id, service_id } = body;
+  const { booking_id, slot_time, guest_id, service_id, therapist_id } = body;
   if (!booking_id || !slot_time || !guest_id) return err('booking_id, slot_time, guest_id required', 400);
 
   try {
     // Step 1: Reserve the slot
-    const reservePayload = {
-      slot_time,
-      therapist_id,
-      services: [{ service_id, therapist_id }],
-    };
+    const reservePayload = { slot_time };
+    if (therapist_id) reservePayload.therapist_id = therapist_id;
 
-    await zenoti(`/bookings/${booking_id}/reserve`, {
+    await zenoti(`/bookings/${booking_id}/slots/reserve`, {
       method: 'POST',
       body: JSON.stringify(reservePayload),
     });
 
     // Step 2: Confirm the booking
-    const confirmPayload = { guest_id };
-    const confirmed = await zenoti(`/bookings/${booking_id}/confirm`, {
+    const confirmed = await zenoti(`/bookings/${booking_id}/slots/confirm`, {
       method: 'POST',
-      body: JSON.stringify(confirmPayload),
+      body: JSON.stringify({ notes: '' }),
     });
+
+    const apptId = confirmed?.invoice?.items?.[0]?.appointment_id || null;
 
     return ok({
       success: true,
-      appointment_id: confirmed.appointment_id || confirmed.id,
+      appointment_id: apptId,
       booking_id,
       slot_time,
       message: 'Appointment confirmed!',
