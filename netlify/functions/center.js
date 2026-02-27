@@ -1,13 +1,30 @@
-const { ok, cors } = require('./_zenoti');
+// GET /api/center
+// Returns center details including the center_id UUID
+const { zenoti, ok, err, cors } = require('./_zenoti');
 
 exports.handler = async (event) => {
   if (event.httpMethod === 'OPTIONS') return { statusCode: 204, headers: cors, body: '' };
-  return ok({
-    id: 'eca2792d-2bbb-4789-be99-6a263c609925',
-    name: '18K Nail Boutique',
-    code: '18K Nail',
-    address: '1323 Lincoln Blvd, Santa Monica, CA 90401',
-    phone: '424-238-5500',
-    email: '18knailboutique@gmail.com',
-  });
+
+  try {
+    const data = await zenoti('/centers');
+    const centers = data.centers || [];
+    const center = centers.find(c =>
+      c.code === process.env.ZENOTI_CENTER_CODE ||
+      c.name?.includes('18K')
+    ) || centers[0];
+
+    if (!center) return err('Center not found', 404);
+
+    return ok({
+      id: center.id,
+      name: center.display_name || center.name,
+      code: center.code,
+      address: center.contact?.address,
+      phone: center.contact?.phone_1,
+      email: center.contact?.email,
+      hours: center.working_hours,
+    });
+  } catch (e) {
+    return err('Failed to fetch center', e.status || 500, e.body);
+  }
 };
