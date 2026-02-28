@@ -32,5 +32,17 @@ exports.handler = async (event) => {
     } catch (e) { return err('Failed to create guest', e.status || 500, e.body); }
   }
 
+
+  if (event.httpMethod === 'PUT') {
+    let body;
+    try { body = JSON.parse(event.body); } catch { return err('Invalid JSON', 400); }
+    const { center_id, guest_id, first_name, last_name, email } = body;
+    if (!center_id || !guest_id) return err('center_id and guest_id required', 400);
+    try {
+      await zenoti(`/guests/${guest_id}`, { method: 'PUT', body: JSON.stringify({ center_id, personal_info: { first_name, last_name, email: email || '' } }) });
+      return ok({ success: true, guest: { id: guest_id, first_name, last_name, email: email || '' } });
+    } catch (e) { return err('Failed to update guest', e.status || 500, e.body); }
+  }
+
   return err('Method not allowed', 405);
 };
