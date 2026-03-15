@@ -40,10 +40,15 @@ exports.handler = async (event) => {
         'adb41db2-0d85-4929-be77-4a5fd995a0b6': 25.00,  // Gel Manicure with Removal
         '28a1b97e-254b-449c-a5c1-f5ac16a56dd6': 27.50,  // Dipping Powder Manicure
         'ccddb693-53d0-4b04-9448-3cfbb625ca14': 30.00,  // Dipping Powder with Removal
-        'f8e85208-9fdd-4739-839d-9d85d583193f': 32.50,  // Gel-X
-        '6dec0797-578f-4b34-9b1a-d43dea0c3162': 37.50,  // Gel-X with removal
+        'f8e85208-9fdd-4739-839d-9d85d583193f': 35.00,  // Gel-X
+        '6dec0797-578f-4b34-9b1a-d43dea0c3162': 40.00,  // Gel-X with removal
         '56dbd438-cf1a-4d07-8289-f6d13d0766c4': 35.00,  // Hard Gel Fill
-        '33f59dc6-0985-49e2-8c7b-4c9f61efc8db': 35.00,  // Dipping Powder Full Set
+        '6fbaba58-96ac-49e0-8ae0-ed2551a29275': 40.00,  // Hard Gel Full Set
+        '33f59dc6-0985-49e2-8c7b-4c9f61efc8db': 40.00,  // Dipping Powder Full Set
+        'c2bfcbae-6ab4-4959-ae41-cb8cc419ac97': 35.00,  // Acrylic Fill In
+        'e2a7ae07-8d82-43b3-9c15-b0a1d1dd0ad8': 40.00,  // Acrylic Full Set
+        'a8df6ef7-a78c-46f5-882c-49ed4b1c46ea': 40.00,  // Acrylic Full Set with removal
+        'ac7995a6-3846-4ae1-b6fe-dd5c0fe40bf1': 35.00,  // Gel Extensions
       };
       const mapped = catServices.map(s => ({
         id: s.id,
