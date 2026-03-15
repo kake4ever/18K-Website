@@ -2,6 +2,17 @@ const { zenoti, ok, err, cors } = require('./_zenoti');
 
 const DEMO_GUEST = 'B83AE293-BD1E-4AC8-9714-74F5C3F5989C';
 
+// Services that require a deposit, with their deposit amounts.
+// Deposit = 50% of price per Zenoti config (DepositType: 1, DepositValue: 50%).
+// Source of truth: Zenoti webstore AvailableTimes response.
+// Update this map when services or prices change.
+const DEPOSIT_MAP = {
+  // Manicures
+  'dc2874d0-a6e0-459b-a530-019aa40bd81e': 22.50, // Gel Manicure ($45)
+  'adb41db2-0d85-4929-be77-4a5fd995a0b6': 25.00, // Gel Manicure with Removal ($50)
+  // Add more service IDs here as needed
+};
+
 exports.handler = async (event) => {
   if (event.httpMethod === 'OPTIONS') return { statusCode: 204, headers: cors, body: '' };
 
@@ -41,7 +52,10 @@ exports.handler = async (event) => {
         };
       });
 
-    return ok({ booking_id, date, slots });
+    // Look up deposit from our map (no extra API call needed)
+    const deposit_amount = DEPOSIT_MAP[service_id] || null;
+
+    return ok({ booking_id, date, slots, deposit_amount });
   } catch (e) {
     return err('Failed to fetch slots', e.status || 500, e.body);
   }
