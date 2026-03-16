@@ -1,14 +1,22 @@
-[build]
-  publish = "."
-  functions = "netlify/functions"
-
-[functions]
-  node_bundler = "esbuild"
-
-[context.production]
-  environment = { NODE_VERSION = "18" }
+[[redirects]]
+  from = "/services"
+  to = "/services.html"
+  status = 200
 
 [[redirects]]
-  from = "/api/*"
-  to = "/.netlify/functions/:splat"
+  from = "/about"
+  to = "/about.html"
   status = 200
+
+[[redirects]]
+  from = "/gallery"
+  to = "/gallery.html"
+  status = 200
+
+[[redirects]]
+  from = "/contact"
+  to = "/contact.html"
+  status = 200
+
+[build]
+  functions = "netlify/functions"

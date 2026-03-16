@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nail Art Gallery | 18K Nail Boutique Santa Monica</title>
+  <meta name="description" content="Browse our nail art gallery — gel manicures, dipping powder, nail enhancements, and signature pedicures. See our work at 18K Nail Boutique in Santa Monica.">
+  <link rel="canonical" href="https://www.18knailboutique.com/gallery">
+  <link rel="icon" type="image/png" href="./images/favicon.png">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Outfit:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root{--warm-black:#1A1714;--pearl:#F5F0EB;--warm-white:#FAF7F4;--soft-gold:#C9A96E;--deep-gold:#B8964E;--gold-border:rgba(184,150,78,0.25);--taupe:#8C7B6B;--font-display:'Cormorant Garamond',serif;--font-body:'Outfit',sans-serif;}
+    *{margin:0;padding:0;box-sizing:border-box;}
+    body{background:var(--warm-black);color:var(--pearl);font-family:var(--font-body);}
+    a{text-decoration:none;color:inherit;}
+    nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:1.2rem 2.5rem;display:flex;align-items:center;justify-content:space-between;background:var(--warm-black);border-bottom:1px solid var(--gold-border);}
+    .nav-logo{font-family:var(--font-display);font-size:1.5rem;font-weight:300;letter-spacing:0.35em;color:var(--soft-gold);}
+    .nav-center{display:flex;gap:2.5rem;list-style:none;}
+    .nav-center a{font-size:0.65rem;font-weight:400;letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,255,255,0.6);transition:color 0.3s;}
+    .nav-center a:hover,.nav-center a.active{color:var(--soft-gold);}
+    .nav-right{display:flex;align-items:center;gap:1.5rem;}
+    .btn-nav{font-size:0.65rem;letter-spacing:0.15em;text-transform:uppercase;padding:0.6rem 1.4rem;border:1px solid var(--soft-gold);color:var(--soft-gold);border-radius:2px;transition:all 0.3s;}
+    .btn-nav:hover{background:var(--deep-gold);color:var(--pearl);border-color:var(--deep-gold);}
+    .nav-gift{font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,255,255,0.45);transition:color 0.3s;}
+    .nav-gift:hover{color:var(--soft-gold);}
+    .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:4px;}
+    .hamburger span{display:block;width:22px;height:1px;background:#fff;}
+    .mobile-menu{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:var(--warm-black);z-index:99;flex-direction:column;align-items:center;justify-content:center;gap:2rem;}
+    .mobile-menu.open{display:flex;}
+    .mobile-menu a{font-family:var(--font-display);font-size:2rem;color:var(--pearl);letter-spacing:0.1em;}
+    @media(max-width:768px){.nav-center,.nav-right{display:none;}.hamburger{display:flex;}}
+    .page-hero{background:var(--warm-black);padding:8rem 2.5rem 4rem;text-align:center;border-bottom:1px solid var(--gold-border);}
+    .page-overline{font-size:0.62rem;letter-spacing:0.3em;text-transform:uppercase;color:var(--soft-gold);margin-bottom:1rem;}
+    .page-title{font-family:var(--font-display);font-size:clamp(2.5rem,5vw,4rem);font-weight:300;color:var(--pearl);line-height:1.15;}
+    .page-title em{font-style:italic;color:var(--soft-gold);}
+    .gold-divider{width:40px;height:1px;background:var(--deep-gold);margin:1.5rem auto;}
+    .page-sub{font-size:0.85rem;color:rgba(245,240,235,0.5);font-weight:300;max-width:500px;margin:0 auto;line-height:1.8;}
+    .gallery-wrap{max-width:1200px;margin:0 auto;padding:5rem 2rem;}
+    .gallery-section{margin-bottom:5rem;}
+    .gallery-header{display:flex;align-items:center;gap:1.5rem;margin-bottom:2.5rem;}
+    .gallery-line{flex:1;height:1px;background:var(--gold-border);}
+    .gallery-cat-title{font-family:var(--font-display);font-size:1.4rem;font-weight:300;color:var(--pearl);letter-spacing:0.1em;white-space:nowrap;}
+    .gallery-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;}
+    .gallery-item{aspect-ratio:1;overflow:hidden;background:var(--warm-black);position:relative;}
+    .gallery-item img{width:100%;height:100%;object-fit:cover;transition:transform 0.5s ease;}
+    .gallery-item:hover img{transform:scale(1.05);}
+    .gallery-placeholder{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0.5rem;border:1px solid var(--gold-border);}
+    .gallery-placeholder-icon{font-size:1.5rem;color:var(--deep-gold);opacity:0.4;}
+    .gallery-placeholder-text{font-size:0.62rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--taupe);opacity:0.4;}
+    .instagram-section{text-align:center;padding:4rem 2rem;border-top:1px solid var(--gold-border);}
+    .instagram-handle{font-family:var(--font-display);font-size:2rem;color:var(--soft-gold);margin:1rem 0;}
+    .instagram-sub{font-size:0.82rem;color:var(--taupe);font-weight:300;margin-bottom:2rem;}
+    .btn-instagram{display:inline-block;border:1px solid var(--soft-gold);color:var(--soft-gold);font-size:0.7rem;letter-spacing:0.2em;text-transform:uppercase;padding:1rem 2.5rem;border-radius:2px;transition:all 0.3s;}
+    .btn-instagram:hover{background:var(--soft-gold);color:var(--warm-black);}
+    .cta-section{background:var(--deep-gold);padding:5rem 2.5rem;text-align:center;}
+    .cta-title{font-family:var(--font-display);font-size:clamp(2rem,4vw,3.5rem);font-weight:300;color:var(--pearl);margin-bottom:1.5rem;}
+    .cta-title em{font-style:italic;}
+    .btn-primary{display:inline-block;background:var(--warm-black);color:var(--pearl);font-size:0.7rem;letter-spacing:0.2em;text-transform:uppercase;padding:1.1rem 3rem;border-radius:2px;transition:all 0.3s;}
+    .btn-primary:hover{background:#000;}
+    footer{background:var(--warm-black);border-top:1px solid var(--gold-border);padding:4rem 2.5rem 2rem;}
+    .footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:3rem;margin-bottom:3rem;}
+    .footer-brand-logo{font-family:var(--font-display);font-size:2rem;font-weight:300;letter-spacing:0.4em;color:var(--soft-gold);display:block;margin-bottom:1rem;}
+    .footer-desc{font-size:0.78rem;color:var(--taupe);font-weight:300;line-height:1.8;max-width:280px;}
+    .footer-social{display:flex;gap:1rem;margin-top:1.5rem;}
+    .footer-social a{font-size:0.65rem;letter-spacing:0.15em;color:var(--taupe);transition:color 0.3s;}
+    .footer-social a:hover{color:var(--soft-gold);}
+    .footer-col-title{font-size:0.62rem;font-weight:500;letter-spacing:0.25em;text-transform:uppercase;color:var(--soft-gold);margin-bottom:1.2rem;}
+    .footer-links{list-style:none;}
+    .footer-links li{margin-bottom:0.7rem;}
+    .footer-links a{font-size:0.78rem;color:var(--taupe);font-weight:300;transition:color 0.3s;}
+    .footer-links a:hover{color:var(--pearl);}
+    .footer-bottom{border-top:1px solid var(--gold-border);padding-top:1.5rem;display:flex;justify-content:space-between;}
+    .footer-copy{font-size:0.72rem;color:var(--taupe);font-weight:300;}
+    .footer-legal{display:flex;gap:1.5rem;}
+    .footer-legal a{font-size:0.72rem;color:var(--taupe);}
+    @media(max-width:768px){.gallery-grid{grid-template-columns:repeat(2,1fr);}.footer-grid{grid-template-columns:1fr 1fr;}}
+  </style>
+</head>
+<body>
+
+<div id="app-banner" style="background:#1A1714;border-bottom:1px solid rgba(184,150,78,0.3);padding:10px 20px;display:flex;align-items:center;justify-content:space-between;position:relative;z-index:1000;">
+  <div style="display:flex;align-items:center;gap:12px;">
+    <div style="width:36px;height:36px;background:#B8964E;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;"><span style="color:#1A1714;font-size:16px;">💅</span></div>
+    <div><div style="font-family:'Cormorant Garamond',serif;font-size:13px;color:#F5F0EB;">18K Nail Boutique</div><div style="font-size:11px;color:#B8964E;letter-spacing:0.08em;text-transform:uppercase;">Book faster with our app</div></div>
+  </div>
+  <div style="display:flex;align-items:center;gap:10px;">
+    <a href="https://apps.apple.com/app/id1659695730" target="_blank" style="background:#B8964E;color:#1A1714;font-size:11px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;padding:7px 16px;border-radius:20px;text-decoration:none;">Download</a>
+    <button onclick="document.getElementById('app-banner').style.display='none'" style="background:none;border:none;color:rgba(245,240,235,0.4);font-size:18px;cursor:pointer;padding:0 4px;">×</button>
+  </div>
+</div>
+
+<nav>
+  <a href="/" class="nav-logo">18K</a>
+  <ul class="nav-center">
+    <li><a href="/">Home</a></li>
+    <li><a href="/services">Services</a></li>
+    <li><a href="/about">About</a></li>
+    <li><a href="/gallery" class="active">Gallery</a></li>
+    <li><a href="/contact">Contact</a></li>
+  </ul>
+  <div class="nav-right">
+    <a href="https://booking.18knailboutique.com/webstoreNew/giftcards/eca2792d-2bbb-4789-be99-6a263c609925" class="nav-gift">Gift Cards</a>
+    <a href="https://booking.18knailboutique.com/webstoreNew/services" class="btn-nav">Book Now</a>
+  </div>
+  <button class="hamburger" onclick="toggleMobile()" id="hamburger"><span></span><span></span><span></span></button>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="/">Home</a>
+  <a href="/services">Services</a>
+  <a href="/about">About</a>
+  <a href="/gallery">Gallery</a>
+  <a href="/contact">Contact</a>
+  <a href="https://booking.18knailboutique.com/webstoreNew/services">Book Now</a>
+</div>
+
+<div class="page-hero">
+  <div class="page-overline">Our Work</div>
+  <h1 class="page-title">Crafted with <em>intention</em></h1>
+  <div class="gold-divider"></div>
+  <p class="page-sub">Every set is a reflection of our commitment to precision and artistry. Browse our recent work below.</p>
+</div>
+
+<div class="gallery-wrap">
+  <div class="gallery-section">
+    <div class="gallery-header"><div class="gallery-line"></div><h2 class="gallery-cat-title">Gel Manicures</h2><div class="gallery-line"></div></div>
+    <div class="gallery-grid">
+      <div class="gallery-item"><div class="gallery-placeholder"><span class="gallery-placeholder-icon">💅</span><span class="gallery-placeholder-text">Coming Soon</span></div></div>
+      <div class="gallery-item"><div class="gallery-placeholder"><span class="gallery-placeholder-icon">💅</span><span class="gallery-placeholder-text">Coming Soon</span></div></div>
+      <div class="gallery-item"><div class="gallery-placeholder"><span class="gallery-placeholder-icon">💅</span><span class="gallery-placeholder-text">Coming Soon</span></div></div>
+      <div class="gallery-item"><div class="gallery-placeholder"><span class="gallery-placeholder-icon">💅</span><span class="gallery-placeholder-text">Coming Soon</span></div></div>
+    </div>
+  </div>
+
+  <div class="gallery-section">
+    <div class="gallery-header"><div class="gallery-line"></div><h2 class="gallery-cat-title">Nail Enhancements</h2><div class="gallery-line"></div></div>
+    <div class="gallery-grid">
+      <div class="gallery-item"><div class="gallery-placeholder"><span class="gallery-placeholder-icon">✨</span><span class="gallery-placeholder-text">Coming Soon</span></div></div>
+      <div class="gallery-item"><div class="gallery-placeholder"><span class="gallery-placeholder-icon">✨</span><span class="gallery-placeholder-text">Coming Soon</span></div></div>
+      <div class="gallery-item"><div class="gallery-placeholder"><span class="gallery-placeholder-icon">✨</span><span class="gallery-placeholder-text">Coming Soon</span></div></div>
+      <div class="gallery-item"><div class="gallery-placeholder"><span class="gallery-placeholder-icon">✨</span><span class="gallery-placeholder-text">Coming Soon</span></div></div>
+    </div>
+  </div>
+
+  <div class="gallery-section">
+    <div class="gallery-header"><div class="gallery-line"></div><h2 class="gallery-cat-title">Pedicures</h2><div class="gallery-line"></div></div>
+    <div class="gallery-grid">
+      <div class="gallery-item"><div class="gallery-placeholder"><span class="gallery-placeholder-icon">🌸</span><span class="gallery-placeholder-text">Coming Soon</span></div></div>
+      <div class="gallery-item"><div class="gallery-placeholder"><span class="gallery-placeholder-icon">🌸</span><span class="gallery-placeholder-text">Coming Soon</span></div></div>
+      <div class="gallery-item"><div class="gallery-placeholder"><span class="gallery-placeholder-icon">🌸</span><span class="gallery-placeholder-text">Coming Soon</span></div></div>
+      <div class="gallery-item"><div class="gallery-placeholder"><span class="gallery-placeholder-icon">🌸</span><span class="gallery-placeholder-text">Coming Soon</span></div></div>
+    </div>
+  </div>
+
+  <div class="instagram-section">
+    <div class="page-overline">Follow Along</div>
+    <div class="instagram-handle">@18k.nailboutique</div>
+    <p class="instagram-sub">See our latest work and behind-the-scenes on Instagram</p>
+    <a href="https://www.instagram.com/18k.nailboutique" target="_blank" class="btn-instagram">Follow on Instagram</a>
+  </div>
+</div>
+
+<div class="cta-section">
+  <h2 class="cta-title">Love what you see? Book your <em>next look</em></h2>
+  <div class="gold-divider" style="background:rgba(245,240,235,0.4);"></div>
+  <a href="https://booking.18knailboutique.com/webstoreNew/services" class="btn-primary">Book an Appointment</a>
+</div>
+
+<footer>
+  <div class="footer-grid">
+    <div><span class="footer-brand-logo">18K</span><p class="footer-desc">Modern nail artistry, designed with intention. Santa Monica's premier luxury nail boutique.</p><div class="footer-social"><a href="https://www.instagram.com/18k.nailboutique" target="_blank">IG</a><a href="https://www.facebook.com/18knailboutique" target="_blank">FB</a><a href="http://www.tiktok.com/18knailboutique" target="_blank">TT</a><a href="https://www.yelp.com/biz/18k-nail-boutique-santa-monica-2" target="_blank">YP</a></div></div>
+    <div><div class="footer-col-title">Services</div><ul class="footer-links"><li><a href="/services">Manicures</a></li><li><a href="/services">Pedicures</a></li><li><a href="/services">Signature Pedicures</a></li><li><a href="/services">Enhancements</a></li></ul></div>
+    <div><div class="footer-col-title">Boutique</div><ul class="footer-links"><li><a href="/about">About Us</a></li><li><a href="/gallery">Gallery</a></li><li><a href="/contact">Contact</a></li><li><a href="https://booking.18knailboutique.com/webstoreNew/giftcards/eca2792d-2bbb-4789-be99-6a263c609925">Gift Cards</a></li></ul></div>
+    <div><div class="footer-col-title">Visit Us</div><ul class="footer-links"><li><a href="https://goo.gl/maps/5nCyRs6TBnn4DLERA" target="_blank">1323 Lincoln Blvd, Santa Monica</a></li><li><a href="tel:4242385500">424-238-5500</a></li><li><a href="mailto:info@18knailboutique.com">info@18knailboutique.com</a></li><li><span>Mon–Fri 10–7 · Sat 10–6 · Sun 10–5</span></li></ul></div>
+  </div>
+  <div class="footer-bottom"><span class="footer-copy">© 2026 18K Nail Boutique. All rights reserved.</span><div class="footer-legal"><a href="#">Privacy Policy</a><a href="#">Terms & Conditions</a></div></div>
+</footer>
+
+<script>
+function toggleMobile(){
+  document.getElementById('mobileMenu').classList.toggle('open');
+  document.getElementById('hamburger').classList.toggle('open');
+}
+</script>
+</body>
+</html>
