@@ -28,6 +28,7 @@ exports.handler = async (event) => {
 
     const mapAppt = (a) => ({
       id: a.appointment_id,
+      invoice_id: a.invoice_id || null,
       date: a.start_time,
       end_time: a.end_time,
       status: a.status,
