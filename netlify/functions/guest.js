@@ -16,7 +16,10 @@ exports.handler = async (event) => {
       const guests = data.guests || [];
       if (guests.length === 0) return ok({ found: false, guest: null });
       const g = guests[0];
-      return ok({ found: true, guest: { id: g.id, code: g.code || '', first_name: g.personal_info?.first_name?.trim(), last_name: g.personal_info?.last_name?.trim(), email: g.personal_info?.email || '', phone: g.personal_info?.mobile_phone?.number || cleanPhone || '', loyalty_points: g.loyalty_points || 0 } });
+      // Fetch full guest details with referral code
+      const fullGuest = await zenoti(`/guests/${g.id}?center_id=${center_id}&expand=referral`);
+      const referralCode = fullGuest?.referral?.referral_code || '';
+      return ok({ found: true, guest: { id: g.id, code: g.code || '', referral_code: referralCode, first_name: g.personal_info?.first_name?.trim(), last_name: g.personal_info?.last_name?.trim(), email: g.personal_info?.email || '', phone: g.personal_info?.mobile_phone?.number || cleanPhone || '', loyalty_points: g.loyalty_points || 0 } });
     } catch (e) { return err('Failed to lookup guest', e.status || 500, e.body); }
   }
 
