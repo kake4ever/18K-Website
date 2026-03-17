@@ -23,5 +23,30 @@
   to = "/contact.html"
   status = 200
 
+[[redirects]]
+  from = "/gel-manicure-santa-monica"
+  to = "/gel-manicure-santa-monica.html"
+  status = 200
+
+[[redirects]]
+  from = "/dipping-powder-nails-santa-monica"
+  to = "/dipping-powder-nails-santa-monica.html"
+  status = 200
+
+[[redirects]]
+  from = "/gel-x-extensions-santa-monica"
+  to = "/gel-x-extensions-santa-monica.html"
+  status = 200
+
+[[redirects]]
+  from = "/russian-manicure-santa-monica"
+  to = "/russian-manicure-santa-monica.html"
+  status = 200
+
+[[redirects]]
+  from = "/luxury-pedicure-santa-monica"
+  to = "/luxury-pedicure-santa-monica.html"
+  status = 200
+
 [build]
   functions = "netlify/functions"
