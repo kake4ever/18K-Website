@@ -42,7 +42,24 @@ exports.handler = async (event) => {
     const { center_id, guest_id, first_name, last_name, email } = body;
     if (!center_id || !guest_id) return err('center_id and guest_id required', 400);
     try {
-      await zenoti(`/guests/${guest_id}`, { method: 'PUT', body: JSON.stringify({ center_id, personal_info: { first_name, last_name, email: email || '', mobile_phone: { country_code: 1 }, country_fk: { id: 233 } } }) });
+      const { phone, code } = body;
+      const payload = {
+        id: guest_id,
+        code: code || '',
+        center_id,
+        is_online_booking_blocked: false,
+        personal_info: {
+          user_name: phone || '',
+          first_name: first_name || '',
+          last_name: last_name || '',
+          email: email || '',
+          mobile_phone: { country_code: 225, number: phone || '' },
+          gender: -1,
+          nationality_id: 225
+        },
+        address_info: { country_id: 225 }
+      };
+      await zenoti(`/guests/${guest_id}`, { method: 'PUT', body: JSON.stringify(payload) });
       return ok({ success: true, guest: { id: guest_id, first_name, last_name, email: email || '' } });
     } catch (e) { return err('Failed to update guest', e.status || 500, e.body); }
   }
