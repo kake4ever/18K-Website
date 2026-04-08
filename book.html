@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Book Now — 18K Nail Boutique | Santa Monica's Luxury Nail Salon</title>
+  <meta name="description" content="Book your luxury nail appointment at 18K Nail Boutique in Santa Monica. Russian Manicure, Gel-X, Dipping Powder. Call (424) 238-5500 or book online.">
+  <!-- Google Ads conversion tracking -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-10810834912"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'AW-10810834912');
+    function trackCall() {
+      gtag('event', 'conversion', { 'send_to': 'AW-10810834912/rrsUCPTW_YgbEOD_gKMo' });
+    }
+    function trackBook() {
+      gtag('event', 'conversion', { 'send_to': 'AW-10810834912/rrsUCPTW_YgbEOD_gKMo' });
+    }
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --gold: #C5A057;
+      --gold-light: #D4B06A;
+      --gold-dim: rgba(197,160,87,0.15);
+      --dark: #0A0908;
+      --dark2: #111009;
+      --cream: #F5EEE1;
+      --muted: #6B6560;
+      --text: #3A3530;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--dark);
+      color: var(--cream);
+      font-family: 'Jost', sans-serif;
+      font-weight: 300;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* ── STICKY CTA BAR ── */
+    .sticky-bar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: var(--gold);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 24px;
+      padding: 10px 20px;
+      transform: translateY(-100%);
+      transition: transform 0.3s ease;
+    }
+    .sticky-bar.visible { transform: translateY(0); }
+    .sticky-bar span {
+      font-family: 'Jost', sans-serif;
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      color: var(--dark);
+      text-transform: uppercase;
+    }
+    .sticky-bar a {
+      background: var(--dark);
+      color: var(--gold);
+      padding: 6px 20px;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-radius: 2px;
+      white-space: nowrap;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 80px 24px 60px;
+      position: relative;
+      border-bottom: 1px solid rgba(197,160,87,0.2);
+      overflow: hidden;
+    }
+
+    /* subtle grid texture */
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(197,160,87,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(197,160,87,0.03) 1px, transparent 1px);
+      background-size: 60px 60px;
+      pointer-events: none;
+    }
+
+    .hero-eyebrow {
+      font-size: 11px;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 24px;
+      opacity: 0;
+      animation: fadeUp 0.8s ease forwards 0.1s;
+    }
+
+    .hero h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(44px, 8vw, 88px);
+      font-weight: 300;
+      line-height: 1.05;
+      color: var(--cream);
+      margin-bottom: 12px;
+      opacity: 0;
+      animation: fadeUp 0.8s ease forwards 0.25s;
+    }
+
+    .hero h1 em {
+      font-style: italic;
+      color: var(--gold);
+    }
+
+    .hero-sub {
+      font-size: 15px;
+      color: rgba(245,238,225,0.55);
+      letter-spacing: 0.05em;
+      margin-bottom: 48px;
+      opacity: 0;
+      animation: fadeUp 0.8s ease forwards 0.4s;
+    }
+
+    /* ── HERO CTA BUTTONS ── */
+    .hero-cta {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      justify-content: center;
+      opacity: 0;
+      animation: fadeUp 0.8s ease forwards 0.55s;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--gold);
+      color: var(--dark);
+      padding: 18px 40px;
+      font-family: 'Jost', sans-serif;
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.15s;
+      border-radius: 2px;
+    }
+    .btn-primary:hover { background: var(--gold-light); transform: translateY(-1px); }
+    .btn-primary svg { width: 16px; height: 16px; flex-shrink: 0; }
+
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: transparent;
+      color: var(--cream);
+      padding: 17px 40px;
+      font-family: 'Jost', sans-serif;
+      font-size: 12px;
+      font-weight: 400;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border: 1px solid rgba(245,238,225,0.25);
+      cursor: pointer;
+      transition: border-color 0.2s, color 0.2s;
+      border-radius: 2px;
+    }
+    .btn-secondary:hover { border-color: var(--gold); color: var(--gold); }
+
+    /* ── TRUST STRIP ── */
+    .trust-strip {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      flex-wrap: wrap;
+      padding: 0 24px;
+      margin-top: 60px;
+      opacity: 0;
+      animation: fadeUp 0.8s ease forwards 0.7s;
+    }
+
+    .trust-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+    }
+    .trust-number {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 32px;
+      font-weight: 300;
+      color: var(--gold);
+      line-height: 1;
+    }
+    .trust-label {
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .trust-divider {
+      width: 1px;
+      height: 40px;
+      background: rgba(197,160,87,0.2);
+      align-self: center;
+    }
+
+    /* ── PHONE BLOCK ── */
+    .phone-block {
+      background: rgba(197,160,87,0.08);
+      border: 1px solid rgba(197,160,87,0.2);
+      border-radius: 4px;
+      padding: 32px 40px;
+      text-align: center;
+      margin: 60px 24px 0;
+      max-width: 540px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .phone-block p {
+      font-size: 11px;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 12px;
+    }
+    .phone-number {
+      display: block;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 42px;
+      font-weight: 300;
+      color: var(--cream);
+      text-decoration: none;
+      letter-spacing: 0.05em;
+      transition: color 0.2s;
+    }
+    .phone-number:hover { color: var(--gold); }
+    .phone-sub {
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 8px;
+      letter-spacing: 0.1em;
+    }
+
+    /* ── SERVICES ── */
+    .section {
+      padding: 80px 24px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-size: 10px;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 16px;
+    }
+
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(32px, 5vw, 52px);
+      font-weight: 300;
+      color: var(--cream);
+      line-height: 1.1;
+      margin-bottom: 48px;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2px;
+    }
+
+    .service-card {
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(197,160,87,0.12);
+      padding: 32px;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .service-card:hover {
+      border-color: rgba(197,160,87,0.4);
+      background: rgba(197,160,87,0.04);
+    }
+
+    .service-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px;
+      font-weight: 400;
+      color: var(--cream);
+      margin-bottom: 8px;
+    }
+    .service-price {
+      font-size: 12px;
+      color: var(--gold);
+      letter-spacing: 0.15em;
+      margin-bottom: 12px;
+    }
+    .service-desc {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    /* ── REVIEWS ── */
+    .reviews-section {
+      background: rgba(255,255,255,0.01);
+      border-top: 1px solid rgba(197,160,87,0.1);
+      border-bottom: 1px solid rgba(197,160,87,0.1);
+      padding: 80px 24px;
+    }
+
+    .reviews-inner {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .stars {
+      color: var(--gold);
+      font-size: 18px;
+      letter-spacing: 2px;
+      margin-bottom: 8px;
+    }
+
+    .reviews-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+      margin-top: 48px;
+    }
+
+    .review-card {
+      border-left: 2px solid rgba(197,160,87,0.3);
+      padding: 0 0 0 20px;
+    }
+
+    .review-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 17px;
+      font-style: italic;
+      color: rgba(245,238,225,0.8);
+      line-height: 1.6;
+      margin-bottom: 12px;
+    }
+    .review-author {
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    /* ── BOOKING SECTION ── */
+    .booking-section {
+      padding: 80px 24px;
+      max-width: 700px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .booking-iframe-wrap {
+      margin-top: 40px;
+      border: 1px solid rgba(197,160,87,0.2);
+      border-radius: 4px;
+      overflow: hidden;
+      background: white;
+    }
+
+    .booking-iframe-wrap iframe {
+      width: 100%;
+      height: 600px;
+      border: none;
+      display: block;
+    }
+
+    /* ── INFO STRIP ── */
+    .info-strip {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 0;
+      border-top: 1px solid rgba(197,160,87,0.15);
+      border-bottom: 1px solid rgba(197,160,87,0.15);
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .info-item {
+      padding: 32px 28px;
+      border-right: 1px solid rgba(197,160,87,0.1);
+    }
+    .info-item:last-child { border-right: none; }
+
+    .info-icon {
+      font-size: 20px;
+      margin-bottom: 12px;
+    }
+    .info-title {
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 8px;
+    }
+    .info-value {
+      font-size: 14px;
+      color: rgba(245,238,225,0.7);
+      line-height: 1.5;
+    }
+    .info-value a {
+      color: var(--cream);
+      text-decoration: none;
+    }
+    .info-value a:hover { color: var(--gold); }
+
+    /* ── FOOTER ── */
+    footer {
+      padding: 32px 24px;
+      text-align: center;
+      font-size: 12px;
+      color: var(--muted);
+      letter-spacing: 0.1em;
+      border-top: 1px solid rgba(197,160,87,0.1);
+    }
+    footer a { color: var(--gold); text-decoration: none; }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── MOBILE ── */
+    @media (max-width: 600px) {
+      .hero-cta { flex-direction: column; align-items: center; }
+      .btn-primary, .btn-secondary { width: 100%; max-width: 320px; justify-content: center; }
+      .trust-divider { display: none; }
+      .phone-number { font-size: 34px; }
+      .phone-block { padding: 24px; }
+      .info-item { border-right: none; border-bottom: 1px solid rgba(197,160,87,0.1); }
+      .sticky-bar { flex-direction: column; gap: 8px; padding: 12px 16px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Sticky bar appears on scroll -->
+<div class="sticky-bar" id="stickyBar">
+  <span>18K Nail Boutique · Santa Monica</span>
+  <a href="tel:4242385500" onclick="trackCall()">Call (424) 238-5500</a>
+  <a href="#book" onclick="trackBook()">Book Online</a>
+</div>
+
+<!-- ── HERO ── -->
+<section class="hero">
+  <p class="hero-eyebrow">Santa Monica's Luxury Nail Studio</p>
+  <h1>Nails that demand<br>a <em>second look</em></h1>
+  <p class="hero-sub">1323 Lincoln Blvd · Santa Monica, CA · Open 7 days</p>
+
+  <div class="hero-cta">
+    <a href="tel:4242385500" class="btn-primary" onclick="trackCall()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.8a19.79 19.79 0 01-3.07-8.67A2 2 0 012 .94h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+      Call Now
+    </a>
+    <a href="#book" class="btn-secondary" onclick="trackBook()">
+      Book Online →
+    </a>
+  </div>
+
+  <div class="trust-strip">
+    <div class="trust-item">
+      <span class="trust-number">4.5★</span>
+      <span class="trust-label">Google Rating</span>
+    </div>
+    <div class="trust-divider"></div>
+    <div class="trust-item">
+      <span class="trust-number">294</span>
+      <span class="trust-label">Reviews</span>
+    </div>
+    <div class="trust-divider"></div>
+    <div class="trust-item">
+      <span class="trust-number">3+</span>
+      <span class="trust-label">Years in Santa Monica</span>
+    </div>
+    <div class="trust-divider"></div>
+    <div class="trust-item">
+      <span class="trust-number">7</span>
+      <span class="trust-label">Days a Week</span>
+    </div>
+  </div>
+
+  <!-- phone block for mobile -->
+  <div class="phone-block">
+    <p>Prefer to call? We answer immediately.</p>
+    <a href="tel:4242385500" class="phone-number" onclick="trackCall()">(424) 238-5500</a>
+    <p class="phone-sub">Mon–Sat 10am–7pm · Sun 10am–5pm</p>
+  </div>
+</section>
+
+<!-- ── INFO STRIP ── -->
+<div class="info-strip">
+  <div class="info-item">
+    <div class="info-icon">📍</div>
+    <div class="info-title">Location</div>
+    <div class="info-value">
+      <a href="https://maps.google.com/?q=1323+Lincoln+Blvd+Santa+Monica+CA" target="_blank">
+        1323 Lincoln Blvd, Ste 101<br>Santa Monica, CA 90401
+      </a>
+    </div>
+  </div>
+  <div class="info-item">
+    <div class="info-icon">🕐</div>
+    <div class="info-title">Hours</div>
+    <div class="info-value">Mon–Sat: 10am – 7pm<br>Sun: 10am – 5pm</div>
+  </div>
+  <div class="info-item">
+    <div class="info-icon">📞</div>
+    <div class="info-title">Phone</div>
+    <div class="info-value"><a href="tel:4242385500" onclick="trackCall()">(424) 238-5500</a></div>
+  </div>
+  <div class="info-item">
+    <div class="info-icon">🅿️</div>
+    <div class="info-title">Parking</div>
+    <div class="info-value">Street parking on Lincoln Blvd. Lot nearby.</div>
+  </div>
+</div>
+
+<!-- ── SERVICES ── -->
+<section class="section">
+  <p class="section-label">What We Do</p>
+  <h2 class="section-title">Signature Services</h2>
+
+  <div class="services-grid">
+    <div class="service-card">
+      <div class="service-name">Russian Manicure</div>
+      <div class="service-price">From $65</div>
+      <div class="service-desc">Our specialty. A dry technique that removes dead skin without cutting — creating a flawless, longer-lasting finish. Precision artistry at its finest.</div>
+    </div>
+    <div class="service-card">
+      <div class="service-name">Gel-X Extensions</div>
+      <div class="service-price">From $70</div>
+      <div class="service-desc">Soft gel tips applied over your natural nail. Lightweight, flexible, and indistinguishable from natural nails. Last 3–4 weeks.</div>
+    </div>
+    <div class="service-card">
+      <div class="service-name">Dipping Powder</div>
+      <div class="service-price">From $55</div>
+      <div class="service-desc">No UV light. Strengthens your natural nail. Lasts 3–4 weeks without chipping. The low-maintenance choice that never compromises on beauty.</div>
+    </div>
+    <div class="service-card">
+      <div class="service-name">Gel Manicure</div>
+      <div class="service-price">From $45</div>
+      <div class="service-desc">Classic gel with a flawless finish. Long-lasting color in hundreds of shades. Your everyday luxury, perfected.</div>
+    </div>
+    <div class="service-card">
+      <div class="service-name">Luxury Pedicure</div>
+      <div class="service-price">From $45</div>
+      <div class="service-desc">A full foot treatment with exfoliation, massage, and impeccable polish. A ritual, not just a service.</div>
+    </div>
+    <div class="service-card">
+      <div class="service-name">Hard Gel Extensions</div>
+      <div class="service-price">From $80</div>
+      <div class="service-desc">Maximum strength, maximum length. Sculpted and shaped by hand for a completely custom nail structure.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── REVIEWS ── -->
+<section class="reviews-section">
+  <div class="reviews-inner">
+    <p class="section-label">What Clients Say</p>
+    <div class="stars">★★★★★</div>
+    <h2 class="section-title" style="margin-bottom: 0;">4.5 stars across<br>294 Google reviews</h2>
+
+    <div class="reviews-grid">
+      <div class="review-card">
+        <p class="review-text">"Absolutely the best nail experience in Santa Monica. Beautiful space, meticulous work, and never rushed."</p>
+        <span class="review-author">— Google Review</span>
+      </div>
+      <div class="review-card">
+        <p class="review-text">"I've tried many salons — nothing compares to 18K. Clean, calm, and consistently flawless."</p>
+        <span class="review-author">— Google Review</span>
+      </div>
+      <div class="review-card">
+        <p class="review-text">"Kenny and his team are professional, kind and always provide a beautiful manicure. I would not hesitate to recommend to anyone."</p>
+        <span class="review-author">— Google Review</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── BOOK ONLINE ── -->
+<section class="booking-section" id="book">
+  <p class="section-label">Reserve Your Visit</p>
+  <h2 class="section-title">Book Your Appointment</h2>
+  <p style="font-size: 14px; color: var(--muted); margin-bottom: 8px;">Or call us directly — <a href="tel:4242385500" style="color: var(--gold)" onclick="trackCall()">(424) 238-5500</a></p>
+
+  <div class="booking-iframe-wrap">
+    <iframe
+      src="https://booking.18knailboutique.com/webstoreNew/services"
+      title="Book an appointment at 18K Nail Boutique"
+      loading="lazy"
+      allow="payment">
+    </iframe>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  © 2026 18K Nail Boutique · 1323 Lincoln Blvd Ste 101, Santa Monica, CA 90401 ·
+  <a href="tel:4242385500">(424) 238-5500</a> ·
+  <a href="https://www.18knailboutique.com">18knailboutique.com</a>
+</footer>
+
+<script>
+  // Show sticky bar after scrolling past hero
+  const stickyBar = document.getElementById('stickyBar');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > window.innerHeight * 0.6) {
+      stickyBar.classList.add('visible');
+    } else {
+      stickyBar.classList.remove('visible');
+    }
+  }, { passive: true });
+
+  // Track booking iframe interactions
+  document.querySelector('.booking-iframe-wrap iframe').addEventListener('load', function() {
+    trackBook();
+  });
+</script>
+
+</body>
+</html>
