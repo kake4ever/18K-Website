@@ -4,13 +4,13 @@ const { zenoti, ok, err, cors } = require('./_zenoti');
 
 exports.handler = async (event) => {
   if (event.httpMethod === 'OPTIONS') return { statusCode: 204, headers: cors, body: '' };
-  if (event.httpMethod !== 'POST') return err('Method not allowed', 405);
+  if (event.httpMethod !== 'POST') return ok({ success: false, appointment_id: null, error: 'Method not allowed' });
 
   let body;
-  try { body = JSON.parse(event.body); } catch { return err('Invalid JSON', 400); }
+  try { body = JSON.parse(event.body); } catch { return ok({ success: false, appointment_id: null, error: 'Invalid JSON' }); }
 
   const { booking_id, slot_time, guest_id, service_id, therapist_id } = body;
-  if (!booking_id || !slot_time || !guest_id) return err('booking_id, slot_time, guest_id required', 400);
+  if (!booking_id || !slot_time || !guest_id) return ok({ success: false, appointment_id: null, error: 'booking_id, slot_time, guest_id required' });
 
   try {
     // Step 1: Reserve the slot
@@ -44,6 +44,6 @@ exports.handler = async (event) => {
       message: 'Appointment confirmed!',
     });
   } catch (e) {
-    return err('Failed to confirm booking', e.status || 500, e.body);
+    return ok({ success: false, appointment_id: null, booking_id, slot_time, error: 'Failed to confirm booking', detail: e.body || e.message });
   }
 };
