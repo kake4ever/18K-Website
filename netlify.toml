@@ -48,5 +48,20 @@
   to = "/luxury-pedicure-santa-monica.html"
   status = 200
 
+[[redirects]]
+  from = "/book"
+  to = "/book.html"
+  status = 200
+
+[[redirects]]
+  from = "/privacy-policy"
+  to = "/privacy-policy.html"
+  status = 200
+
+[[redirects]]
+  from = "/terms-conditions"
+  to = "/terms-conditions.html"
+  status = 200
+
 [build]
   functions = "netlify/functions"
