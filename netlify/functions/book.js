@@ -28,13 +28,19 @@ exports.handler = async (event) => {
       body: JSON.stringify({ notes: '' }),
     });
 
-    const apptId = confirmed?.invoice?.items?.[0]?.appointment_id || null;
+    // Extract appointment ID — Zenoti may return it at different paths
+    const apptId = confirmed?.invoice?.items?.[0]?.appointment_id
+      || confirmed?.appointment_id
+      || confirmed?.appointments?.[0]?.id
+      || confirmed?.id
+      || null;
 
     return ok({
       success: true,
       appointment_id: apptId,
       booking_id,
       slot_time,
+      confirmed_data: apptId ? undefined : confirmed,
       message: 'Appointment confirmed!',
     });
   } catch (e) {
