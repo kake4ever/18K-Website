@@ -17,8 +17,9 @@ const DEPOSIT_MAP = {
 exports.handler = async (event) => {
   if (event.httpMethod === 'OPTIONS') return { statusCode: 204, headers: cors, body: '' };
 
-  const { center_id, service_id, date, guest_id, therapist_id } = event.queryStringParameters || {};
-  if (!center_id || !service_id || !date) return err('center_id, service_id, date required', 400);
+  const { center_id, service_id, guest_id, therapist_id } = event.queryStringParameters || {};
+  const date = event.queryStringParameters?.date || new Date().toISOString().split('T')[0];
+  if (!center_id || !service_id) return ok({ booking_id: null, date, slots: [], deposit_amount: null, error: 'center_id and service_id required' });
 
   try {
     const guestItem = { item: { id: service_id } };
@@ -36,8 +37,8 @@ exports.handler = async (event) => {
       }),
     });
 
-    const booking_id = booking.id;
-    if (!booking_id) return err('Could not create booking session', 500, booking);
+    const booking_id = booking.id || booking.booking_id;
+    if (!booking_id) return ok({ booking_id: null, date, slots: [], deposit_amount: null, error: 'Could not create booking session' });
 
     const slotsData = await zenoti(`/bookings/${booking_id}/slots?date=${date}`);
 
@@ -72,6 +73,6 @@ exports.handler = async (event) => {
 
     return ok({ booking_id, date, slots, deposit_amount });
   } catch (e) {
-    return err('Failed to fetch slots', e.status || 500, e.body);
+    return ok({ booking_id: null, date, slots: [], deposit_amount: null, error: 'Failed to fetch slots', detail: e.body || e.message });
   }
 };
