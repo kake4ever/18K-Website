@@ -53,7 +53,7 @@ exports.handler = async (event) => {
           first_name: first_name || '',
           last_name: last_name || '',
           email: email || '',
-          mobile_phone: { country_code: 225, number: phone || '' },
+          mobile_phone: { country_code: 1, number: phone || '' },
           gender: -1,
           nationality_id: 225
         },
