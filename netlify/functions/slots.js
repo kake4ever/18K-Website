@@ -41,11 +41,16 @@ exports.handler = async (event) => {
 
     const slotsData = await zenoti(`/bookings/${booking_id}/slots?date=${date}`);
 
-    const slots = (slotsData.slots || [])
+    const slots = (slotsData.slots || slotsData.Slots || [])
       .filter(s => s.Available)
       .map(slot => {
         const t = new Date(slot.Time);
-        const start_time = t.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true });
+        const start_time = t.toLocaleTimeString('en-US', {
+          hour: 'numeric',
+          minute: '2-digit',
+          hour12: true,
+          timeZone: 'America/Los_Angeles',
+        });
         return {
           start_time,
           raw_time: slot.Time,
