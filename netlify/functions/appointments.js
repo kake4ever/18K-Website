@@ -38,8 +38,11 @@ exports.handler = async (event) => {
         : null,
     });
 
-    const upcoming = Array.isArray(upcomingData) ? upcomingData.map(mapAppt) : [];
-    const past = Array.isArray(pastData) ? pastData.map(mapAppt).filter(a => a.date !== today) : [];
+    const upcomingList = Array.isArray(upcomingData) ? upcomingData : (upcomingData?.appointments || []);
+    const pastList = Array.isArray(pastData) ? pastData : (pastData?.appointments || []);
+
+    const upcoming = upcomingList.map(mapAppt);
+    const past = pastList.map(mapAppt).filter(a => a.date !== today);
 
     return ok({ upcoming, past });
   } catch (e) {
