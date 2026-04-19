@@ -30,7 +30,6 @@
     const escaped = escapeHtml(text);
     return escaped
       .replace(/(https?:\/\/[^\s<]+)/g, '<a href="$1" target="_blank" rel="noopener">$1</a>')
-      .replace(/(\b(?:booking\.)?18knailboutique\.com[^\s<]*)/g, '<a href="https://$1" target="_blank" rel="noopener">$1</a>')
       .replace(/\((\d{3})\)\s?(\d{3})-(\d{4})/g, '<a href="tel:+1$1$2$3">($1) $2-$3</a>');
   }
 
