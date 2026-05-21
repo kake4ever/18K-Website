@@ -437,11 +437,12 @@ footer { background: var(--warm-black); border-top: 1px solid rgba(184,150,78,0.
       "@type": "OfferCatalog",
       "name": "Nail Services",
       "itemListElement": [
-        {"@type":"Offer","itemOffered":{"@type":"Service","name":"Gel Manicure"}},
-        {"@type":"Offer","itemOffered":{"@type":"Service","name":"Dipping Powder Manicure"}},
+        {"@type":"Offer","itemOffered":{"@type":"Service","name":"Manicures"}},
+        {"@type":"Offer","itemOffered":{"@type":"Service","name":"Signature Manicures"}},
+        {"@type":"Offer","itemOffered":{"@type":"Service","name":"Pedicures"}},
+        {"@type":"Offer","itemOffered":{"@type":"Service","name":"Signature Pedicures"}},
+        {"@type":"Offer","itemOffered":{"@type":"Service","name":"Nail Enhancements"}},
         {"@type":"Offer","itemOffered":{"@type":"Service","name":"Gel-X Extensions"}},
-        {"@type":"Offer","itemOffered":{"@type":"Service","name":"Hard Gel Extensions"}},
-        {"@type":"Offer","itemOffered":{"@type":"Service","name":"Luxury Pedicures"}},
         {"@type":"Offer","itemOffered":{"@type":"Service","name":"Nail Art"}}
       ]
     },
@@ -552,11 +553,11 @@ footer { background: var(--warm-black); border-top: 1px solid rgba(184,150,78,0.
       <p>Every treatment is crafted with care, using only the finest products and proven techniques.</p>
     </div>
     <div class="services-cards">
-      <div class="svc-card reveal" onclick="navigate('services')"><div class="svc-num">01</div><div class="svc-name">Manicures</div><div class="svc-desc">Classic to gel options — structured nail care with a refined, lasting finish.</div><div class="svc-starting">From $25</div><div class="svc-arrow">→</div></div>
-      <div class="svc-card reveal" onclick="navigate('services')"><div class="svc-num">02</div><div class="svc-name">Pedicures</div><div class="svc-desc">Relaxing treatments with disposable liners, designed for comfort and longevity.</div><div class="svc-starting">From $30</div><div class="svc-arrow">→</div></div>
-      <div class="svc-card reveal" onclick="navigate('services')"><div class="svc-num">03</div><div class="svc-name">Signature Pedicures</div><div class="svc-desc">Our elevated rituals — from Honey Milk to CBD-infused luxury experiences.</div><div class="svc-starting">From $45</div><div class="svc-arrow">→</div></div>
-      <div class="svc-card reveal" onclick="navigate('services')"><div class="svc-num">04</div><div class="svc-name">Gel-X & Extensions</div><div class="svc-desc">Advanced techniques for strength, natural beauty, and lasting durability.</div><div class="svc-starting">From $70</div><div class="svc-arrow">→</div></div>
-      <div class="svc-card reveal" onclick="navigate('services')"><div class="svc-num">05</div><div class="svc-name">Nail Art</div><div class="svc-desc">Custom designs from minimal accents to editorial, trending 2026 looks.</div><div class="svc-starting">From $3/nail</div><div class="svc-arrow">→</div></div>
+      <div class="svc-card reveal" onclick="navigate('services')"><div class="svc-num">01</div><div class="svc-name">Manicures</div><div class="svc-desc">From gel to classic — structured nail care with a refined finish.</div><div class="svc-starting">From $30</div><div class="svc-arrow">→</div></div>
+      <div class="svc-card reveal" onclick="navigate('services')"><div class="svc-num">02</div><div class="svc-name">Signature Manicures</div><div class="svc-desc">The house rituals — from Honey & Milk to Rose Petal.</div><div class="svc-starting">From $45</div><div class="svc-arrow">→</div></div>
+      <div class="svc-card reveal" onclick="navigate('services')"><div class="svc-num">03</div><div class="svc-name">Pedicures</div><div class="svc-desc">From essential care to signature rituals, designed for comfort.</div><div class="svc-starting">From $35</div><div class="svc-arrow">→</div></div>
+      <div class="svc-card reveal" onclick="navigate('services')"><div class="svc-num">04</div><div class="svc-name">Nail Enhancements</div><div class="svc-desc">Gel-X, structured gel, and dipping powder for strength and beauty.</div><div class="svc-starting">From $70</div><div class="svc-arrow">→</div></div>
+      <div class="svc-card reveal" onclick="navigate('services')"><div class="svc-num">05</div><div class="svc-name">Finishing Touches</div><div class="svc-desc">Art, care, removals and add-ons.</div><div class="svc-starting">From $5</div><div class="svc-arrow">→</div></div>
     </div>
   </section>
 
@@ -600,59 +601,55 @@ footer { background: var(--warm-black); border-top: 1px solid rgba(184,150,78,0.
 <!-- ═══ SERVICES ═══ -->
 <div class="page" id="page-services">
   <div class="page-hero"><p class="page-hero-eyebrow">Our Services</p><h1 class="page-hero-title">The <em>Full</em> Menu</h1><p class="page-hero-sub">Thoughtfully designed services, performed with intention and premium products.</p></div>
-  <div class="services-nav-bar"><button class="svc-tab active" onclick="showCat('manicures',this)">Manicures</button><button class="svc-tab" onclick="showCat('pedicures',this)">Pedicures</button><button class="svc-tab" onclick="showCat('signature',this)">Signature Pedicures</button><button class="svc-tab" onclick="showCat('enhancements',this)">Enhancements</button></div>
+  <div class="services-nav-bar"><button class="svc-tab active" onclick="showCat('manicures',this)">Manicures</button><button class="svc-tab" onclick="showCat('sig-manicures',this)">Signature Manicures</button><button class="svc-tab" onclick="showCat('pedicures',this)">Pedicures</button><button class="svc-tab" onclick="showCat('signature',this)">Signature Pedicures</button><button class="svc-tab" onclick="showCat('enhancements',this)">Enhancements</button></div>
 
   <div class="svc-category active" id="cat-manicures"><div class="svc-category-inner"><div class="menu-category-title">Manicures</div><div class="menu-category-desc">Classic, structured nail care with a refined finish.</div>
-    <div class="menu-item"><div><div class="mi-name">Regular Manicure</div><div class="mi-desc">Hand soak, nail trimming, shaping & buffing, cuticle grooming, lotion & polish.</div></div><div class="mi-price">$25</div></div>
-
-    <div class="menu-item"><div><div class="mi-name">Shiny Buff Manicure</div><div class="mi-desc">Regular Manicure with a mirror-shine buffing finish.</div></div><div class="mi-price">$30</div></div>
-    <div class="menu-item"><div><div class="mi-name">Honey Milk Manicure</div><div class="mi-desc">Milk & honey salt soak, fresh lemon & honey sea salt scrub, 5-minute massage, hot towel wrap & polish.</div></div><div class="mi-price">$45</div></div>
-    <div class="menu-item"><div><div class="mi-name">Gel Manicure</div><div class="mi-desc">Chip-free color lasting up to 14 days. Regular Manicure with gel polish.</div></div><div class="mi-price">$45</div></div>
-    <div class="menu-item"><div><div class="mi-name">Dipping Powder Manicure</div><div class="mi-desc">Natural-looking, non-toxic, calcium & vitamin E fortified. Includes Regular Manicure.</div></div><div class="mi-price-multi">Without removal <strong>$55</strong><br>With removal <strong>$65</strong></div></div>
-    <div class="menu-item"><div><div class="mi-name">Gel Color Polish Change</div><div class="mi-desc">Old polish removal, nail trimming & shaping, and gel polish of your choice.</div></div><div class="mi-price">$40</div></div>
-    <div class="menu-item"><div><div class="mi-name">Gel/Dip Removal & Regular Mani</div><div class="mi-desc">Full removal plus a fresh regular manicure.</div></div><div class="mi-price">$35</div></div>
-    <div class="menu-item"><div><div class="mi-name">Gel/Dip Removal Only</div><div class="mi-desc">Safe removal with buffing.</div></div><div class="mi-price">$25</div></div>
+    <div class="menu-item"><div><div class="mi-name">Classic</div><div class="mi-desc">Shape, cuticle care, lotion and lacquer. The essentials, refined.</div></div><div class="mi-price">$30</div></div>
+    <div class="menu-item"><div><div class="mi-name">Luminous</div><div class="mi-desc">Buffed to a natural high shine. No polish — only light.</div></div><div class="mi-price">$40</div></div>
+    <div class="menu-item"><div><div class="mi-name">Gel</div><div class="mi-desc">True-pigment gel color, sealed for up to fourteen days of wear.</div></div><div class="mi-price">$50</div></div>
+    <div class="menu-item"><div><div class="mi-name">Dipping Powder</div><div class="mi-desc">Lightweight strength, shine and color. Calcium and vitamin E fortified.</div></div><div class="mi-price">$65</div></div>
   </div></div>
 
-  <div class="svc-category" id="cat-pedicures"><div class="svc-category-inner"><div class="menu-category-title">Pedicures</div><div class="menu-category-desc">Relaxing treatments with disposable liners for every guest.</div>
-    <div class="menu-item"><div><div class="mi-name">Regular Pedicure</div><div class="mi-desc">Foot soak, nail trimming, shaping, cuticle cleaning, gentle heel scrub, lotion & polish.</div></div><div class="mi-price">$30</div></div>
-
-    <div class="menu-item"><div><div class="mi-name">Buff Shine Pedicure</div><div class="mi-desc">Regular Pedicure with a shiny buff finish.</div></div><div class="mi-price">$35</div></div>
-    <div class="menu-item"><div><div class="mi-name">Gel Pedicure</div><div class="mi-desc">Regular Pedicure with long-lasting gel polish.</div></div><div class="mi-price-multi">Without removal <strong>$50</strong><br>With removal <strong>$55</strong></div></div>
-    <div class="menu-item"><div><div class="mi-name">Gel Removal & Regular Pedicure</div><div class="mi-desc">Safe gel removal followed by a full Regular Pedicure.</div></div><div class="mi-price">$40</div></div>
-    <div class="menu-item"><div><div class="mi-name">Gel Polish Removal Only</div><div class="mi-desc">Gel removal and nail buffing.</div></div><div class="mi-price">$20</div></div>
-    <div class="menu-item"><div><div class="mi-name">Gel Polish Color Change</div><div class="mi-desc">Removal, nail trimming, shaping & fresh gel polish.</div></div><div class="mi-price">$45</div></div>
+  <div class="svc-category" id="cat-sig-manicures"><div class="svc-category-inner"><div class="menu-category-title">Signature Manicures</div><div class="menu-category-desc">The house rituals — from Honey & Milk to Rose Petal.</div>
+    <div class="menu-item"><div><div class="mi-name">Honey & Milk</div><div class="mi-desc">A milk-and-honey soak with fresh lemon and an exfoliating honey scrub. Five-minute massage.</div></div><div class="mi-price">$45</div></div>
+    <div class="menu-item"><div><div class="mi-name">Tropical Citrus</div><div class="mi-desc">A bright citrus sugar scrub with a collagen-lotion massage. Five-minute massage.</div></div><div class="mi-price">$50</div></div>
+    <div class="menu-item"><div><div class="mi-name">The Calm</div><div class="mi-desc">CBD-infused oil and sugar scrub for hands that hold tension. Ten-minute massage.</div></div><div class="mi-price">$60</div></div>
+    <div class="menu-item"><div><div class="mi-name">Rose Petal</div><div class="mi-desc">French rose petals, sugar scrub and mask, warm towel wrap. Ten-minute massage.</div></div><div class="mi-price">$65</div></div>
+    <div class="menu-note">✦ Each signature manicure includes a classic manicure.</div>
   </div></div>
 
-  <div class="svc-category" id="cat-signature"><div class="svc-category-inner"><div class="menu-category-title">18K Signature Pedicures</div><div class="menu-category-desc">Our elevated rituals — each includes a Regular Pedicure plus premium add-ons.</div>
-    <div class="menu-item"><div><div class="mi-name">Honey Milk Pedicure</div><div class="mi-desc">Honey & milk soak, fresh lemon, exfoliating honey sea salt scrub, 5-minute massage with honey milk cream.</div></div><div class="mi-price">$45</div></div>
-    <div class="menu-item"><div><div class="mi-name">Please Me Pedicure</div><div class="mi-desc">Your choice of scent. Sea salt soak, sugar scrub, cream, 5-minute massage & polish.</div></div><div class="mi-price">$50</div></div>
-    <div class="menu-item"><div><div class="mi-name">Pamper Me Pedicure</div><div class="mi-desc">Choice of Tea Tree or Aussie Pink Clay. Sea salt soak, sugar scrub, mask, lotion, hot towel & 5-min massage.</div></div><div class="mi-price">$55</div></div>
-    <div class="menu-item"><div><div class="mi-name">Mint to Be Cool Pedicure</div><div class="mi-desc">Mint bath bomb, mint sugar scrub, mask, hot towel wrap & 5-minute massage.</div></div><div class="mi-price">$60</div></div>
-    <div class="menu-item"><div><div class="mi-name">CBD Pedicure</div><div class="mi-desc">CBD oil, sugar scrub, CBD lotion & 5-minute massage. Detoxifies and relieves aches.</div></div><div class="mi-price">$65</div></div>
-    <div class="menu-item"><div><div class="mi-name">Orange You Pretty Pedicure</div><div class="mi-desc">Orange bath bomb, fresh orange, callus treatment, sugar scrub, mask, hot towel & 10-min massage.</div></div><div class="mi-price">$80</div></div>
-    <div class="menu-item"><div><div class="mi-name">Lovely Lavender Pedicure</div><div class="mi-desc">Bath bomb, lavender flower, callus treatment, sugar scrub, mask, hot towel & 10-minute massage.</div></div><div class="mi-price">$80</div></div>
-    <div class="menu-note">✦ All Signature Pedicures include a Regular Pedicure. Upgrade to gel polish for an additional charge.</div>
+  <div class="svc-category" id="cat-pedicures"><div class="svc-category-inner"><div class="menu-category-title">Pedicures</div><div class="menu-category-desc">From essential care to signature rituals, designed for comfort.</div>
+    <div class="menu-item"><div><div class="mi-name">Classic</div><div class="mi-desc">Soak, shape, cuticle care, lotion and lacquer.</div></div><div class="mi-price">$35</div></div>
+    <div class="menu-item"><div><div class="mi-name">Honey & Milk</div><div class="mi-desc">A honey-milk soak with fresh lemon and exfoliating honey scrub.</div></div><div class="mi-price">$45</div></div>
+    <div class="menu-item"><div><div class="mi-name">Gel</div><div class="mi-desc">Classic care, sealed in long-wear gel color.</div></div><div class="mi-price">$55</div></div>
+    <div class="menu-item"><div><div class="mi-name">Tropical Citrus</div><div class="mi-desc">Citrus sugar scrub with a collagen-lotion massage. Bright and fresh.</div></div><div class="mi-price">$55</div></div>
+    <div class="menu-item"><div><div class="mi-name">The Calm</div><div class="mi-desc">CBD-infused oil and sugar scrub to ease aches, warm towel, CBD-lotion massage.</div></div><div class="mi-price">$65</div></div>
   </div></div>
 
-  <div class="svc-category" id="cat-enhancements"><div class="svc-category-inner"><div class="menu-category-title">Nail Enhancements</div><div class="menu-category-desc">Advanced techniques with a 10-day warranty on all enhancements.</div>
-    <div class="menu-item"><div><div class="mi-name">Dipping Powder Full Set</div><div class="mi-desc">Natural-looking, non-toxic, lightweight. Calcium & vitamin E fortified.</div></div><div class="mi-price">$80+</div></div>
-    <div class="menu-item"><div><div class="mi-name">Gel-X Full Set</div><div class="mi-desc">Premium soft gel extensions for a natural, lightweight look.</div></div><div class="mi-price">$70+</div></div>
-    <div class="menu-item"><div><div class="mi-name">Hard Gel / Gel Builder Full Set</div><div class="mi-desc">Sculpted hard gel or gel builder for maximum strength and custom shaping.</div></div><div class="mi-price">$80+</div></div>
-    <div class="menu-item"><div><div class="mi-name">Hard Gel Fill</div><div class="mi-desc">Maintenance fill for existing hard gel extensions.</div></div><div class="mi-price">$70</div></div>
-    <div class="menu-item"><div><div class="mi-name">Nail Art</div><div class="mi-desc">Custom designs — from minimal accents to trending editorial looks.</div></div><div class="mi-price">$3–$5 / nail</div></div>
-    <div class="menu-note">✦ Prices vary based on length and complexity. Ask your technician for details.</div>
+  <div class="svc-category" id="cat-signature"><div class="svc-category-inner"><div class="menu-category-title">18K Signature Pedicures</div><div class="menu-category-desc">Our elevated rituals — designed to restore, rejuvenate and indulge.</div>
+    <div class="menu-item"><div><div class="mi-name">The Aromatherapy Ritual</div><div class="mi-desc">Your choice of mood — bright orange, calming lavender, or cooling mint. Bath bomb, sugar scrub, mask and warm towel. Ten-minute massage.</div></div><div class="mi-price">$80</div></div>
+    <div class="menu-item"><div><div class="mi-name">Champagne & Rose</div><div class="mi-desc">A soak of champagne and fresh rose petals, rose scrub and mask, warm towel wrap, rose cream and oil. Fifteen-minute massage.</div></div><div class="mi-price">$100</div></div>
+    <div class="menu-item"><div><div class="mi-name">The 18K Golden Aura</div><div class="mi-desc">Genuine 24K gold leaf, gold soak, scrub and mask, warm towel wrap, and gold-infused oils — the full house ceremony. Twenty-minute massage.</div></div><div class="mi-price">$120</div></div>
+    <div class="menu-note">✦ Each signature pedicure includes a classic pedicure. Upgrade to gel polish for an additional charge.</div>
+  </div></div>
+
+  <div class="svc-category" id="cat-enhancements"><div class="svc-category-inner"><div class="menu-category-title">Nail Enhancements</div><div class="menu-category-desc">Gel-X, structured gel, and dipping powder for strength and beauty.</div>
+    <div class="menu-item"><div><div class="mi-name">Structured Gel</div><div class="mi-desc">Builder gel overlay — the strength of hard gel without the cracking. For natural nails that need protection.</div></div><div class="mi-price">$70</div></div>
+    <div class="menu-item"><div><div class="mi-name">Gel-X</div><div class="mi-desc">Soft-gel tip extensions — thinner, lighter and more natural than the traditional set. Gel color included.</div></div><div class="mi-price">$70+</div></div>
+    <div class="menu-item"><div><div class="mi-name">Dipping Powder Set</div><div class="mi-desc">A full-coverage powder system. Strength, color and lasting shine.</div></div><div class="mi-price">$80</div></div>
+    <div class="menu-item"><div><div class="mi-name">Nail Art</div><div class="mi-desc">Custom designs — from minimal accents to trending editorial looks.</div></div><div class="mi-price">$5+ / nail</div></div>
+    <div class="menu-note">✦ Each enhancement carries a ten-day warranty. Prices vary based on length and complexity.</div>
   </div></div>
 
   <div style="max-width:900px;margin:2rem auto;padding:0 1rem;">
   <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:1rem;margin-bottom:2rem;">
     <a href="/gel-manicure-santa-monica" style="display:block;border:1px solid rgba(184,150,78,0.25);padding:1.2rem;text-align:center;transition:border-color 0.3s;" onmouseover="this.style.borderColor='#B8964E'" onmouseout="this.style.borderColor='rgba(184,150,78,0.25)'">
       <div style="font-family:'Cormorant Garamond',serif;font-size:1.1rem;color:#1A1714;margin-bottom:0.3rem;">Gel Manicure</div>
-      <div style="font-size:0.68rem;color:#B8964E;letter-spacing:0.15em;text-transform:uppercase;">From $45 →</div>
+      <div style="font-size:0.68rem;color:#B8964E;letter-spacing:0.15em;text-transform:uppercase;">From $50 →</div>
     </a>
     <a href="/dipping-powder-nails-santa-monica" style="display:block;border:1px solid rgba(184,150,78,0.25);padding:1.2rem;text-align:center;transition:border-color 0.3s;" onmouseover="this.style.borderColor='#B8964E'" onmouseout="this.style.borderColor='rgba(184,150,78,0.25)'">
       <div style="font-family:'Cormorant Garamond',serif;font-size:1.1rem;color:#1A1714;margin-bottom:0.3rem;">Dipping Powder</div>
-      <div style="font-size:0.68rem;color:#B8964E;letter-spacing:0.15em;text-transform:uppercase;">From $55 →</div>
+      <div style="font-size:0.68rem;color:#B8964E;letter-spacing:0.15em;text-transform:uppercase;">From $65 →</div>
     </a>
     <a href="/gel-x-extensions-santa-monica" style="display:block;border:1px solid rgba(184,150,78,0.25);padding:1.2rem;text-align:center;transition:border-color 0.3s;" onmouseover="this.style.borderColor='#B8964E'" onmouseout="this.style.borderColor='rgba(184,150,78,0.25)'">
       <div style="font-family:'Cormorant Garamond',serif;font-size:1.1rem;color:#1A1714;margin-bottom:0.3rem;">Gel-X Extensions</div>
