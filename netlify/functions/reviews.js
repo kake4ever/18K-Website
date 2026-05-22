@@ -47,8 +47,9 @@ exports.handler = async (event) => {
     const res = await fetch(url);
 
     if (!res.ok) {
-      console.error('Google Places API error:', res.status, await res.text());
-      return fallback();
+      const errorText = await res.text();
+      console.error('Google Places API error:', res.status, errorText);
+      return ok({ rating: 0, total_reviews: 0, reviews: [], debug: { status: res.status, error: errorText } });
     }
 
     const data = await res.json();
@@ -74,6 +75,6 @@ exports.handler = async (event) => {
     return ok(result);
   } catch (error) {
     console.error('Reviews fetch error:', error);
-    return fallback();
+    return ok({ rating: 0, total_reviews: 0, reviews: [], debug: { error: error.message } });
   }
 };
