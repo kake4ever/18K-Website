@@ -273,6 +273,36 @@ footer { background: var(--warm-black); border-top: 1px solid rgba(184,150,78,0.
 .g-item:hover .g-overlay { opacity: 1; }
 .g-label { font-family: var(--font-display); font-size: 0.95rem; color: var(--pearl); font-weight: 300; }
 
+/* ═══════════════════════════════
+   VIDEO SHOWCASE — The Craft in Motion
+   ═══════════════════════════════ */
+.video-showcase { background: var(--warm-black); padding: clamp(5rem,10vw,8rem) 5%; text-align: center; position: relative; overflow: hidden; }
+.video-showcase::before { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at 50% 0%, rgba(184,150,78,0.08), transparent 60%); pointer-events: none; }
+.video-showcase-header { max-width: 700px; margin: 0 auto 3rem; position: relative; z-index: 1; }
+.video-showcase .section-title { color: var(--pearl); margin-top: 0.6rem; }
+.video-showcase .section-title em { color: var(--soft-gold); }
+.video-showcase-desc { font-size: 0.9rem; font-weight: 300; color: var(--taupe); margin-top: 1rem; line-height: 1.7; letter-spacing: 0.02em; }
+.video-reel-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; max-width: 1200px; margin: 0 auto; position: relative; z-index: 1; }
+.video-reel { position: relative; aspect-ratio: 9/16; background: #1A1714; border: 1px solid rgba(184,150,78,0.2); overflow: hidden; transition: border-color 0.4s, transform 0.4s cubic-bezier(0.22,1,0.36,1); }
+.video-reel:hover { border-color: var(--deep-gold); transform: translateY(-4px); }
+.video-reel::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 30%); pointer-events: none; z-index: 2; opacity: 0.9; transition: opacity 0.3s; }
+.video-reel:hover::after { opacity: 0.6; }
+.video-reel video { width: 100%; height: 100%; object-fit: cover; display: block; }
+.video-reel-badge { position: absolute; bottom: 14px; left: 50%; transform: translateX(-50%); font-size: 9px; font-weight: 400; letter-spacing: 0.2em; text-transform: uppercase; color: var(--soft-gold); z-index: 3; white-space: nowrap; opacity: 0; transition: opacity 0.4s; text-shadow: 0 1px 4px rgba(0,0,0,0.6); }
+.video-reel:hover .video-reel-badge, .video-reel:focus-visible .video-reel-badge { opacity: 1; }
+.video-reel:focus-visible { outline: 2px solid var(--deep-gold); outline-offset: 4px; }
+.video-showcase-cta { margin-top: 3rem; position: relative; z-index: 1; }
+.video-showcase-cta .btn-outline { border-color: var(--deep-gold); color: var(--soft-gold); }
+.video-showcase-cta .btn-outline:hover { background: var(--deep-gold); color: var(--warm-black); }
+@media (max-width: 900px) {
+  .video-reel-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+}
+@media (max-width: 480px) {
+  .video-showcase { padding: 4rem 5%; }
+  .video-reel-grid { gap: 10px; }
+  .video-reel-badge { opacity: 1; font-size: 8px; }
+}
+
 .stats-strip { background: linear-gradient(135deg, var(--champagne) 0%, var(--blush) 100%); padding: clamp(3.5rem,7vw,6rem) 5%; }
 .stats-grid { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: repeat(4,1fr); gap: 2.5rem; text-align: center; }
 .stat-item { position: relative; }
@@ -580,6 +610,24 @@ footer { background: var(--warm-black); border-top: 1px solid rgba(184,150,78,0.
     </div>
   </section>
 
+  <!-- ═══ VIDEO SHOWCASE ═══ -->
+  <section class="video-showcase reveal">
+    <div class="video-showcase-header">
+      <div class="section-overline center">The Craft in Motion</div>
+      <h2 class="section-title light" style="text-align:center;">Watch the <em>artistry</em></h2>
+      <p class="video-showcase-desc">A closer look at the process — from first stroke to final finish.</p>
+    </div>
+    <div class="video-reel-grid">
+      <div class="video-reel" data-src="/videos/reel-1.mp4"><span class="video-reel-badge">▶ Tap to play with sound</span></div>
+      <div class="video-reel" data-src="/videos/reel-2.mp4"><span class="video-reel-badge">▶ Tap to play with sound</span></div>
+      <div class="video-reel" data-src="/videos/reel-3.mp4"><span class="video-reel-badge">▶ Tap to play with sound</span></div>
+      <div class="video-reel" data-src="/videos/reel-4.mp4"><span class="video-reel-badge">▶ Tap to play with sound</span></div>
+    </div>
+    <div class="video-showcase-cta">
+      <a href="https://www.instagram.com/18k.nailboutique" target="_blank" rel="noopener" class="btn-outline">See more on @18k.nailboutique</a>
+    </div>
+  </section>
+
   <div class="stats-strip"><div class="stats-grid">
     <div class="stat-item reveal"><div class="stat-big">8+</div><div class="stat-label">Years of Artistry</div></div>
     <div class="stat-item reveal"><div class="stat-big">5★</div><div class="stat-label">Google & Yelp</div></div>
@@ -813,6 +861,7 @@ initReveals();
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js" defer></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/SplitText.min.js" defer></script>
 <script src="/motion.js" defer></script>
+<script src="/videos.js" defer></script>
 <script src="/chat-widget.js" defer></script>
 </body>
 </html>
