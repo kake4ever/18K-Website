@@ -106,10 +106,22 @@
     gsap.registerPlugin(ScrollTrigger);
     if (window.SplitText) gsap.registerPlugin(window.SplitText);
 
-    const mm = gsap.matchMedia();
+    // Wait for fonts before running SplitText to avoid inaccurate line breaks
+    const runInit = () => {
+      const mm = gsap.matchMedia();
+      autoTagElements();
+      setupAnimations(gsap, ScrollTrigger, mm);
+      injectMotionToggle();
+    };
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(runInit);
+    } else {
+      runInit();
+    }
+    return;
+  }
 
-    // Autotag headings + images if not already tagged
-    autoTagElements();
+  function setupAnimations(gsap, ScrollTrigger, mm) {
 
     mm.add({
       normal: '(prefers-reduced-motion: no-preference)',
@@ -131,8 +143,6 @@
         jsParallaxFallback(gsap, ScrollTrigger, effectiveReduce);
       }
     });
-
-    injectMotionToggle();
   }
 
   // ==================================================================
