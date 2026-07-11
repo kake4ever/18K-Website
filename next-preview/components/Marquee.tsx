@@ -11,17 +11,32 @@ const items = [
 
 export default function Marquee() {
   return (
-    <div className="bg-warmblack py-5 overflow-hidden border-y border-deepgold/10">
-      <div className="flex gap-10 animate-marquee w-max">
-        {[...items, ...items, ...items].map((item, i) => (
-          <span
-            key={i}
-            className="font-display text-sm font-light tracking-[0.3em] uppercase text-taupe whitespace-nowrap flex items-center gap-10"
-          >
-            {item}
-            <span className="text-deepgold text-[0.35rem]">◆</span>
-          </span>
-        ))}
+    <div className="bg-warmblack py-8 overflow-hidden border-y border-deepgold/15 relative">
+      <div
+        className="absolute inset-0 pointer-events-none z-10"
+        style={{
+          background:
+            'linear-gradient(90deg, #1A1714 0%, transparent 8%, transparent 92%, #1A1714 100%)',
+        }}
+      />
+      <div
+        className="relative"
+        style={{ perspective: '600px', perspectiveOrigin: 'center' }}
+      >
+        <div
+          className="flex gap-14 animate-marquee w-max"
+          style={{ transform: 'rotateX(6deg)', transformStyle: 'preserve-3d' }}
+        >
+          {[...items, ...items, ...items].map((item, i) => (
+            <span
+              key={i}
+              className="font-display text-lg md:text-2xl font-light tracking-[0.35em] uppercase text-pearl/40 whitespace-nowrap flex items-center gap-14"
+            >
+              {item}
+              <span className="text-deepgold text-[0.5rem]">◆</span>
+            </span>
+          ))}
+        </div>
       </div>
     </div>
   );
