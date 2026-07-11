@@ -40,8 +40,8 @@
 
 [[redirects]]
   from = "/russian-manicure-santa-monica"
-  to = "/russian-manicure-santa-monica.html"
-  status = 200
+  to = "/services"
+  status = 301
 
 [[redirects]]
   from = "/luxury-pedicure-santa-monica"
