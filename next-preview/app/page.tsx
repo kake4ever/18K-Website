@@ -1,6 +1,7 @@
 import Nav from '@/components/Nav';
 import Hero from '@/components/Hero';
 import Marquee from '@/components/Marquee';
+import SignatureRitual from '@/components/SignatureRitual';
 import About from '@/components/About';
 import Services from '@/components/Services';
 import Gallery from '@/components/Gallery';
@@ -15,6 +16,7 @@ export default function Home() {
       <Nav />
       <Hero />
       <Marquee />
+      <SignatureRitual />
       <About />
       <Services />
       <Gallery />
