@@ -218,6 +218,43 @@ footer { background: var(--warm-black); border-top: 1px solid rgba(184,150,78,0.
 .hero-eyebrow { font-size: 0.62rem; font-weight: 400; letter-spacing: 0.5em; text-transform: uppercase; color: var(--soft-gold); margin-bottom: 2.2rem; opacity: 0; animation: rise 1s ease 0.4s forwards; }
 .hero-h1 { font-family: var(--font-display); font-size: clamp(3.5rem,8.5vw,8rem); font-weight: 300; color: var(--pearl); line-height: 1.02; letter-spacing: 0.04em; margin-bottom: 1.5rem; opacity: 0; animation: rise 1s ease 0.6s forwards; }
 .hero-h1 em { font-style: italic; color: var(--soft-gold); }
+
+/* ═══════════════════════════════
+   BOLD HERO VARIANT (cinematic)
+   ═══════════════════════════════ */
+.hero.hero-bold { background: #050403; overflow: hidden; padding: 0; }
+.hero-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; opacity: 0; animation: heroVideoFade 2.2s ease 0.2s forwards; }
+@keyframes heroVideoFade { to { opacity: 1; } }
+.hero-scrim { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(10,9,8,0.5) 0%, rgba(10,9,8,0.35) 40%, rgba(10,9,8,0.72) 100%); z-index: 1; }
+.hero-vignette { position: absolute; inset: 0; background: radial-gradient(ellipse at center, transparent 30%, rgba(10,9,8,0.55) 100%); z-index: 1; pointer-events: none; }
+.hero-topbar { position: absolute; top: 5.5rem; left: 0; right: 0; z-index: 3; display: flex; justify-content: space-between; align-items: center; padding: 0 clamp(1.5rem, 4vw, 3.5rem); opacity: 0; animation: rise 1s ease 0.2s forwards; }
+.hero-topbar-brand { font-family: var(--font-body); font-size: 0.62rem; font-weight: 500; letter-spacing: 0.4em; color: var(--soft-gold); }
+.hero-topbar-phone { font-family: var(--font-body); font-size: 0.62rem; font-weight: 400; letter-spacing: 0.35em; color: rgba(255,255,255,0.6); text-decoration: none; transition: color 0.3s; }
+.hero-topbar-phone:hover { color: var(--soft-gold); }
+
+.hero-content-bold { max-width: 1100px; text-align: center; position: relative; z-index: 2; padding: 0 1.5rem; }
+.hero-content-bold .hero-eyebrow { font-family: var(--font-display); font-style: italic; font-size: 0.95rem; letter-spacing: 0.15em; text-transform: none; color: var(--soft-gold); margin-bottom: 2.5rem; opacity: 0; animation: rise 1s ease 0.5s forwards; }
+
+.hero-h1-bold { font-family: var(--font-display); font-size: clamp(4.5rem, 13vw, 12rem); font-weight: 300; line-height: 0.92; letter-spacing: -0.02em; color: var(--pearl); margin-bottom: 2.5rem; opacity: 0; animation: heroRise 1.4s cubic-bezier(0.16, 1, 0.3, 1) 0.75s forwards; }
+.hero-h1-bold em { font-style: italic; color: transparent; background: linear-gradient(135deg, #E8D19A 0%, #B8964E 45%, #D4BC8B 100%); -webkit-background-clip: text; background-clip: text; text-shadow: 0 0 60px rgba(184,150,78,0.35); }
+@keyframes heroRise { from { opacity: 0; transform: translateY(45px); } to { opacity: 1; transform: translateY(0); } }
+
+.hero-sub-bold { font-family: var(--font-display); font-style: italic; font-size: clamp(1rem, 1.4vw, 1.35rem); font-weight: 300; color: rgba(245,240,235,0.75); line-height: 1.7; max-width: 540px; margin: 0 auto 3rem; letter-spacing: 0.01em; opacity: 0; animation: rise 1s ease 1.05s forwards; }
+
+.hero-content-bold .hero-buttons { opacity: 0; animation: rise 1s ease 1.3s forwards; }
+
+.hero-microstats { display: flex; align-items: center; justify-content: center; gap: 1rem; margin-top: 3.5rem; font-size: 0.6rem; letter-spacing: 0.3em; text-transform: uppercase; color: rgba(184,150,78,0.55); font-weight: 400; opacity: 0; animation: rise 1s ease 1.55s forwards; }
+
+.hero-scroll-bold { flex-direction: column; gap: 0.7rem; }
+.hero-scroll-bold span { writing-mode: horizontal-tb; font-size: 0.55rem; }
+
+@media (max-width: 768px) {
+  .hero-topbar { top: 5rem; padding: 0 1.2rem; }
+  .hero-topbar-brand, .hero-topbar-phone { font-size: 0.55rem; letter-spacing: 0.2em; }
+  .hero-h1-bold { font-size: clamp(3.5rem, 18vw, 6rem); }
+  .hero-microstats { gap: 0.6rem; font-size: 0.5rem; letter-spacing: 0.2em; flex-wrap: wrap; }
+  .hero-microstats span:nth-child(2), .hero-microstats span:nth-child(4) { display: none; }
+}
 .hero-sub { font-size: 0.92rem; font-weight: 200; color: rgba(255,255,255,0.4); letter-spacing: 0.06em; line-height: 1.75; max-width: 460px; margin: 0 auto 3rem; opacity: 0; animation: rise 1s ease 0.8s forwards; }
 .hero-buttons { display: flex; gap: 1.5rem; justify-content: center; align-items: center; flex-wrap: wrap; opacity: 0; animation: rise 1s ease 1s forwards; }
 @keyframes rise { from { opacity: 0; transform: translateY(28px); } to { opacity: 1; transform: translateY(0); } }
@@ -547,22 +584,48 @@ footer { background: var(--warm-black); border-top: 1px solid rgba(184,150,78,0.
 
 <!-- ═══ HOME ═══ -->
 <div class="page active" id="page-home">
-  <section class="hero k18-skip">
-    <!-- TO ADD YOUR HERO IMAGE: Replace the line below with: <div class="hero-bg" style="background-image:url('./images/hero.jpg')"></div> -->
-    <div class="hero-bg" style="background-image:url('./images/hero.jpg');background-size:cover;background-position:center;"></div>
-    <div class="hero-overlay"></div>
-    <div class="hero-gradient"></div>
-    <div class="hero-orb"></div>
-    <div class="hero-content">
-      <p class="hero-eyebrow">Santa Monica's Premier Nail Boutique</p>
-      <h1 class="hero-h1">Nail Artistry,<br><em>Refined</em></h1>
-      <p class="hero-sub">Modern precision meets quiet luxury. Every service designed with intention — never rushed, never ordinary.</p>
+  <section class="hero hero-bold k18-skip">
+    <!-- Video background (autoplay muted loop, poster fallback) -->
+    <video class="hero-video" autoplay muted loop playsinline preload="metadata" poster="./images/hero.jpg" aria-hidden="true">
+      <source src="/videos/reel-4.mp4" type="video/mp4">
+    </video>
+    <div class="hero-scrim"></div>
+    <div class="hero-vignette"></div>
+
+    <!-- Top corner details -->
+    <div class="hero-topbar">
+      <span class="hero-topbar-brand">18K · SANTA MONICA</span>
+      <a href="tel:4242385500" class="hero-topbar-phone">(424) 238-5500</a>
+    </div>
+
+    <!-- Editorial content -->
+    <div class="hero-content hero-content-bold">
+      <p class="hero-eyebrow">— The house of quiet luxury —</p>
+      <h1 class="hero-h1 hero-h1-bold">
+        Made<br>
+        of <em>poetry.</em>
+      </h1>
+      <p class="hero-sub hero-sub-bold">Nail artistry, honed to a whisper.<br>Considered, calm, entirely yours.</p>
       <div class="hero-buttons">
-        <a href="https://booking.18knailboutique.com/webstoreNew/services" class="btn-primary">Book Your Visit</a>
-        <a onclick="navigate('services')" class="btn-outline light" style="cursor:pointer;">Explore Services</a>
+        <a href="https://booking.18knailboutique.com/webstoreNew/services" class="btn-primary">Reserve Your Visit</a>
+        <a onclick="navigate('services')" class="btn-outline light" style="cursor:pointer;">The Menu ↓</a>
+      </div>
+
+      <!-- Micro stats bar -->
+      <div class="hero-microstats">
+        <span>★ 4.5 GOOGLE</span>
+        <span>·</span>
+        <span>MMXXVI</span>
+        <span>·</span>
+        <span>1323 LINCOLN BLVD</span>
       </div>
     </div>
-    <div class="hero-scroll"><div class="ln"></div><span>Scroll</span></div>
+
+    <!-- Bottom scroll indicator -->
+    <div class="hero-scroll hero-scroll-bold">
+      <span>Scroll</span>
+      <div class="ln"></div>
+    </div>
   </section>
   <div class="marquee"><div class="marquee-track"><span class="marquee-item">Gel-X Specialist</span><span class="marquee-item">Luxury Pedicures</span><span class="marquee-item">Hard Gel Extensions</span><span class="marquee-item">Custom Nail Art</span><span class="marquee-item">Dipping Powder</span><span class="marquee-item">Signature Treatments</span><span class="marquee-item">Santa Monica</span><span class="marquee-item">Gel-X Specialist</span><span class="marquee-item">Luxury Pedicures</span><span class="marquee-item">Hard Gel Extensions</span><span class="marquee-item">Custom Nail Art</span><span class="marquee-item">Dipping Powder</span><span class="marquee-item">Signature Treatments</span><span class="marquee-item">Santa Monica</span></div></div>
 
