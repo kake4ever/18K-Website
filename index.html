@@ -218,6 +218,22 @@ footer { background: var(--warm-black); border-top: 1px solid rgba(184,150,78,0.
 .hero-eyebrow { font-size: 0.62rem; font-weight: 400; letter-spacing: 0.5em; text-transform: uppercase; color: var(--soft-gold); margin-bottom: 2.2rem; opacity: 0; animation: rise 1s ease 0.4s forwards; }
 .hero-h1 { font-family: var(--font-display); font-size: clamp(3.5rem,8.5vw,8rem); font-weight: 300; color: var(--pearl); line-height: 1.02; letter-spacing: 0.04em; margin-bottom: 1.5rem; opacity: 0; animation: rise 1s ease 0.6s forwards; }
 .hero-h1 em { font-style: italic; color: var(--soft-gold); }
+
+/* ═══════════════════════════════
+   3D SCENES — HERO WORDMARK + GALLERY CUBE
+   ═══════════════════════════════ */
+.hero-3d-mount{position:absolute;top:12%;right:5%;width:min(38vw,520px);height:min(70vh,540px);z-index:1;pointer-events:none;filter:drop-shadow(0 20px 60px rgba(184,150,78,0.25));}
+.hero-3d-mount canvas{width:100% !important;height:100% !important;display:block;}
+@media(max-width:900px){.hero-3d-mount{position:relative;top:auto;right:auto;left:50%;transform:translateX(-50%);width:min(85vw,420px);height:280px;margin:1.5rem auto 0;opacity:0.9;}}
+
+.gallery-3d-section{padding:clamp(5rem,10vw,8rem) 5%;text-align:center;background:linear-gradient(180deg,var(--pearl) 0%,var(--champagne) 50%,var(--pearl) 100%);position:relative;overflow:hidden;}
+.gallery-3d-header{max-width:640px;margin:0 auto 2.5rem;}
+.gallery-3d-desc{font-size:0.9rem;font-weight:300;color:var(--taupe);font-family:var(--font-display);font-style:italic;margin-top:0.6rem;}
+.gallery-3d-mount{width:min(560px,90vw);height:min(560px,80vh);margin:0 auto;cursor:grab;touch-action:none;user-select:none;position:relative;}
+.gallery-3d-mount:active{cursor:grabbing;}
+.gallery-3d-mount canvas{width:100% !important;height:100% !important;display:block;}
+.gallery-3d-hint{font-size:0.65rem;letter-spacing:0.25em;text-transform:uppercase;color:var(--taupe);margin-top:2rem;font-weight:400;}
+@media(max-width:600px){.gallery-3d-mount{width:90vw;height:90vw;max-height:70vh;}}
 .hero-sub { font-size: 0.92rem; font-weight: 200; color: rgba(255,255,255,0.4); letter-spacing: 0.06em; line-height: 1.75; max-width: 460px; margin: 0 auto 3rem; opacity: 0; animation: rise 1s ease 0.8s forwards; }
 .hero-buttons { display: flex; gap: 1.5rem; justify-content: center; align-items: center; flex-wrap: wrap; opacity: 0; animation: rise 1s ease 1s forwards; }
 @keyframes rise { from { opacity: 0; transform: translateY(28px); } to { opacity: 1; transform: translateY(0); } }
@@ -553,6 +569,8 @@ footer { background: var(--warm-black); border-top: 1px solid rgba(184,150,78,0.
     <div class="hero-overlay"></div>
     <div class="hero-gradient"></div>
     <div class="hero-orb"></div>
+    <!-- 3D "18K" wordmark mount -->
+    <div id="hero-3d-mount" class="hero-3d-mount" aria-hidden="true"></div>
     <div class="hero-content">
       <p class="hero-eyebrow">Santa Monica's Premier Nail Boutique</p>
       <h1 class="hero-h1">Nail Artistry,<br><em>Refined</em></h1>
@@ -608,6 +626,17 @@ footer { background: var(--warm-black); border-top: 1px solid rgba(184,150,78,0.
       <div class="g-item reveal"><div class="g-item-inner"><img src="./images/gallery-5.jpg" class="img-cover" alt="Aurora rainbow gel nails" loading="lazy"></div><div class="g-overlay"><span class="g-label">Aurora Gel</span></div></div>
       <div class="g-item reveal"><div class="g-item-inner"><img src="./images/gallery-6.jpg" class="img-cover" alt="Galaxy dark nail art with gold circles" loading="lazy"></div><div class="g-overlay"><span class="g-label">Galaxy Art</span></div></div>
     </div>
+  </section>
+
+  <!-- ═══ 3D INTERACTIVE GALLERY CUBE ═══ -->
+  <section class="gallery-3d-section reveal">
+    <div class="gallery-3d-header">
+      <div class="section-overline center">Explore</div>
+      <h2 class="section-title light" style="text-align:center;">Drag to <em>explore</em></h2>
+      <p class="gallery-3d-desc">Every angle, considered.</p>
+    </div>
+    <div id="gallery-3d-mount" class="gallery-3d-mount" role="img" aria-label="Interactive 3D nail-art gallery cube"></div>
+    <p class="gallery-3d-hint">✦ Drag to rotate · Auto-spins gently when idle</p>
   </section>
 
   <!-- ═══ VIDEO SHOWCASE ═══ -->
@@ -856,9 +885,11 @@ initReveals();
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js" defer></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js" defer></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/SplitText.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.min.js" defer></script>
 <script src="/motion.js" defer></script>
 <script src="/videos.js" defer></script>
 <script src="/effects.js" defer></script>
+<script src="/3d.js" defer></script>
 <script src="/chat-widget.js" defer></script>
 </body>
 </html>
