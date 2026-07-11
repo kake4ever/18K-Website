@@ -1,0 +1,40 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-cormorant: 'Cormorant Garamond', Georgia, serif;
+  --font-outfit: 'Outfit', system-ui, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: #F5F0EB;
+  color: #1A1714;
+  font-family: var(--font-outfit);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: #B8964E;
+  color: #F5F0EB;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: #1A1714; }
+::-webkit-scrollbar-thumb { background: #B8964E; border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: #C9A96E; }
+
+/* Utility: smooth gold gradient text */
+.gradient-gold {
+  background: linear-gradient(135deg, #E8D19A 0%, #B8964E 45%, #D4BC8B 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
