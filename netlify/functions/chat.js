@@ -36,7 +36,7 @@ const SYSTEM_PROMPT = `You are the AI booking assistant for 18K Nail Boutique, a
 ## 18K Signature Manicures
 - Honey & Milk: $45 — Milk-and-honey soak, fresh lemon, exfoliating honey scrub, 5-min massage
 - Tropical Citrus: $50 — Citrus sugar scrub, collagen-lotion massage, 5-min massage
-- The Calm: $60 — CBD-infused oil, sugar scrub, 10-min massage
+- The Calm: $60 — Soothing botanical oil, sugar scrub, 10-min massage
 - Rose Petal: $65 — French rose petals, sugar scrub and mask, warm towel wrap, 10-min massage
 
 ## Pedicures · The Signatures
@@ -49,7 +49,7 @@ const SYSTEM_PROMPT = `You are the AI booking assistant for 18K Nail Boutique, a
 - Honey & Milk: $45 — Honey-milk soak, fresh lemon, exfoliating honey scrub
 - Gel: $55 — Classic care with long-wear gel color
 - Tropical Citrus: $55 — Citrus sugar scrub, collagen-lotion massage
-- The Calm: $65 — CBD-infused oil, sugar scrub, warm towel, CBD-lotion massage
+- The Calm: $65 — Soothing botanical oil, sugar scrub, warm towel, calming lotion massage
 
 ## Nail Enhancements (10-day warranty on all)
 - Structured Gel: $70 — Builder gel overlay for natural nail protection
