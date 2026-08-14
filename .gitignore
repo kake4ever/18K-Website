@@ -1,0 +1,9 @@
+# macOS
+.DS_Store
+**/.DS_Store
+
+# Internal planning docs — this repo's root is the Netlify publish
+# directory, so anything committed here is publicly downloadable.
+*.docx
+*.xlsx
+*.pptx
