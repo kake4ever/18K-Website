@@ -1,0 +1,199 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-cormorant: 'Cormorant Garamond', Georgia, serif;
+  --font-outfit: 'Outfit', system-ui, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: #F5F0EB;
+  color: #1A1714;
+  font-family: var(--font-outfit);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: #B8964E;
+  color: #F5F0EB;
+}
+
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: #1A1714; }
+::-webkit-scrollbar-thumb { background: #B8964E; border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: #C9A96E; }
+
+.gradient-gold {
+  background: linear-gradient(135deg, #E8D19A 0%, #B8964E 45%, #D4BC8B 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* ── Aurora background (Aceternity) ──────────────────── */
+@keyframes aurora-drift {
+  0%   { background-position: 50% 50%, 50% 50%; }
+  50%  { background-position: 350% 50%, 350% 50%; }
+  100% { background-position: 50% 50%, 50% 50%; }
+}
+.aurora {
+  --aurora:
+    repeating-linear-gradient(100deg,
+      #B8964E 10%, #E8D19A 15%, #FDFBF8 20%, #C9A96E 25%, #B8964E 30%);
+  --dark-gradient:
+    repeating-linear-gradient(100deg,
+      #0d0a08 0%, #0d0a08 7%, transparent 10%, transparent 12%, #0d0a08 16%);
+  background-image: var(--dark-gradient), var(--aurora);
+  background-size: 300%, 200%;
+  background-position: 50% 50%, 50% 50%;
+  filter: blur(10px) invert(0);
+  animation: aurora-drift 60s linear infinite;
+  will-change: background-position;
+}
+.aurora::after {
+  content: "";
+  position: absolute; inset: 0;
+  background-image:
+    repeating-linear-gradient(100deg,
+      rgba(232,209,154,0.5) 10%, rgba(184,150,78,0.5) 15%,
+      rgba(253,251,248,0.4) 20%, rgba(201,169,110,0.5) 25%,
+      rgba(184,150,78,0.5) 30%);
+  background-size: 200%;
+  filter: blur(30px);
+  mix-blend-mode: soft-light;
+  pointer-events: none;
+}
+
+/* ── Sparkles (twinkling gold dots) ──────────────────── */
+@keyframes twinkle {
+  0%, 100% { opacity: 0; transform: scale(0.4); }
+  50%      { opacity: 1; transform: scale(1); }
+}
+.sparkle {
+  position: absolute;
+  border-radius: 9999px;
+  background: radial-gradient(circle, #E8D19A 0%, transparent 70%);
+  animation: twinkle 4s ease-in-out infinite;
+  pointer-events: none;
+}
+
+/* ── Border Beam (Magic UI style traveling border) ───── */
+@keyframes beam-spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+.beam-parent { position: relative; isolation: isolate; overflow: hidden; }
+.beam-parent::before {
+  content: "";
+  position: absolute;
+  inset: -100%;
+  background: conic-gradient(from 0deg,
+    transparent 0deg,
+    transparent 300deg,
+    #E8D19A 340deg,
+    #B8964E 355deg,
+    #E8D19A 360deg);
+  animation: beam-spin 4s linear infinite;
+  opacity: 0;
+  transition: opacity 400ms ease;
+  z-index: -1;
+}
+.beam-parent:hover::before { opacity: 1; }
+.beam-parent::after {
+  content: "";
+  position: absolute;
+  inset: 1px;
+  background: #211E1B;
+  z-index: -1;
+}
+
+/* ── Infinite scroll (marquee + testimonials) ────────── */
+@keyframes scroll-x {
+  from { transform: translateX(0); }
+  to   { transform: translateX(calc(-50% - 0.5rem)); }
+}
+.animate-scroll-x {
+  animation: scroll-x var(--duration, 40s) linear infinite;
+}
+.animate-scroll-x[data-direction="reverse"] {
+  animation-direction: reverse;
+}
+.animate-scroll-x:hover { animation-play-state: paused; }
+
+/* ── Shine sweep on hover ────────────────────────────── */
+@keyframes shine {
+  0%   { transform: translateX(-150%) skewX(-20deg); }
+  100% { transform: translateX(250%)  skewX(-20deg); }
+}
+.shine-parent { position: relative; overflow: hidden; }
+.shine-parent .shine {
+  position: absolute; top: 0; bottom: 0;
+  width: 60%;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    rgba(232, 209, 154, 0.15) 45%,
+    rgba(253, 251, 248, 0.35) 50%,
+    rgba(232, 209, 154, 0.15) 55%,
+    transparent 100%);
+  transform: translateX(-150%) skewX(-20deg);
+  pointer-events: none;
+}
+.shine-parent:hover .shine { animation: shine 1.3s ease-out; }
+
+/* ── Moving-border button (Aceternity) ───────────────── */
+@keyframes border-rotate {
+  from { --angle: 0deg; }
+  to   { --angle: 360deg; }
+}
+@property --angle {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
+.moving-border {
+  position: relative;
+  background: linear-gradient(#1A1714, #1A1714) padding-box,
+              conic-gradient(from var(--angle),
+                #B8964E 0%, #E8D19A 20%, #FDFBF8 30%,
+                #C9A96E 45%, #B8964E 60%, #E8D19A 80%, #B8964E 100%) border-box;
+  border: 1.5px solid transparent;
+  animation: border-rotate 4s linear infinite;
+}
+
+/* ── Lamp effect (Aceternity) ────────────────────────── */
+.lamp-cone-left,
+.lamp-cone-right {
+  position: absolute;
+  filter: blur(50px);
+  opacity: 0;
+  transition: opacity 800ms ease, width 800ms ease;
+}
+.lamp-cone-left {
+  right: 50%;
+  height: 224px;
+  background-image: conic-gradient(from 70deg at center top,
+    #E8D19A, transparent, transparent);
+  transform-origin: top right;
+}
+.lamp-cone-right {
+  left: 50%;
+  height: 224px;
+  background-image: conic-gradient(from 290deg at center top,
+    transparent, transparent, #E8D19A);
+  transform-origin: top left;
+}
+.lamp-active .lamp-cone-left,
+.lamp-active .lamp-cone-right { opacity: 0.65; }
+
+/* respect motion prefs */
+@media (prefers-reduced-motion: reduce) {
+  .aurora, .sparkle, .beam-parent::before, .animate-scroll-x,
+  .moving-border, .shine-parent:hover .shine { animation: none !important; }
+}
