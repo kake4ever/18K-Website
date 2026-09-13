@@ -2,12 +2,7 @@
 // Body: { messages: [{ role: 'user'|'assistant', content: string }] }
 // Returns: { reply: string }
 const Anthropic = require('@anthropic-ai/sdk');
-
-const cors = {
-  'Access-Control-Allow-Origin': '*',
-  'Access-Control-Allow-Headers': 'Content-Type',
-  'Access-Control-Allow-Methods': 'POST, OPTIONS',
-};
+const { corsFor, clientIp, checkRateLimit, rateLimitedResponse } = require('./_security');
 
 const SYSTEM_PROMPT = `You are the AI booking assistant for 18K Nail Boutique, a luxury nail salon in Santa Monica, California. Be warm, concise, and professional. Keep responses short (2-4 sentences typically). Use a refined, elegant tone that matches the boutique's brand.
 
@@ -110,66 +105,52 @@ The Little One (kids mani & pedi): $45
 
 **Format:** Plain text only, no markdown, no lists with dashes — write conversationally. If you mention a price, format as "$45". If you mention a URL, write it out so the chat widget can linkify it.`;
 
-function ok(body, status = 200) {
-  return {
-    statusCode: status,
-    headers: { ...cors, 'Content-Type': 'application/json' },
-    body: JSON.stringify(body),
-  };
+function ok(body, status, cors) {
+  return { statusCode: status, headers: { ...cors, 'Content-Type': 'application/json' }, body: JSON.stringify(body) };
 }
 
 exports.handler = async (event) => {
+  const cors = corsFor(event, 'POST, OPTIONS');
   if (event.httpMethod === 'OPTIONS') return { statusCode: 204, headers: cors, body: '' };
-  if (event.httpMethod !== 'POST') return ok({ reply: '', error: 'Method not allowed' });
+  if (event.httpMethod !== 'POST') return ok({ reply: '', error: 'Method not allowed' }, 200, cors);
+
+  // Every call is a real, billed LLM request — the one endpoint here with a
+  // direct dollar cost per hit, and previously the only one with no limit at all.
+  const check = checkRateLimit(`chat:${clientIp(event)}`, { max: 20, windowMs: 60_000 });
+  if (!check.allowed) return rateLimitedResponse(cors, check.retryAfterSec);
 
   if (!process.env.ANTHROPIC_API_KEY) {
-    return ok({ reply: 'Sorry, the chat is not configured right now. Please call us at (424) 238-5500.', error: 'Missing ANTHROPIC_API_KEY' });
+    return ok({ reply: 'Sorry, the chat is not configured right now. Please call us at (424) 238-5500.', error: 'Missing ANTHROPIC_API_KEY' }, 200, cors);
   }
 
   let body;
-  try { body = JSON.parse(event.body); } catch { return ok({ reply: '', error: 'Invalid JSON' }); }
+  try { body = JSON.parse(event.body); } catch { return ok({ reply: '', error: 'Invalid JSON' }, 200, cors); }
 
   const messages = Array.isArray(body.messages) ? body.messages : [];
-  if (messages.length === 0) return ok({ reply: '', error: 'No messages provided' });
+  if (messages.length === 0) return ok({ reply: '', error: 'No messages provided' }, 200, cors);
 
-  // Sanitize: only keep role + content as string, last 20 messages max
   const cleanMessages = messages
     .slice(-20)
     .filter(m => m && (m.role === 'user' || m.role === 'assistant') && typeof m.content === 'string' && m.content.trim())
     .map(m => ({ role: m.role, content: m.content.slice(0, 2000) }));
 
   if (cleanMessages.length === 0 || cleanMessages[0].role !== 'user') {
-    return ok({ reply: '', error: 'First message must be from user' });
+    return ok({ reply: '', error: 'First message must be from user' }, 200, cors);
   }
 
   try {
     const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
-
     const response = await client.messages.create({
       model: 'claude-haiku-4-5',
       max_tokens: 1024,
-      system: [
-        {
-          type: 'text',
-          text: SYSTEM_PROMPT,
-          cache_control: { type: 'ephemeral' },
-        },
-      ],
+      system: [{ type: 'text', text: SYSTEM_PROMPT, cache_control: { type: 'ephemeral' } }],
       messages: cleanMessages,
     });
 
-    const reply = response.content
-      .filter(b => b.type === 'text')
-      .map(b => b.text)
-      .join('')
-      .trim();
-
-    return ok({ reply: reply || "I'm sorry, I didn't catch that. Could you try again?" });
+    const reply = response.content.filter(b => b.type === 'text').map(b => b.text).join('').trim();
+    return ok({ reply: reply || "I'm sorry, I didn't catch that. Could you try again?" }, 200, cors);
   } catch (e) {
     console.error('Chat error:', e);
-    return ok({
-      reply: "I'm having trouble responding right now. Please call us at (424) 238-5500 or book online at booking.18knailboutique.com.",
-      error: e.message,
-    });
+    return ok({ reply: "I'm having trouble responding right now. Please call us at (424) 238-5500 or book online at booking.18knailboutique.com.", error: e.message }, 200, cors);
   }
 };

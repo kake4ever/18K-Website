@@ -4,7 +4,7 @@
   "description": "",
   "main": "_zenoti.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node --test tests/*.test.js"
   },
   "keywords": [],
   "author": "",
@@ -13,5 +13,8 @@
   "dependencies": {
     "@anthropic-ai/sdk": "^0.90.0",
     "stripe": "^20.4.0"
+  },
+  "engines": {
+    "node": ">=20"
   }
 }
