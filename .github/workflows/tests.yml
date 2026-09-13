@@ -1,0 +1,45 @@
+# Netlify Functions have no build step of their own, so nothing ran these
+# functions' tests until now — this is the gate that makes "add tests
+# proving unauthenticated requests are rejected" actually mean something
+# going forward, not just on the day they were written.
+name: functions tests
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+concurrency:
+  group: tests-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    defaults:
+      run:
+        working-directory: netlify/functions
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: netlify/functions/package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run the test suite
+        run: npm test
+
+      - name: Assert the suite is not empty
+        run: |
+          count=$(ls tests/*.test.js | wc -l)
+          echo "$count test files"
+          if [ "$count" -lt 5 ]; then
+            echo "::error::only $count test files matched — the suite shrank"
+            exit 1
+          fi

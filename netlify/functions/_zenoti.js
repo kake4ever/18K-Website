@@ -1,15 +1,28 @@
 // ─────────────────────────────────────────────────────────
-// Zenoti API helper — shared across all Netlify Functions
+// Zenoti API helper — shared across all Netlify Functions.
+//
+// The credential is env-only. There is no fallback: a Zenoti application
+// secret was previously hardcoded here as a default (in token.js, since
+// removed) and committed to this public repository. The fix is not "hide it
+// better" — it is "never write a real credential into source again."
 // ─────────────────────────────────────────────────────────
+const { corsFor } = require('./_security');
+
 const BASE_URL = process.env.ZENOTI_API_URL || 'https://api.zenoti.com/v1';
-const API_KEY  = process.env.ZENOTI_API_KEY;
+
+// Swappable for tests only — production always uses the real fetch.
+let fetchImpl = (...args) => fetch(...args);
+function setFetchImpl(fn) { fetchImpl = fn || ((...args) => fetch(...args)); }
 
 async function zenoti(path, options = {}) {
+  const apiKey = process.env.ZENOTI_API_KEY;
+  if (!apiKey) throw { status: 503, body: { error: 'ZENOTI_API_KEY is not configured' } };
+
   const url = `${BASE_URL}${path}`;
-  const res = await fetch(url, {
+  const res = await fetchImpl(url, {
     ...options,
     headers: {
-      'Authorization': `apikey ${API_KEY}`,
+      'Authorization': `apikey ${apiKey}`,
       'Content-Type': 'application/json',
       'Accept': 'application/json',
       ...(options.headers || {}),
@@ -26,18 +39,12 @@ async function zenoti(path, options = {}) {
   return data;
 }
 
-const cors = {
-  'Access-Control-Allow-Origin': '*',
-  'Access-Control-Allow-Headers': 'Content-Type, Authorization',
-  'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
-};
-
-function ok(body, status = 200) {
-  return { statusCode: status, headers: { ...cors, 'Content-Type': 'application/json' }, body: JSON.stringify(body) };
+function ok(body, status = 200, extraHeaders = {}) {
+  return { statusCode: status, headers: { ...extraHeaders, 'Content-Type': 'application/json' }, body: JSON.stringify(body) };
 }
 
-function err(message, status = 500, detail = null) {
-  return { statusCode: status, headers: { ...cors, 'Content-Type': 'application/json' }, body: JSON.stringify({ error: message, detail }) };
+function err(message, status = 500, detail = null, extraHeaders = {}) {
+  return { statusCode: status, headers: { ...extraHeaders, 'Content-Type': 'application/json' }, body: JSON.stringify({ error: message, detail }) };
 }
 
-module.exports = { zenoti, ok, err, cors };
+module.exports = { zenoti, ok, err, corsFor, setFetchImpl };
