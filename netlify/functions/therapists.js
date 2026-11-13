@@ -1,4 +1,5 @@
-const { ok, cors } = require('./_zenoti');
+const { ok } = require('./_zenoti');
+const { corsFor } = require('./_security');
 
 const TECHNICIANS = [
   { id: '7a31af0b-2ae4-4be9-9e9a-e0ea2b1e2b33', first_name: 'Thomas', last_name: '' },
@@ -11,6 +12,7 @@ const TECHNICIANS = [
 ];
 
 exports.handler = async (event) => {
+  const cors = corsFor(event);
   if (event.httpMethod === 'OPTIONS') return { statusCode: 204, headers: cors, body: '' };
-  return ok({ therapists: TECHNICIANS.map(t => ({ ...t, name: t.last_name ? `${t.first_name} ${t.last_name}` : t.first_name, image_url: null })) });
+  return ok({ therapists: TECHNICIANS.map(t => ({ ...t, name: t.last_name ? `${t.first_name} ${t.last_name}` : t.first_name, image_url: null })) }, 200, cors);
 };
